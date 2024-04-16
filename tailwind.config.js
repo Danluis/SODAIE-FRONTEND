@@ -8,7 +8,8 @@ export default {
     extend: {
       colors:{
         blackMain: '#121212',
-        semiWhite: '#B3B3B3'
+        semiWhite: '#B3B3B3',
+        secondaryBlack: '#242424'
       }
     },
   },

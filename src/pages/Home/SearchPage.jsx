@@ -2,7 +2,7 @@ import SideBarMenu from '../../components/SideBarMenu'
 import SideBarPlaylist from '../../components/SideBarPlaylist'
 import SodaieLogo from '../../assets/SODAIE.png'
 import ToggleButton from '../../components/ToggleButton'
-export default function HomePage(){
+export default function SearchPage(){
 
 
     return(
