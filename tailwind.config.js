@@ -6,10 +6,15 @@ export default {
   ],
   theme: {
     extend: {
+      height: {
+        '95vh': '95vh',
+        '70vh': '70vh'
+      },
       colors:{
         blackMain: '#121212',
         semiWhite: '#B3B3B3',
-        secondaryBlack: '#242424'
+        secondaryBlack: '#242424',
+        blackLogo: '#292929'
       }
     },
   },

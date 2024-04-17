@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default function ToggleButton() {
+export default function SelectedButton() {
 
     const [selectedOption, setSelectedOption] = useState(null);
     const [menuOpen, setMenuOpen] = useState(false);

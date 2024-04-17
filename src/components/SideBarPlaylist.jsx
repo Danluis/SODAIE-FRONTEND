@@ -4,7 +4,7 @@ import NotificationGuide from "./NotificationGuide";
 
 export default function SideBarPlaylist () {
     return(
-        <div className="text-semiWhite flex item flex-col bg-blackMain rounded-xl w-72 h-min-height mt-2">
+        <div className="overflow-y-auto text-semiWhite flex item flex-col bg-blackMain rounded-xl w-72 h-full mt-2">
             
             
             <div className="flex items-center px-4 pt-4 pb-2 justify-between hover:text-white cursor-pointer">
