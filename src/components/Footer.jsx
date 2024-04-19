@@ -32,9 +32,9 @@ export default function Footer() {
           </div>
 
           <div className="flex gap-2">
-            <FaInstagram className="text-white w-10 h-10 p-2 rounded-full bg-blackLogo hover:bg-slate-500"/>
-            <FaFacebookSquare className="text-white w-10 h-10 p-2 rounded-full bg-blackLogo hover:bg-slate-500"/>
-            <FaYoutube className="text-white w-10 h-10 p-2 rounded-full bg-blackLogo hover:bg-slate-500"/>
+            <FaInstagram className="text-white w-10 h-10 p-2 rounded-full bg-blackLogo hover:bg-slate-700"/>
+            <FaFacebookSquare className="text-white w-10 h-10 p-2 rounded-full bg-blackLogo hover:bg-slate-700"/>
+            <FaYoutube className="text-white w-10 h-10 p-2 rounded-full bg-blackLogo hover:bg-slate-700"/>
           </div>
       </div>
       

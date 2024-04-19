@@ -1,9 +1,9 @@
 import SideBarMenu from '../../components/SideBarMenu'
 import SideBarPlaylist from '../../components/SideBarPlaylist'
-import SodaieLogo from '../../assets/SODAIE.png'
 import SelectedButton from '../../components/SelectedButton'
 import Footer from '../../components/Footer'
 import { IoSearch } from "react-icons/io5";
+import Header from '../../components/Header'
 export default function SearchPage(){
 
 
@@ -18,9 +18,10 @@ export default function SearchPage(){
             
             <div className='overflow-y-auto bg-blackMain my-2 mr-2 rounded-xl p-8 w-full h-95vh text-white'>
 
-                <div className='flex flex-col items-center w-full h-full gap-4'>
-                    <img className='w-72' src={SodaieLogo} alt="" />      
-                    <span>Encuentra a nuevos artistas y compositores</span>         
+                <Header/>
+
+                <div className='flex flex-col items-center w-full h-full mt-4 gap-4'>
+                    <span className='text-2xl font-semibold'>Encuentra a nuevos artistas y compositores</span>         
                     
                     <div className='flex'>
                         <SelectedButton/>

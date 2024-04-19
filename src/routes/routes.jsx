@@ -5,10 +5,11 @@ import SearchPage from "../pages/Home/SearchPage";
 const RoutesApp = () => {
   return (
     <Routes>
-        <Route path="/" element={<Login /> }/>
         <Route element={<Login/>}></Route>
-        <Route index path="/home" element={<HomePage/>} />
+        <Route index path="/" element={<HomePage/>} />
         <Route path="/search" element={<SearchPage/>} />
+        <Route path="/login" element={<Login /> }/>
+
     </Routes>
   );
 };
