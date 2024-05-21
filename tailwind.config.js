@@ -11,7 +11,7 @@ export default {
         '70vh': '70vh'
       },
       colors:{
-        blackMain: '#121212',
+        blackMain: '#0F0F0F',
         semiWhite: '#B3B3B3',
         secondaryBlack: '#242424',
         blackLogo: '#292929'

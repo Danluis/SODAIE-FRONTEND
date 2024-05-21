@@ -7,7 +7,7 @@ export default function Footer() {
     return(
     <footer className="mt-36 w-full">
 
-      <div className="flex flex-col-5 justify-around">
+      <div className="flex flex-col-5 justify-between px-4">
         
         <div className="flex flex-col items-left">
               <span className="text-white text-lg">Empresa</span>
@@ -38,10 +38,10 @@ export default function Footer() {
           </div>
       </div>
       
-      <hr className="mx-8 border border-semiWhite border-opacity-20 my-6" />
+      <hr className="mx-2 border border-semiWhite border-opacity-20 my-6" />
       
       <div className="flex items-end gap-1 justify-end mr-8 text-semiWhite">
-        <span>Sodaie </span>
+        <span>REPERDOM </span>
         <span>© {new Date().getFullYear()}
         </span>
       </div>
