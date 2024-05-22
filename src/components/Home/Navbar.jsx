@@ -7,7 +7,7 @@ import { MdLibraryMusic } from "react-icons/md";
 export default function Navbar() {
     return(
       
-      <div className="mr-4 flex items-center justify-between h-[2210px] flex-col text-white mt-[9vh] pt-4 w-[6rem] border-r-2 border-r-white border-opacity-5">
+      <div className={`mr-4 flex items-center justify-between min-h-[740px] h-max-height flex-col text-white mt-[9vh] pt-4 w-[6rem] border-r-2 border-r-white border-opacity-5`}>
        <div className="fixed">
         <div className="flex flex-col gap-4">
         <div className="flex items-center justify-center hover:bg-slate-600 p-2 rounded-full">

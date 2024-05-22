@@ -12,9 +12,7 @@ export default function HomePageV1(){
 
 
         <div className="flex flex-col-2">
-            <div className="">
                 <Navbar/>
-            </div>
 
             <div className="w-full h-full">
                 <div className='bg-blackMain mr-2 p-8 w-full h-full text-white'>
