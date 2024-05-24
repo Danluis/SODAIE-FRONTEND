@@ -10,9 +10,9 @@ export default function LoginPageV1() {
                 <Navbar />
                 <div className="w-full h-full">
                     <div className="bg-blackMain mr-2 p-8 w-full h-full">
-                        <div className="mt-16 flex items-center justify-center mb-48">
+                        <div className="mt-10 flex items-center justify-center mb-48">
                             <div className="flex items-center flex-col">
-                                <span className="text-4xl mb-10">Iniciar Sesion</span>
+                                <span className="text-4xl mb-8">Iniciar Sesion</span>
                                 <div className="flex gap-4 mb-4">
                                     <button className="flex rounded-lg text-sm font-semibold px-10 py-3 hover:bg-slate-900 bg-semiBlack">
                                     <img className="w-5 h-5 mr-2" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg" />
@@ -55,7 +55,7 @@ export default function LoginPageV1() {
                                         <Link to={'/RegisterPageV1'} className="cursor-pointer hover:text-semiWhite">Registrarse</Link>
                                         <span className="cursor-pointer hover:text-blue-600">¿Olvidaste tu contraseña?</span>
                                     </div>
-                                    <button className="w-[28rem] p-4 font-semibold bg-cyan-700 rounded-lg mt-4 transition-transform transform hover:scale-105">Iniciar Sesion</button>
+                                    <button className="w-[28rem] p-3 font-semibold bg-cyan-700 rounded-lg mt-4 transition-transform transform hover:scale-105">Iniciar Sesion</button>
 
                                     </div>
                                 </div>

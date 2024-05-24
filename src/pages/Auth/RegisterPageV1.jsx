@@ -10,7 +10,7 @@ export default function RegisterPageV1() {
                 <Navbar />
                 <div className="w-full h-full">
                     <div className="bg-blackMain mr-2 p-8 w-full h-full">
-                        <div className="mt-16 flex items-center justify-center mb-48">
+                        <div className="mt-10 flex items-center justify-center mb-48">
                             <div className="flex items-center flex-col">
                                 <span className="text-4xl mb-10">Registrarse</span>
                                 <div className="flex gap-4 mb-4">
