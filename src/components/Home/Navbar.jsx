@@ -2,7 +2,7 @@ import { LuMenu } from "react-icons/lu";
 import { IoHome } from "react-icons/io5";
 import { MdOutlineExplore } from "react-icons/md";
 import { MdLibraryMusic } from "react-icons/md";
-
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
     return(
@@ -13,18 +13,18 @@ export default function Navbar() {
         <div className="flex items-center justify-center hover:bg-slate-600 p-2 rounded-full">
         <LuMenu className="  text-white w-6 h-6 cursor-pointer"/>
         </div>
-          <div className="hover:bg-slate-600 flex flex-col items-center p-2 rounded-lg cursor-pointer">
+          <Link to={'/'} className="hover:bg-slate-600 flex flex-col items-center p-2 rounded-lg cursor-pointer">
             <IoHome className=" w-6 h-6"/>
             <span>Inicio</span>
-          </div>
-          <div className="hover:bg-slate-600 flex flex-col items-center p-2 rounded-lg cursor-pointer">
+          </Link>
+          <Link to={'/search'} className="hover:bg-slate-600 flex flex-col items-center p-2 rounded-lg cursor-pointer">
             <MdOutlineExplore className=" w-6 h-6"/>
             <span>Explorar</span>
-          </div>
-          <div className="hover:bg-slate-600 flex flex-col items-center p-2 rounded-lg cursor-pointer">
+          </Link>
+          <Link className="hover:bg-slate-600 flex flex-col items-center p-2 rounded-lg cursor-pointer">
             <MdLibraryMusic className=" w-6 h-6"/>
             <span>Biblioteca</span>
-          </div>
+          </Link>
           </div>
           </div>
       </div>

@@ -14,7 +14,8 @@ export default {
         blackMain: '#0F0F0F',
         semiWhite: '#B3B3B3',
         secondaryBlack: '#242424',
-        blackLogo: '#292929'
+        blackLogo: '#292929',
+        semiBlack: '#1E293B'
       }
     },
   },

@@ -1,16 +1,15 @@
 import { Route, Routes } from "react-router-dom";
-import LoginPage from "../pages/Auth/LoginPage";
-import HomePage from "../pages/Home/HomePage";
-import SearchPage from "../pages/Home/SearchPage";
-import RegisterPage from "../pages/Auth/RegisterPage";
+import HomePageV1 from '../pages/Home/HomePageV1'
+import ExplorePageV1 from '../pages/Home/ExplorePageV1'
+import LoginPageV1 from "../pages/Auth/LoginPageV1";
+import RegisterPageV1 from "../pages/Auth/RegisterPageV1";
 const RoutesApp = () => {
   return (
     <Routes>
-        <Route element={<LoginPage/>}></Route>
-        <Route index path="/" element={<HomePage/>} />
-        <Route path="/search" element={<SearchPage/>} />
-        <Route path="/register" element={<RegisterPage /> }/>
-        <Route path="/login" element={<LoginPage /> }/>
+        <Route index path="/" element={<HomePageV1/>} />
+        <Route path="/search" element={<ExplorePageV1/>} />
+        <Route path="/LoginPageV1" element={<LoginPageV1 /> }/>
+        <Route path="/RegisterPageV1" element={<RegisterPageV1 /> }/>
 
     </Routes>
   );

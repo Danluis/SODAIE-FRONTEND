@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import ButtonRegister from "./ButtonRegister"
-import LoginButton from "./LoginButton"
+import LoginButtonHeader from "./LoginButtonHeader"
 import { CiSearch } from "react-icons/ci";
 
 export default function Header() {
@@ -9,7 +9,7 @@ export default function Header() {
   <header className="fixed top-0 z-10 max-w-full-xl flex flex-wrap w-full border-b-2 border-b-white border-opacity-5">
   <div className=" w-full bg-blackMain max-w-full-xl flex flex-wrap items-center justify-between mx-auto px-8 p-2">
     
-    <Link href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
+    <Link to={'/'} className="flex items-center space-x-3 rtl:space-x-reverse">
         <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">REPERDOM</span>
     </Link>
 
@@ -25,7 +25,7 @@ export default function Header() {
     <div>
         
         <ButtonRegister text={'Registrarse'}/>
-        <LoginButton text={'Iniciar Sesión'}/>
+        <LoginButtonHeader text={'Iniciar Sesión'}/>
     </div>
 
   </div>

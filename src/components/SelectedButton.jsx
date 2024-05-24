@@ -15,7 +15,7 @@ export default function SelectedButton() {
         <div className="relative">
             <button 
                 onClick={() => setMenuOpen(!menuOpen)} // Cambia el estado de visibilidad del menú al hacer clic
-                className="flex items-center px-4 py-2 text-sm font-medium text-white bg-secondaryBlack border border-gray-300 shadow-sm hover:bg-black focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100 w-56" // Establece un ancho fijo de 32
+                className="flex items-center px-4 py-2 text-sm font-medium text-white bg-secondaryBlack border border-gray-300 shadow-sm hover:bg-black focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100 w-[14rem] h-[3rem]" // Establece un ancho fijo de 32
                 type="button" 
                 aria-haspopup="true" 
                 aria-expanded={menuOpen ? "true" : "false"} // Indica si el menú está abierto o cerrado
