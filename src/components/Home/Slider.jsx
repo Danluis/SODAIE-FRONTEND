@@ -2,7 +2,7 @@ import { useState } from "react"
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs"
 import { RxDotFilled } from "react-icons/rx"
 
-export default function Slider(){
+export default function Slider({height='h-[75vh]'}){
     const slides = [
         {
             url: 'https://i.imgur.com/zZTPoFK.png'
@@ -37,7 +37,7 @@ export default function Slider(){
     }
 
     return(
-        <div className=" max-w-[1400px] h-[75vh] w-full m-auto mt-[8vh] relative group mb-20">
+        <div className={`max-w-[1400px] ${height} w-full m-auto mt-[8vh] relative group mb-20`}>
             <div style={{backgroundImage: `url(${slides[currentIndex].url})`}} className="rounded-lg w-full h-full bg-center bg-cover duration-500"></div>
         <div>
             <BsChevronCompactLeft onClick={prevSlide} size={30} className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white  cursor-pointer"/>

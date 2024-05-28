@@ -1,6 +1,7 @@
 import Header from "../../components/Home/Header";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Home/Navbar";
+import { Link } from "react-router-dom";
 
 export default function RegisterPageV1() {
     return (
@@ -53,7 +54,7 @@ export default function RegisterPageV1() {
 
 
                                     </div>
-                                    <button className="w-[28rem] p-4 font-semibold bg-cyan-700 rounded-lg mt-2 transition-transform transform hover:scale-105">Continuar</button>
+                                    <Link to={'/ChooseRegister'} className="w-[28rem] text-center p-4 font-semibold bg-cyan-700 rounded-lg mt-2 transition-transform transform hover:scale-105">Continuar</Link>
 
                                 </div>
 
