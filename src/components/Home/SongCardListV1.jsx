@@ -9,11 +9,11 @@ export default function SongCardList({title}) {
 
             <div className="flex gap-6 rounded-xl py-2">
             
-                <SongCard img={'https://i.imgur.com/na8LePB.png'} title={'Como Yo'} artist={'Luis Segura'}/>
-                <SongCard img={'https://i.imgur.com/rrsOjBD.png'} title={'La bilirrubina'} artist={'Juan Luis Guerra'}/>
-                <SongCard img={'https://i.imgur.com/tkPSPeA.png'} title={'La Chiflera'} artist={'Fefita La Grande'}/>
-                <SongCard img={'https://i.imgur.com/BvEOTeI.png'} title={'Si tu estuvieras'} artist={'El Torito'}/>
-                <SongCard img={'https://i.imgur.com/UW32Y8f.png'} title={'Si tu estuvieras'} artist={'El Alfa'}/>
+                <SongCard img={'https://cdn.pixabay.com/photo/2022/08/21/21/24/colours-7402147_1280.jpg'} title={'TITULO'} artist={'NOMBRE'}/>
+                <SongCard img={'https://cdn.pixabay.com/photo/2022/01/05/00/13/music-6916184_1280.jpg'} title={'TITULO'} artist={'NOMBRE'}/>
+                <SongCard img={'https://cdn.pixabay.com/photo/2024/01/09/14/52/man-8497739_1280.jpg'} title={'TITULO'} artist={'NOMBRE'}/>
+                <SongCard img={'https://cdn.pixabay.com/photo/2020/08/31/00/33/guitar-5531027_1280.jpg'} title={'TITULO'} artist={'NOMBRE'}/>
+                <SongCard img={'https://cdn.pixabay.com/photo/2024/04/20/07/14/boy-8707989_1280.jpg'} title={'TITULO'} artist={'NOMBRE'}/>
                 <div className="relative top-10 right-8">
                 <ShowMore/>
 
