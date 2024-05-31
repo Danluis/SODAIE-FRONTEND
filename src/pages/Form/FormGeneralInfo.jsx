@@ -13,9 +13,9 @@ export default function FormGeneralInfo() {
                 <Navbar />
                 <div className="w-full h-full">
                     <div className="bg-blackMain mr-2 p-8 object-cover w-full h-full">
-                        <div className="flex gap-16 flex-col-2">
+                        <div className="flex gap-16 flex-col-2 flex justify-center">
                             <div className="mt-10">
-                                <div className="mb-6 text-3xl font-semibold">Informacion General</div>
+                                <div className="mb-6 text-3xl font-semibold">Información General</div>
                                 <FormInput text={'Nombre'} placeholder={'Juan'}/>
                                 <FormInput text={'Apellido'} placeholder={'Espaillat'}/>
                                 <FormInput text={'Apodo'} placeholder={'El Chaval'}/>
@@ -26,9 +26,7 @@ export default function FormGeneralInfo() {
                                 <Timeline paso1={'completed'} paso2={'upcoming'} paso3={'upcoming'}/>
 
                             </div>
-                            <div className="mt-10">
-                                <img className="w-[100vw] h-[85vh] rounded-xl" src="https://i.pinimg.com/564x/28/72/aa/2872aa3196c9897ae773a6210000a229.jpg" alt="" />
-                            </div>
+                            
                         </div>
                         <Footer />
                     </div>

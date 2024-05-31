@@ -4,7 +4,7 @@ export default function SelectedButton() {
 
     const [selectedOption, setSelectedOption] = useState(null);
     const [menuOpen, setMenuOpen] = useState(false);
-    const options = ["Título"];
+    const options = ["Autor", "Compositor", "Arreglista"];
 
     const handleSelect = (option) => {
         setSelectedOption(option);

@@ -2,19 +2,19 @@ import { useState } from "react"
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs"
 import { RxDotFilled } from "react-icons/rx"
 
-export default function Slider({height='h-[75vh]'}){
+export default function Slider({height='h-[50vh]'}){
     const slides = [
         {
-            url: 'https://i.imgur.com/zZTPoFK.png'
+            url: 'https://cdn.pixabay.com/photo/2016/11/23/15/48/audience-1853662_1280.jpg'
         },
         {
-            url: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+            url: 'https://cdn.pixabay.com/photo/2016/11/18/15/44/audience-1835431_1280.jpg'
         },
         {
-            url: 'https://wallpaperaccess.com/full/4849378.jpg'
+            url: 'https://cdn.pixabay.com/photo/2014/05/21/15/18/musician-349790_960_720.jpg'
         },
         {
-            url: 'https://images.unsplash.com/photo-1433622070098-754fdf81c929?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+            url: 'https://cdn.pixabay.com/photo/2016/11/22/19/15/hand-1850120_1280.jpg'
         }
     ]
 
@@ -37,7 +37,7 @@ export default function Slider({height='h-[75vh]'}){
     }
 
     return(
-        <div className={`max-w-[1400px] ${height} w-full m-auto mt-[8vh] relative group mb-20`}>
+        <div className={`max-w-[1050px] ${height} w-full m-auto mt-[8vh] relative group mb-20`}>
             <div style={{backgroundImage: `url(${slides[currentIndex].url})`}} className="rounded-lg w-full h-full bg-center bg-cover duration-500"></div>
         <div>
             <BsChevronCompactLeft onClick={prevSlide} size={30} className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white  cursor-pointer"/>

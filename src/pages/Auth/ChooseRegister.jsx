@@ -15,10 +15,9 @@ export default function ChooseRegister() {
                 <Navbar />
                 <div className="w-full h-full">
                     <div className="bg-blackMain mr-2 p-8 w-full h-full">
-                        <Slider height="h-[40vh]"/>
                         <div className="flex items-center justify-around">
-                            <ChooseRegisterCard Icon={FaUserPlus} title={'Usuario de la musica'} NameUser={'usuario'} subTitle={'Escucho o busco nuevos talentos.'} img={'https://i.imgur.com/NpV8qvu.jpg'}/>
-                            <ChooseRegisterCard Icon={FaUserEdit} title={'Creador de musica'} NameUser={'artista'} subTitle={'Escribo, compongo o publico musica.'} img={'https://i.imgur.com/S4v8eUl.jpg'}/>
+                            <ChooseRegisterCard Icon={FaUserPlus} title={'Usuario de la música'} NameUser={'usuario'} subTitle={'Escucho o busco nuevos talentos.'} img={'https://cdn.pixabay.com/photo/2024/04/12/17/40/model-8692324_960_720.jpg'}/>
+                            <ChooseRegisterCard Icon={FaUserEdit} title={'Creador de música'} NameUser={'artista'} subTitle={'Escribo, compongo o arreglo música.'} img={'https://cdn.pixabay.com/photo/2024/04/17/16/33/ai-generated-8702438_960_720.png'}/>
                         </div>
                         <Footer />
                     </div>
