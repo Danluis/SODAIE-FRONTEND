@@ -8,11 +8,11 @@ export default function ArtistList({title}) {
 
             <div className="flex gap-4 rounded-xl py-2">
             
-                <ArtistCard img={'https://i.imgur.com/na8LePB.png'} title={'Como Yo'} artist={'Luis Segura'}/>
-                <ArtistCard img={'https://i.imgur.com/rrsOjBD.png'} title={'La bilirrubina'} artist={'Juan Luis Guerra'}/>
-                <ArtistCard img={'https://i.imgur.com/tkPSPeA.png'} title={'La Chiflera'} artist={'Fefita La Grande'}/>
-                <ArtistCard img={'https://i.imgur.com/BvEOTeI.png'} title={'Si tu estuvieras'} artist={'El Torito'}/>
-                <ArtistCard img={'https://i.imgur.com/UW32Y8f.png'} title={'Si tu estuvieras'} artist={'El Alfa'}/>
+                <ArtistCard img={'https://cdn.pixabay.com/photo/2021/08/20/17/48/man-6560971_960_720.jpg'} title={'TITULO'} artist={'NOMBRE'}/>
+                <ArtistCard img={'https://cdn.pixabay.com/photo/2018/07/19/08/22/singer-3548070_1280.jpg'} title={'TITULO'} artist={'NOMBRE'}/>
+                <ArtistCard img={'https://cdn.pixabay.com/photo/2020/05/24/08/40/city-5213062_1280.jpg'} title={'TITULO'} artist={'NOMBRE'}/>
+                <ArtistCard img={'https://cdn.pixabay.com/photo/2023/05/23/23/33/trumpet-8013698_1280.jpg'} title={'TITULO'} artist={'NOMBRE'}/>
+                <ArtistCard img={'https://cdn.pixabay.com/photo/2018/01/30/19/30/music-3119459_1280.jpg'} title={'TITULO'} artist={'NOMBRE'}/>
             </div>
         </div>
     )

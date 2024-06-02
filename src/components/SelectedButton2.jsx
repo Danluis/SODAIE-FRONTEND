@@ -4,7 +4,8 @@ export default function SelectedButton() {
 
     const [selectedOption, setSelectedOption] = useState(null);
     const [menuOpen, setMenuOpen] = useState(false);
-    const options = ["Título"];
+    const options = ["Autor", "Compositor", "Arreglista"];
+    //Agregué un segundo botón
 
     const handleSelect = (option) => {
         setSelectedOption(option);
