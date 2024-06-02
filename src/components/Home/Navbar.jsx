@@ -21,7 +21,7 @@ export default function Navbar() {
             <MdOutlineExplore className=" w-6 h-6"/>
             <span>Explorar</span>
           </Link>
-          <Link className="hover:bg-slate-600 flex flex-col items-center p-2 rounded-lg cursor-pointer">
+          <Link to={'/Library'} className="hover:bg-slate-600 flex flex-col items-center p-2 rounded-lg cursor-pointer">
             <MdLibraryMusic className=" w-6 h-6"/>
             <span>Biblioteca</span>
           </Link>
