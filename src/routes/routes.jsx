@@ -8,9 +8,12 @@ import FormGeneralInfo from "../pages/Form/FormGeneralInfo";
 import FormPersonalInfo from "../pages/Form/FormPersonalInfo";
 import FormFirstSong from "../pages/Form/FormFirstSong";
 import Library from "../pages/Home/Library";
+import Artist from "../pages/Artist/Artist";
+import ScrollToTop from "../components/Utilities/ScrollToTop";
 const RoutesApp = () => {
   return (
     <Routes>
+      <Route element={<ScrollToTop />}> 
         <Route index path="/" element={<HomePageV1/>} />
         <Route path="/search" element={<ExplorePageV1/>} />
         <Route path="/LoginPageV1" element={<LoginPageV1 /> }/>
@@ -20,7 +23,8 @@ const RoutesApp = () => {
         <Route path="/FormPersonalInfo" element={<FormPersonalInfo /> }/>
         <Route path="/FormFirstSong" element={<FormFirstSong /> }/>
         <Route path="/Library" element={<Library /> }/>
-
+        <Route path="/Artist" element={<Artist /> }/>
+      </Route>
     </Routes>
   );
 };
