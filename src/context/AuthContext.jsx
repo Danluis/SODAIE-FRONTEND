@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import {registerRequest, loginRequest} from '../api/auth.js'
+import {registerRequest, loginRequest, logoutRequest} from '../api/auth.js'
 
 export const AuthContext = createContext()
 
@@ -41,6 +41,19 @@ export const AuthProvider = ({ children }) => {
     }
    }
 
+   const logout = async () => {
+    try {
+        const res = await logoutRequest()
+        console.log(res);
+        setIsAuthenticated(false)
+    } catch (error) {
+        if (Array.isArray(error.response.data)) {
+            return setErrors(error.response.data)
+        }
+        setErrors([error.response.data.message])
+    }
+   }
+
    useEffect(() => {
     if(errors.length > 0) {
         const timer = setTimeout(() => {
@@ -54,6 +67,7 @@ export const AuthProvider = ({ children }) => {
         <AuthContext.Provider value={{
             signup,
             signin,
+            logout,
             user,
             isAuthenticated,
             errors
