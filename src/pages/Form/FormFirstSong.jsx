@@ -17,12 +17,12 @@ export default function FormFirstSong() {
                         <div className="mt-12 w-full h-full">
                             
                             <div className="flex gap-2 items-center justify-center">
-                                <h1 className="text-3xl font-semibold text-center">Sube tu primera cancion</h1>
+                                <h1 className="text-3xl font-semibold text-center">Sube tu primera canción</h1>
                                 <RiFolderMusicFill className="w-10 h-10"/>
                             </div>
                             
                             <div>
-                                <h1 className="text-2xl mt-6 mb-6">Composicion</h1>
+                                <h1 className="text-2xl mt-6 mb-6">Composición</h1>
                                <div className="flex justify-around">
                                     <FormInput text={'Titulo'} placeholder={'Título de la canción'}/>
                                     <FormInput text={'Compositor o compositores'} placeholder={'Nombre de los autores, compositores o arreglistas'}/>

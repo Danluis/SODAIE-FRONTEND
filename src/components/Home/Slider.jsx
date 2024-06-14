@@ -2,7 +2,7 @@ import { useState } from "react"
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs"
 import { RxDotFilled } from "react-icons/rx"
 
-export default function Slider({height='h-[50vh]'}){
+export default function Slider({height='h-[60vh]'}){
     const slides = [
         {
             url: 'https://cdn.pixabay.com/photo/2016/11/23/15/48/audience-1853662_1280.jpg'

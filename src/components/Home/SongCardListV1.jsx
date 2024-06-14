@@ -9,11 +9,11 @@ export default function SongCardList({title}) {
 
             <div className="flex gap-6 rounded-xl py-2">
             
-                <SongCard img={'https://cdn.pixabay.com/photo/2022/08/21/21/24/colours-7402147_1280.jpg'} title={'TITULO'} artist={'NOMBRE'}/>
-                <SongCard img={'https://cdn.pixabay.com/photo/2022/01/05/00/13/music-6916184_1280.jpg'} title={'TITULO'} artist={'NOMBRE'}/>
-                <SongCard img={'https://cdn.pixabay.com/photo/2024/01/09/14/52/man-8497739_1280.jpg'} title={'TITULO'} artist={'NOMBRE'}/>
-                <SongCard img={'https://cdn.pixabay.com/photo/2020/08/31/00/33/guitar-5531027_1280.jpg'} title={'TITULO'} artist={'NOMBRE'}/>
-                <SongCard img={'https://cdn.pixabay.com/photo/2024/04/20/07/14/boy-8707989_1280.jpg'} title={'TITULO'} artist={'NOMBRE'}/>
+                <SongCard img={'https://cdn.pixabay.com/photo/2015/07/31/15/01/guitar-869217_1280.jpg'} title={'TITULO'} artist={'NOMBRE'}/>
+                <SongCard img={'https://cdn.pixabay.com/photo/2016/03/26/22/36/man-1281642_1280.jpg'} title={'TITULO'} artist={'NOMBRE'}/>
+                <SongCard img={'https://cdn.pixabay.com/photo/2017/11/12/16/45/people-2943124_1280.jpg'} title={'TITULO'} artist={'NOMBRE'}/>
+                <SongCard img={'https://cdn.pixabay.com/photo/2016/11/19/21/05/bass-guitar-1841186_1280.jpg'} title={'TITULO'} artist={'NOMBRE'}/>
+                <SongCard img={'https://cdn.pixabay.com/photo/2023/10/28/11/52/dj-8347229_1280.jpg'} title={'TITULO'} artist={'NOMBRE'}/>
                 <div className="relative top-10 right-8">
                 <ShowMore/>
 

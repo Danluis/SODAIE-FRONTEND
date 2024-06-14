@@ -16,12 +16,12 @@ export default function FormPersonalInfo() {
                         <div className="flex gap-16 flex-col-2 flex justify-center">
                             <div className="mt-10">
                                 <div className="mb-6 text-3xl font-semibold">Información Personal</div>
-                                <FormInput text={'Nacionalidad'} placeholder={'Dominicano'}/>
-                                <FormInput text={'Telefono'} placeholder={'854-456-7890'}/>
+                                <FormInput text={'Nacionalidad'} placeholder={''}/>
+                                <FormInput text={'Teléfono'} placeholder={''}/>
                                 <div className="flex justify-between gap-10 mt-6">
                                     <Link to={'/FormGeneralInfo'} className="w-1/4 text-center bg-semiBlack text-semiWhite px-4 py-3 rounded-xl font-semibold hover:bg-slate-900 transition-transform transform hover:scale-105">Atrás</Link>
                                     <Link to={'/FormFirstSong'} className="w-1/2 text-center bg-cyan-700 text-white px-12 py-3 rounded-xl font-semibold transition-transform transform hover:scale-105">Siguiente</Link>
-                                    <Link to={'/FormFirstSong'} className="w-1/4 text-center bg-semiBlack text-semiWhite px-4 py-3 rounded-xl font-semibold hover:bg-slate-900 transition-transform transform hover:scale-105">Omitir</Link>
+                                    <Link to={'/'} className="w-1/4 text-center bg-semiBlack text-semiWhite px-4 py-3 rounded-xl font-semibold hover:bg-slate-900 transition-transform transform hover:scale-105">Omitir</Link>
                                 </div>
                                 <Timeline paso1={'completed'} paso2={'completed'} paso3={'upcoming'}/>
 
