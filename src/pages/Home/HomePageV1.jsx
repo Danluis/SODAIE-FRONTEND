@@ -17,11 +17,11 @@ export default function HomePageV1(){
             <div className="w-full h-full">
                 <div className='bg-blackMain mr-2 p-8 w-full h-full text-white'>
                 <Slider/>
-                    <ArtistList title={'Artistas mas Escuchados'}/>
+                    <ArtistList title={'Creadores más escuchados'}/>
                     <SongCardList title={'Escuchado recientemente'}/>
                     <SongCardList title={'Subidas recientemente'}/>
-                    <SongCardList title={'Las mas votadas'}/>
-                    <SongCardList title={'Musica de Temporada'}/>
+                    <SongCardList title={'Las más votadas'}/>
+                    <SongCardList title={'Música de Temporada'}/>
                     <Footer/>
                 </div>
             </div>
