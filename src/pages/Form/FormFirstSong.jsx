@@ -2,6 +2,7 @@ import HeaderLogged from "../../components/Home/HeaderLogged";
 import Footer from "../../components/Footer";
 import NavbarComposer from "../../components/Home/NavbarComposer";
 import FormInput from "../../components/Form/FormInput";
+import FormInputDesigner from "../../components/Form/FormInputDesigner";
 import Timeline from "../../components/Form/Timeline";
 import { Link } from "react-router-dom";
 import { RiFolderMusicFill } from "react-icons/ri";
@@ -24,8 +25,8 @@ export default function FormFirstSong() {
                             <div>
                                 <h1 className="text-2xl mt-6 mb-6">Composicion</h1>
                                <div className="flex justify-around">
-                                    <FormInput text={'Titulo'} placeholder={'Título de la canción'}/>
-                                    <FormInput text={'Compositor o compositores'} placeholder={'Nombre de los autores, compositores o arreglistas'}/>
+                                    <FormInputDesigner text={'Titulo'} placeholder={'Título de la canción'}/>
+                                    <FormInputDesigner text={'Compositor o compositores'} placeholder={'Nombre de los autores, compositores o arreglistas'}/>
                                </div>
                             </div>
                             

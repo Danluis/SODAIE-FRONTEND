@@ -1,79 +1,91 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import {registerRequest, loginRequest, logoutRequest} from '../api/auth.js'
+import { registerRequest, loginRequest, logoutRequest } from '../api/auth.js';
 
-export const AuthContext = createContext()
+export const AuthContext = createContext();
 
 export const useAuth = () => {
-    const context = useContext(AuthContext)
-    if(!context) {
-        throw new Error("useAuth must be used within an AuthProvider")
-    }
-    return context;
-}
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error("useAuth must be used within an AuthProvider");
+  }
+  return context;
+};
 
 export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(null)
-    const [isAuthenticated, setIsAuthenticated] = useState(false)
-    const [errors, setErrors] = useState([])
+  const [user, setUser] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isRegister, setIsRegister] = useState(false);
+  const [errors, setErrors] = useState([]);
 
-   const signup = async (user) => {
-        try {
-            const res = await registerRequest(user)
-            //console.log(res.data);
-            setUser(res.data)
-            setIsAuthenticated(true)
-        } catch (error) {
-            console.log(error.response);
-            setErrors(error.response.data)
-        }
-   }
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+      setIsAuthenticated(true);
+    }
+  }, []);
 
-   const signin = async (user) => {
+  const signup = async (user) => {
     try {
-        const res = await loginRequest(user)
-        console.log(res);
-        setIsAuthenticated(true)
+      const res = await registerRequest(user);
+      setUser(res.data);
+      localStorage.setItem('user', JSON.stringify(res.data));
+      setIsRegister(true);
     } catch (error) {
-        if (Array.isArray(error.response.data)) {
-            return setErrors(error.response.data)
-        }
-        setErrors([error.response.data.message])
+      console.log(error.response);
+      setErrors(error.response.data);
     }
-   }
+  };
 
-   const logout = async () => {
+  const signin = async (user) => {
     try {
-        const res = await logoutRequest()
-        console.log(res);
-        setIsAuthenticated(false)
+      const res = await loginRequest(user);
+      setUser(res.data);
+      localStorage.setItem('user', JSON.stringify(res.data));
+      setIsAuthenticated(true);
     } catch (error) {
-        if (Array.isArray(error.response.data)) {
-            return setErrors(error.response.data)
-        }
-        setErrors([error.response.data.message])
+      if (Array.isArray(error.response.data)) {
+        return setErrors(error.response.data);
+      }
+      setErrors([error.response.data.message]);
     }
-   }
+  };
 
-   useEffect(() => {
-    if(errors.length > 0) {
-        const timer = setTimeout(() => {
-            setErrors([])
-        },5000)
-        return () => clearTimeout(timer)
+  const logout = async () => {
+    try {
+      const res = await logoutRequest();
+      console.log(res);
+      localStorage.removeItem('user');
+      setUser(null);
+      setIsAuthenticated(false);
+    } catch (error) {
+      if (Array.isArray(error.response.data)) {
+        return setErrors(error.response.data);
+      }
+      setErrors([error.response.data.message]);
     }
-   },[errors])
+  };
 
-    return(
-        <AuthContext.Provider value={{
-            signup,
-            signin,
-            logout,
-            user,
-            isAuthenticated,
-            errors
-        }}>
-            {children}
-        </AuthContext.Provider>
-   )
-   
-}
+  useEffect(() => {
+    if (errors.length > 0) {
+      const timer = setTimeout(() => {
+        setErrors([]);
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [errors]);
+
+  return (
+    <AuthContext.Provider value={{
+      signup,
+      signin,
+      logout,
+      user,
+      isRegister,
+      isAuthenticated,
+      errors
+    }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};

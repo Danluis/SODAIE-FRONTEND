@@ -1,9 +1,14 @@
-import axios from 'axios'
+import axios from 'axios';
 
-const API = 'http://localhost:4000/api/v1'
+const API = 'http://localhost:4000/api/v1';
 
-export const registerRequest = user => axios.post(`${API}/register`, user)
+//AUTHENTICATION APIS
+export const registerRequest = user => axios.post(`${API}/register`, user);
+export const loginRequest = user => axios.post(`${API}/login`, user);
+export const logoutRequest = user => axios.post(`${API}/logout`, user);
 
-export const loginRequest = user => axios.post(`${API}/login`, user)
+//CREDENTIALS API
+export const updateCredentialRequest = (id, updatedCredential) => axios.put(`${API}/credentials/${id}`, updatedCredential);
 
-export const logoutRequest = user => axios.post(`${API}/logout`, user)
+//USER API
+export const updateUserRequest = (id, updatedCredential) => axios.put(`${API}/users/${id}`, updatedCredential);

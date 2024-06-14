@@ -7,12 +7,12 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 export default function RegisterPageV1() {
     const {register, handleSubmit, formState:{ errors }} = useForm()
-    const {signup, isAuthenticated, errors: RegisterErrors } = useAuth()
+    const {signup, isRegister, errors: RegisterErrors } = useAuth()
     const navigate = useNavigate()
 
     useEffect(() => {
-        if (isAuthenticated) navigate('/ChooseRegister')
-    }, [isAuthenticated])
+        if (isRegister) navigate('/ChooseRegister')
+    }, [isRegister])
 
     const onSubmit = handleSubmit(async (values)=> {
         signup(values)
