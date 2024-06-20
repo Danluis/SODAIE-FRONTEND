@@ -9,6 +9,7 @@ import FormPersonalInfo from "../pages/Form/FormPersonalInfo";
 import FormFirstSong from "../pages/Form/FormFirstSong";
 import Library from "../pages/Home/Library";
 import Artist from "../pages/Artist/Artist";
+import AdminHomePageV1 from "../pages/Admin/AdminHomePage";
 import ScrollToTop from "../components/Utilities/ScrollToTop";
 const RoutesApp = () => {
   return (
@@ -24,6 +25,7 @@ const RoutesApp = () => {
         <Route path="/FormFirstSong" element={<FormFirstSong /> }/>
         <Route path="/Library" element={<Library /> }/>
         <Route path="/Artist" element={<Artist /> }/>
+        <Route path="/AdminPage" element={<AdminHomePageV1 /> }/>
       </Route>
     </Routes>
   );

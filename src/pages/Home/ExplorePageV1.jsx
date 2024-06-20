@@ -4,7 +4,8 @@ import Navbar from "../../components/Home/Navbar"
 import SelectedButton from '../../components/SelectedButton'
 import SelectedButton2 from "../../components/SelectedButton2"
 import { IoSearch } from "react-icons/io5";
-import logoSodaie from '../../assets/SODAIE.png'
+import { AudioPlayer } from "./../../components/MediaPlayer/AudioPlayer";
+
 export default function ExplorePageV1(){
 
     return (
@@ -46,6 +47,10 @@ export default function ExplorePageV1(){
                 </div>
             </div>
 
+        </div>
+
+        <div className="bottom-0 fixed w-full max-w-[80rem]">
+                 <AudioPlayer />
         </div>
 
         </div>

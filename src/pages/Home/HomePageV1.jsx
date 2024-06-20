@@ -4,6 +4,8 @@ import SongCardList from "../../components/Home/SongCardListV1"
 import Footer from "../../components/Footer"
 import Navbar from "../../components/Home/Navbar"
 import ArtistList from "../../components/Home/ArtistList"
+import { AudioPlayer } from "./../../components/MediaPlayer/AudioPlayer";
+
 export default function HomePageV1(){
 
     return (
@@ -23,10 +25,15 @@ export default function HomePageV1(){
                     <SongCardList title={'Las mas votadas'}/>
                     <SongCardList title={'Musica de Temporada'}/>
                     <Footer/>
+                    
                 </div>
             </div>
 
         </div>
+
+            <div className="bottom-0 fixed w-full max-w-[80rem]">
+                 <AudioPlayer />
+            </div>
 
         </div>
 

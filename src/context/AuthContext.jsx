@@ -37,19 +37,20 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const signin = async (user) => {
-    try {
+// Definir la función signin con la lógica de redirección para administradores
+const signin = async (user) => {
+  try {
       const res = await loginRequest(user);
       setUser(res.data);
       localStorage.setItem('user', JSON.stringify(res.data));
       setIsAuthenticated(true);
-    } catch (error) {
+  } catch (error) {
       if (Array.isArray(error.response.data)) {
-        return setErrors(error.response.data);
+          return setErrors(error.response.data);
       }
       setErrors([error.response.data.message]);
-    }
-  };
+  }
+};
 
   const logout = async () => {
     try {
