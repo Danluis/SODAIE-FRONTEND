@@ -1,6 +1,6 @@
-import create from 'zustand';
+import { create } from 'zustand';
 
-const useAudioStore = create((set) => ({
+export const useAudioStore = create((set) => ({
   isPlaying: false,
   currentSong: null,
   currentMusic: { playlist: null, song: null, songs: []},
@@ -10,5 +10,3 @@ const useAudioStore = create((set) => ({
   setCurrentSong: (song) => set({ currentSong: song }),
   setCurrentMusic: (currentMusic) => set({ currentMusic }),
 }));
-
-export default useAudioStore;

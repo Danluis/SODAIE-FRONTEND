@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { registerRequest, loginRequest, logoutRequest } from '../api/auth.js';
-
+import Cookies from 'js-cookie'
 export const AuthContext = createContext();
 
 export const useAuth = () => {
@@ -30,6 +30,7 @@ export const AuthProvider = ({ children }) => {
       const res = await registerRequest(user);
       setUser(res.data);
       localStorage.setItem('user', JSON.stringify(res.data));
+      setIsAuthenticated(true)
       setIsRegister(true);
     } catch (error) {
       console.log(error.response);
@@ -37,20 +38,21 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-// Definir la función signin con la lógica de redirección para administradores
-const signin = async (user) => {
-  try {
+  const signin = async (user) => {
+    try {
       const res = await loginRequest(user);
+      console.log(res.headers["set-cookie"]);
       setUser(res.data);
       localStorage.setItem('user', JSON.stringify(res.data));
       setIsAuthenticated(true);
-  } catch (error) {
+    } catch (error) {
       if (Array.isArray(error.response.data)) {
-          return setErrors(error.response.data);
+        setErrors(error.response.data);
+      } else {
+        setErrors([error.response.data.message]);
       }
-      setErrors([error.response.data.message]);
-  }
-};
+    }
+  };
 
   const logout = async () => {
     try {
@@ -59,11 +61,13 @@ const signin = async (user) => {
       localStorage.removeItem('user');
       setUser(null);
       setIsAuthenticated(false);
+      setIsRegister(false);
     } catch (error) {
       if (Array.isArray(error.response.data)) {
-        return setErrors(error.response.data);
+        setErrors(error.response.data);
+      } else {
+        setErrors([error.response.data.message]);
       }
-      setErrors([error.response.data.message]);
     }
   };
 
@@ -75,6 +79,14 @@ const signin = async (user) => {
       return () => clearTimeout(timer);
     }
   }, [errors]);
+
+  useEffect(() => {
+    const cookies = Cookies.get()
+
+    if(cookies){
+      console.log(cookies.token);
+    }
+  })
 
   return (
     <AuthContext.Provider value={{

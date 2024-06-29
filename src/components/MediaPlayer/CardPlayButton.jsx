@@ -1,4 +1,4 @@
-import useAudioStore from "../../store/audioStore";
+import {useAudioStore} from "../../store/audioStore";
 import { Play,Pause } from "../MediaPlayer/AudioPlayer";
 
 export default function CardPlayButton({ id }){

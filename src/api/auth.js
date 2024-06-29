@@ -1,14 +1,15 @@
-import axios from 'axios';
-
-const API = 'http://localhost:4000/api/v1';
+import axios from './axios';
 
 //AUTHENTICATION APIS
-export const registerRequest = user => axios.post(`${API}/register`, user);
-export const loginRequest = user => axios.post(`${API}/login`, user);
-export const logoutRequest = user => axios.post(`${API}/logout`, user);
+export const registerRequest = user => axios.post(`/register`, user);
+export const loginRequest = user => axios.post(`/login`, user);
+export const logoutRequest = user => axios.post(`/logout`, user);
 
 //CREDENTIALS API
-export const updateCredentialRequest = (id, updatedCredential) => axios.put(`${API}/credentials/${id}`, updatedCredential);
+export const updateCredentialRequest = (id, updatedCredential) => axios.put(`/credentials/${id}`, updatedCredential);
 
 //USER API
-export const updateUserRequest = (id, updatedCredential) => axios.put(`${API}/users/${id}`, updatedCredential);
+export const updateUserRequest = (id, updatedCredential) => axios.put(`/users/${id}`, updatedCredential);
+
+//SONG API
+export const apiCreateSong = song => axios.post(`/songs`, song);
