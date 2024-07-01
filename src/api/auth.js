@@ -13,3 +13,5 @@ export const updateUserRequest = (id, updatedCredential) => axios.put(`/users/${
 
 //SONG API
 export const apiCreateSong = song => axios.post(`/songs`, song);
+export const apiGetSongs = () => axios.get(`/songs`);
+export const apiGetSong = songId => axios.get(`/songs/${songId}`);
