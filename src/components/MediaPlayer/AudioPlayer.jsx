@@ -12,12 +12,18 @@ export const Pause = () => (
 );
 
 export function AudioPlayer() {
-  const {isPlaying, setIsPlaying} = useAudioStore(state => state);
+  const {isPlaying, setIsPlaying, audio} = useAudioStore(state => state);
   const currentSong = useAudioStore(state => state.currentSong);
 
-  const handleClick = () =>{
-    setIsPlaying(!isPlaying)
-  }
+  const handleClick = () => {
+    if (isPlaying) {
+      audio.pause();
+    } else {
+      audio.play();
+    }
+    setIsPlaying(!isPlaying);
+  };
+
 
   return (
     <div className="bg-black p-4 flex flex-row justify-between w-full px-4 z-50 text-white">

@@ -13,20 +13,21 @@ export default function SongCard({ img, title, artists, id }) {
         // Lógica adicional para manejar la reproducción de la canción
     };
 
+    const maxArtistsToShow = 3; 
+    const displayedArtists = artists.slice(0, maxArtistsToShow);
+    const remainingArtists = artists.length - maxArtistsToShow;
+
     return (
         <div onClick={handleNavigate} className="w-[14rem] relative flex flex-col mb-16 h-min-height py-2 bg-transparent cursor-pointer p-3 rounded-lg hover:bg-gray-800 hover:shadow-lg">
             <img className="w-full h-[10rem] object-cover rounded-lg" src={img} alt={title} />
+            <span className="mt-2 font-semibold">{title}</span>
+            
             <div className="text-white mt-2">
-                {
-                artists.map((artist, index) => (
-                    <div key={index}>
-                        {artist}
-                        {index < artists.length - 1 && <br />} {/* Añade un salto de línea excepto después del último compositor */}
-                    </div>
-                ))
-                }
+                <div className="text-semiWhite line-clamp-2">
+                    {displayedArtists.join(', ')}
+                    {remainingArtists > 0 && ', y más'}
+                </div>
             </div>
-            <span className="text-semiWhite text-sm">{title}</span>
             <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
                 <div onClick={handlePlayClick}>
                     <CardPlayButton id={id} />

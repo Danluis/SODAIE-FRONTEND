@@ -13,7 +13,6 @@ export default function SongCardList({ title }) {
             try {
                 const response = await apiGetSongs();
                 setSongs(response.data);
-                console.log('Songs data:', response.data); // Imprimir los datos en la consola
             } catch (error) {
                 setError(error);
                 console.error('Error fetching songs:', error);
