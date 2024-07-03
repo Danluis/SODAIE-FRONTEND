@@ -11,6 +11,7 @@ import Library from "../pages/Home/Library";
 import Artist from "../pages/Artist/Artist";
 import AdminHomePageV1 from "../pages/Admin/AdminHomePage";
 import ScrollToTop from "../components/Utilities/ScrollToTop";
+import ArtistPage from "../pages/Artist/ArtistPage";
 const RoutesApp = () => {
   return (
     <Routes>
@@ -26,6 +27,7 @@ const RoutesApp = () => {
         <Route path="/Library" element={<Library /> }/>
         <Route path="/Artist" element={<Artist /> }/>
         <Route path="/AdminPage" element={<AdminHomePageV1 /> }/>
+        <Route path="/Artist" element={<ArtistPage />} /> {/* Nueva ruta para la página de artistas */}
       </Route>
     </Routes>
   );
