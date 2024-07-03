@@ -27,7 +27,7 @@ const RoutesApp = () => {
         <Route path="/Library" element={<Library /> }/>
         <Route path="/Artist" element={<Artist /> }/>
         <Route path="/AdminPage" element={<AdminHomePageV1 /> }/>
-        <Route path="/Artist" element={<ArtistPage />} /> {/* Nueva ruta para la página de artistas */}
+        <Route path="/artists" element={<ArtistPage />} />
       </Route>
     </Routes>
   );
