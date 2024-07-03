@@ -18,11 +18,11 @@ export default function ArtistPage() {
         <Navbar />
         <div className="w-full h-full">
           <div className='bg-blackMain mr-2 p-8 w-full h-full text-white mt-10'>
-            {visibleArtists >= 1 && <ArtistList title={'Artistas Populares'} />}
-            {visibleArtists >= 2 && <ArtistList title={'Artistas Nuevos'} />}
-            {visibleArtists >= 3 && <ArtistList title={'Tus Artistas Favoritos'} />}
-            {visibleArtists >= 4 && <ArtistList title={'Artistas Emergentes'} />}
-            {visibleArtists >= 5 && <ArtistList title={'Artistas Recomendados'} />}
+            {visibleArtists >= 1 && <ArtistList title={'Compositores Populares'} />}
+            {visibleArtists >= 2 && <ArtistList title={'Compositores Nuevos'} />}
+            {visibleArtists >= 3 && <ArtistList title={'Tus Compositores Favoritos'} />}
+            {visibleArtists >= 4 && <ArtistList title={'Compositores Emergentes'} />}
+            {visibleArtists >= 5 && <ArtistList title={'Compositores Recomendados'} />}
             {/* Agrega más listas de artistas según sea necesario */}
             <div className="flex justify-center"> {/* Centra el botón */}
               <button 
