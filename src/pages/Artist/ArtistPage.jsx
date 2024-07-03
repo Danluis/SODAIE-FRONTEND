@@ -24,12 +24,14 @@ export default function ArtistPage() {
             {visibleArtists >= 4 && <ArtistList title={'Artistas Emergentes'} />}
             {visibleArtists >= 5 && <ArtistList title={'Artistas Recomendados'} />}
             {/* Agrega más listas de artistas según sea necesario */}
-            <button 
-              className="mt-4 py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-700"
-              onClick={showMoreArtists}
-            >
-              Mostrar más
-            </button>
+            <div className="flex justify-center"> {/* Centra el botón */}
+              <button 
+                className="mt-4 py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-700"
+                onClick={showMoreArtists}
+              >
+                Mostrar más
+              </button>
+            </div>
             <Footer />
           </div>
         </div>
