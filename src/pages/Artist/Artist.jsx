@@ -2,6 +2,7 @@ import Header from "../../components/Home/Header"
 import Footer from "../../components/Footer"
 import Navbar from "../../components/Home/Navbar"
 import CardPlayButton from "../../components/MediaPlayer/CardPlayButton"
+import { Link } from 'react-router-dom'; // Importar Link desde React Router
 export default function Artist(){
 
     return (
@@ -17,7 +18,8 @@ export default function Artist(){
                 <div class="w-full h-full max-w-full-xl mt-2 bg-blackMainmax-w-sm bg-gray-800 rounded-lg shadow-lg overflow-hidden">
         <div class="p-6">
             <h1 class="text-2xl font-bold text-white mb-2">Canción</h1>
-            <p class="text-sm text-gray-400 mb-12">Artistas o Compositores • Año de la canción</p>
+            <p class="text-sm text-gray-400 mb-12">
+                <Link to="/ruta-a-perfil" className="hover:text-white">Artistas o Compositores</Link> • Año de la canción</p>
             <div class="flex justify-between items-center mb-4">
                 <button class="relative top-16 z-20 left-14 ">
                     <CardPlayButton/>
