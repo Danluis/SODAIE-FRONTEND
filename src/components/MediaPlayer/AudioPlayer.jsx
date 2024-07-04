@@ -1,7 +1,8 @@
-import {useAudioStore} from "../../store/audioStore.js";
+import { useAudioStore } from "../../store/audioStore.js";
 
 export const Play = () => (
-  <svg data-encore-id="icon" role="img" height={16} width={16} aria-hidden="true" viewBox="0 0 16 16" ><path d="M3 1.713a.7.7 0 0 1 1.05-.607l10.89 6.288a.7.7 0 0 1 0 1.212L4.05 14.894A.7.7 0 0 1 3 14.288V1.713z"></path>
+  <svg data-encore-id="icon" role="img" height={16} width={16} aria-hidden="true" viewBox="0 0 16 16">
+    <path d="M3 1.713a.7.7 0 0 1 1.05-.607l10.89 6.288a.7.7 0 0 1 0 1.212L4.05 14.894A.7.7 0 0 1 3 14.288V1.713z"></path>
   </svg>
 );
 
@@ -11,9 +12,21 @@ export const Pause = () => (
   </svg>
 );
 
+const CurrentSong = ({ cover, title }) => {
+  return (
+    <div className="flex items-center gap-5 relative overflow-hidden">
+      <div className="w-16 h-16 bg-zinc-800 rounded-md shadow-lg overflow-hidden">
+        <img src={cover} alt={title} className="w-full h-full object-cover" />
+      </div>
+      <div className="text-white">
+        <div className="text-lg font-semibold">{title}</div>
+      </div>
+    </div>
+  );
+};
+
 export function AudioPlayer() {
-  const {isPlaying, setIsPlaying, audio} = useAudioStore(state => state);
-  const currentSong = useAudioStore(state => state.currentSong);
+  const { isPlaying, setIsPlaying, audio, currentMusic } = useAudioStore(state => state);
 
   const handleClick = () => {
     if (isPlaying) {
@@ -24,11 +37,10 @@ export function AudioPlayer() {
     setIsPlaying(!isPlaying);
   };
 
-
   return (
     <div className="bg-black p-4 flex flex-row justify-between w-full px-4 z-50 text-white">
       <div>
-        {currentSong ? currentSong.title : "No song playing"}
+        {currentMusic.song ? <CurrentSong {...currentMusic.song} /> : "No song playing"}
       </div>
 
       <div className="grid place-content-center gap-4 flex-1">
