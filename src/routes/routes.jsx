@@ -12,6 +12,7 @@ import Artist from "../pages/Artist/Artist";
 import AdminHomePageV1 from "../pages/Admin/AdminHomePage";
 import ScrollToTop from "../components/Utilities/ScrollToTop";
 import ArtistPage from "../pages/Artist/ArtistPage";
+import ComposerPerfil from "../pages/Artist/ComposerPerfil";
 const RoutesApp = () => {
   return (
     <Routes>
@@ -28,6 +29,7 @@ const RoutesApp = () => {
         <Route path="/Artist" element={<Artist /> }/>
         <Route path="/AdminPage" element={<AdminHomePageV1 /> }/>
         <Route path="/artists" element={<ArtistPage />} />
+        <Route path="/Perfil" element={<ComposerPerfil />} />
       </Route>
     </Routes>
   );
