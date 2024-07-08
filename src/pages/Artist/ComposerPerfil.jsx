@@ -1,7 +1,7 @@
 import Header from "../../components/Home/Header"
 import Footer from "../../components/Footer"
 import Navbar from "../../components/Home/Navbar"
-export default function Artist(){
+export default function ComposerPerfil(){
 
     return (
         <div className=" w-full h-full max-w-full-xl mt-2 bg-blackMain">
