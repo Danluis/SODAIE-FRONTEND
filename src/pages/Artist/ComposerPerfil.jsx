@@ -11,6 +11,11 @@ export default function Artist() {
                 <Navbar />
 
                 <div className="flex-1  p-8">
+                    {/* Banner Section */}
+                    <div className="w-full h-48 bg-gray-900 flex items-center justify-center mb-8">
+                        <span className="text-white text-2xl">Banner Placeholder</span>
+                    </div>
+                    
                     {/* Sección de Perfil */}
                     <div className="bg-gray-700 p-6 rounded mt-8">
                         <div className="flex items-center justify-between mb-4">
