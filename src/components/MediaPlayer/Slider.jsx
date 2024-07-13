@@ -7,7 +7,7 @@ const Slider = ({ min, max, value, onChange, className }) => {
         max={max}
         value={value}
         onChange={onChange}
-        className={`w-full h-1 appearance-none cursor-pointer ${className}`}
+        className={`h-1 appearance-none cursor-pointer ${className}`}
         style={{
           WebkitAppearance: 'none',
           appearance: 'none',

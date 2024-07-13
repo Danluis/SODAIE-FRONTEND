@@ -12,6 +12,7 @@ export default function CardPlayButton({ id }) {
     setIsPlaying,
     setCurrentMusic,
     audio,
+    setIsHiddenPlayer,
     setAudio
   } = useAudioStore(state => state);
 
@@ -32,17 +33,20 @@ export default function CardPlayButton({ id }) {
     if (isPlayingPlaylist) {
       audio.pause();
       setIsPlaying(false);
+      setIsHiddenPlayer(true)
       return;
     }
 
     if (audioUrl) {
       if (audio.src !== audioUrl) {
         audio.src = audioUrl;
+        setIsHiddenPlayer(true)
         await audio.load(); // Ensure the audio is loaded
       }
 
       setCurrentMusic({ playlist: { id }, song: song, songs:[song] }); // Pass the full song data
       setIsPlaying(true);
+      setIsHiddenPlayer(true)
       await audio.play();
     }
   };

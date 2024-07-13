@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useAudioStore } from "../../store/audioStore.js";
-import Slider from "./Slider";  // Asegúrate de ajustar la ruta si es necesario
+import { IoMdClose } from "react-icons/io";
+import Slider from "./Slider";
 
 export const Play = () => (
   <svg data-encore-id="icon" role="img" height={16} width={16} aria-hidden="true" viewBox="0 0 16 16">
@@ -54,9 +55,9 @@ const SongControl = ({ audio }) => {
         max={audio.duration || 0}
         value={currentTime}
         onChange={handleSeek}
-        className="w-[450px]"
+        className="w-[30rem]"
       />
-      <span className='text-sm text-semiWhite font-semibold w-12 text-center'>{formatTime(audio.duration)}</span>
+      <span className='text-sm text-semiWhite font-semibold w-12 text-center'>{formatTime(audio.duration || '')}</span>
     </div>
   );
 };
@@ -68,9 +69,9 @@ const formatTime = (time) => {
 };
 
 export function AudioPlayer() {
-  const { isPlaying, setIsPlaying, audio, currentMusic } = useAudioStore(state => state);
+  const { isPlaying, setIsPlaying, audio, currentMusic, isHiddenPlayer, setIsHiddenPlayer } = useAudioStore(state => state);
   const [volume, setVolume] = useState(audio.volume * 100);
-  const volumeMultiplier = 2; // Ajusta este valor para aumentar el volumen
+  const volumeMultiplier = 1; // Ajusta este valor para aumentar el volumen
 
   const handleClick = () => {
     if (isPlaying) {
@@ -97,12 +98,19 @@ export function AudioPlayer() {
     };
   }, [audio]);
 
+  const handleClose = () => {
+    audio.pause();
+    audio.currentTime = 0;
+    setIsPlaying(false);
+    setIsHiddenPlayer(false);
+  }
+
   return (
-    <div className="bg-black p-4 flex items-center flex-row justify-between w-full px-4 z-50 text-white">
-        
-        <div className='w-1/3 h-full'>
-          {currentMusic.song ? <CurrentSong {...currentMusic.song} /> : "No song playing"}
-        </div>
+    <div className={`${isHiddenPlayer ? '' : 'hidden'} bg-black p-4 flex items-center flex-row justify-between w-full px-4 z-50 text-white relative`}>
+      <IoMdClose className='w-5 h-5 absolute top-3 right-3 cursor-pointer hover:text-semiWhite' onClick={handleClose} />
+      <div className='w-1/3 h-full'>
+        {currentMusic.song ? <CurrentSong {...currentMusic.song} /> : "No song playing"}
+      </div>
 
       <div className="w-1/3 grid place-content-center items-center flex-1">
         <div className="flex justify-center">
@@ -111,20 +119,19 @@ export function AudioPlayer() {
           </button>
         </div>
         <SongControl audio={audio}/>
-
       </div>
-    <div className='w-1/3 flex justify-end'>
-      <div className="w-[95px]">
+
+      <div className='w-1/3 flex justify-end'>
+        <div className="w-[95px]">
           <Slider 
             min={0}
             max={100}
             value={volume}
             onChange={handleVolumeChange}
-            className="slider"
+            className="slider w-full"
           />
         </div>
-    </div>
-
+      </div>
     </div>
   );
 }

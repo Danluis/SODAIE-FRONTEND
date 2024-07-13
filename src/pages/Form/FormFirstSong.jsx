@@ -46,7 +46,7 @@ export default function FormFirstSong() {
             console.error("Error uploading file:", error);
             return null;
         }
-        const fullPath = data.path;
+        const fullPath = data.fullPath;
         const publicURL = await supabase.storage.from(bucket).url;
         const URL = `${publicURL}/object/public/${fullPath}`;
         return URL;
@@ -71,10 +71,10 @@ export default function FormFirstSong() {
             gender: ['asdadcweasd'],
             etiquetas: ['dasda', 'adasd'],
             cover: coverURL,
-            letter: "Un video xwqeqwwerwemas mi dqwgedqwnte, udawdhhhhh",
-            likes: 1,
+            letter: "Un video xwqeqwwerwemaswqdasd mi dqwgedqwnte, udawdhhhhh",
+            likes: 100,
             audio: audioURL,
-            favorites: 1,
+            favorites: 100,
             registro_ONDA:'afkdajf1fewfweasda2421acdsdwqdaczxcmclksdcm'
         };
 
