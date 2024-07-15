@@ -20,7 +20,7 @@ export default function Artist() {
 
                 <div className="flex-1  p-8">
                     {/* Banner Section */}
-                    <div className="w-full h-48 bg-gray-900 flex items-center justify-center mb-8">
+                    <div className="w-full h-80 bg-gray-900 flex items-center justify-center mb-8">
                         <span className="text-white text-2xl">Banner Placeholder</span>
                     </div>
                     
