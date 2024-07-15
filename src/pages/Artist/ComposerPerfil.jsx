@@ -2,6 +2,7 @@ import Header from "../../components/Home/Header";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Home/Navbar";
 import ToggleSwitch from "../../components/Utilities/ToggleSwitch";
+import FollowButton from "../../components/Utilities/FollowButton";
 import { useState } from 'react';
 
 export default function Artist() {
@@ -18,9 +19,9 @@ export default function Artist() {
             <div className="flex">
                 <Navbar />
 
-                <div className="flex-1  p-8">
+                <div className="flex-1 p-8">
                     {/* Banner Section */}
-                    <div className="w-full h-80 bg-gray-900 flex items-center justify-center mb-8">
+                    <div className="w-full h-64 bg-gray-900 flex items-center justify-center mb-8">
                         <span className="text-white text-2xl">Banner Placeholder</span>
                     </div>
                     
@@ -29,9 +30,7 @@ export default function Artist() {
                         <div className="flex items-center justify-between mb-4">
                             <div className="flex items-center">
                                 <div className="bg-gray-500 rounded-full h-12 w-12 mr-4"></div>
-                                <button className="bg-gray-500 text-white px-4 py-1 rounded hover:bg-blue-500">
-                                    Seguir
-                                </button>
+                                <FollowButton />
                             </div>
                             <div className="flex items-center space-x-2">
                                 <span>Cancion mas escuchada:</span>
@@ -69,9 +68,9 @@ export default function Artist() {
 
                     {/* Conditionally Render Pages */}
                     {currentPage === 'main' ? (
-                        <div className="text-white">compositor Page Content</div>
+                        <div className="text-white">Main Page Content</div>
                     ) : (
-                        <div className="text-white">usuario Page Content</div>
+                        <div className="text-white">Alternate Page Content</div>
                     )}
 
                     <Footer />
