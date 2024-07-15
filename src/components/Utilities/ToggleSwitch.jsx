@@ -11,12 +11,11 @@ const ToggleSwitch = ({ onClick }) => {
     return (
         <button
             onClick={handleToggle}
-            className={`flex items-center focus:outline-none ${isToggled ? 'bg-blue-500' : 'bg-gray-400'} p-1 rounded-full`}
+            className={`relative w-12 h-6 flex items-center ${isToggled ? 'bg-blue-500' : 'bg-gray-400'} rounded-full p-1 duration-300 ease-in-out`}
         >
             <div
-                className={`transform transition-transform duration-200 ${isToggled ? 'translate-x-6' : 'translate-x-0'} bg-white w-6 h-6 rounded-full`}
+                className={`bg-white w-4 h-4 rounded-full shadow-md transform duration-300 ease-in-out ${isToggled ? 'translate-x-6' : 'translate-x-0'}`}
             />
-            <span className="ml-2 text-blue-500">Guardar tarjeta</span>
         </button>
     );
 };

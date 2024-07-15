@@ -1,8 +1,16 @@
 import Header from "../../components/Home/Header";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Home/Navbar";
+import ToggleSwitch from "../../components/Utilities/ToggleSwitch";
+import { useState } from 'react';
 
 export default function Artist() {
+    const [currentPage, setCurrentPage] = useState('main'); // 'main' o 'alternate'
+
+    const handleToggleClick = () => {
+        setCurrentPage(currentPage === 'main' ? 'alternate' : 'main');
+    };
+
     return (
         <div className="w-full h-full max-w-full-xl mt-2 bg-blackMain">
             <Header />
@@ -53,6 +61,18 @@ export default function Artist() {
                             <span>Estadisticas? (interrogacion significa que no se si lo ponemos o no)</span>
                         </div>
                     </div>
+
+                    {/* Toggle Button */}
+                    <div className="mt-8">
+                        <ToggleSwitch onClick={handleToggleClick} />
+                    </div>
+
+                    {/* Conditionally Render Pages */}
+                    {currentPage === 'main' ? (
+                        <div className="text-white">compositor Page Content</div>
+                    ) : (
+                        <div className="text-white">usuario Page Content</div>
+                    )}
 
                     <Footer />
                 </div>
