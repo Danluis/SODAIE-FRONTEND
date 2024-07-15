@@ -15,7 +15,17 @@ const FollowButton = () => {
                 isFollowing ? 'bg-green-500' : ''
             }`}
         >
-            {isFollowing ? <FiCheck className="animate-bounce" /> : <FiPlus />}
+            {isFollowing ? (
+                <>
+                    <FiCheck className="mr-2" />
+                    <span>Siguiendo</span>
+                </>
+            ) : (
+                <>
+                    <FiPlus className="mr-2" />
+                    <span>Seguir</span>
+                </>
+            )}
         </button>
     );
 };
