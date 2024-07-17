@@ -30,6 +30,13 @@ export default function FormFirstSong() {
                                </div>
                                <div className="flex justify-around">
                                     <FormInputDesigner text={'Género'} placeholder={'Ej: Pop, Rock, Jazz'}/>
+                                    <FormInputDesigner text={'Interpretes'} placeholder={'Nombre de los Interpretes'}/>
+                               </div>
+                               <div className="flex justify-around">
+                                    <FormInputDesigner text={'Etiquetas'} placeholder={'Ej: #salso o #bachata'}/>
+                                    <FormInputDesigner text={'Letra'} placeholder={''}/>
+                               </div>
+                               <div className="flex justify-around">
                                     <FormInputDesigner text={'Registro del Número del Onda'} placeholder={'Ej: #500/07/2024'}/>
                                </div>
                             </div>
