@@ -51,9 +51,9 @@ export default function FormGeneralInfo() {
                             <FormProvider {...methods}>
                                 <form onSubmit={onSubmit} className="mt-10">
                                     <div className="mb-6 text-3xl font-semibold">Información General</div>
-                                    <FormInput name="name" text="Nombre" placeholder="Juan" />
-                                    <FormInput name="lastName" text="Apellido" placeholder="Espaillat" />
-                                    <FormInput name="nickname" text="Apodo" placeholder="El Chaval" />
+                                    <FormInput name="name" text="Nombre" placeholder="Nombre" />
+                                    <FormInput name="lastName" text="Apellido" placeholder="Apellido" />
+                                    <FormInput name="nickname" text="Apodo" placeholder="Apodo" />
                                     
                                     <div className="flex justify-between gap-10 mt-6">
                                         <button type="submit" className="text-center w-1/2 bg-cyan-700 text-white px-12 py-3 rounded-xl font-semibold transition-transform transform hover:scale-105">Siguiente</button>
