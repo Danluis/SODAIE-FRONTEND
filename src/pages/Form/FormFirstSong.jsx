@@ -28,6 +28,10 @@ export default function FormFirstSong() {
                                     <FormInputDesigner text={'Titulo'} placeholder={'Título de la canción'}/>
                                     <FormInputDesigner text={'Compositor o compositores'} placeholder={'Nombre de los autores, compositores o arreglistas'}/>
                                </div>
+                               <div className="flex justify-around">
+                                    <FormInputDesigner text={'Género'} placeholder={'Ej: Pop, Rock, Jazz'}/>
+                                    <FormInputDesigner text={'Registro del Número del Onda'} placeholder={'Ej: #500/07/2024'}/>
+                               </div>
                             </div>
                             
                             <div>
