@@ -59,7 +59,7 @@ export default function FormGeneralInfo() {
                                         <button type="submit" className="text-center w-1/2 bg-cyan-700 text-white px-12 py-3 rounded-xl font-semibold transition-transform transform hover:scale-105">Siguiente</button>
                                         <Link to="/FormPersonalInfo" className="text-center w-1/4 bg-semiBlack text-semiWhite px-4 py-3 rounded-xl font-semibold hover:bg-slate-900 transition-transform transform hover:scale-105">Omitir</Link>
                                     </div>
-                                    <Timeline paso1="completed" paso2="upcoming" paso3="upcoming" />
+                                    <Timeline paso1="completed" paso2="upcoming" paso3="upcoming" paso4="upcoming" />
                                 </form>
                             </FormProvider>
                         </div>

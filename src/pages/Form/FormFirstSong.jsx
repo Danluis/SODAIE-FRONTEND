@@ -62,10 +62,10 @@ export default function FormFirstSong() {
                             </div>
 
                             <div className="flex justify-around">
-                                <Timeline paso1={'completed'} paso2={'completed'} paso3={'completed'} />
+                                <Timeline paso1={'completed'} paso2={'completed'} paso3={'completed'} paso4="upcoming"/>
                                 <div className="mt-16">
                                     <Link to={'/FormPersonalInfo'} className="w-1/4 text-center bg-semiBlack text-semiWhite px-4 py-3 rounded-xl font-semibold hover:bg-slate-900 transition-transform transform hover:scale-105">Atrás</Link>&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <Link to={'/'} className="mr-4 text-center w-1/2 bg-cyan-700 text-white px-12 py-3 rounded-xl font-semibold transition-transform transform hover:scale-105">Finalizar</Link>
+                                    <Link to={'/'} className="mr-4 text-center w-1/2 bg-cyan-700 text-white px-12 py-3 rounded-xl font-semibold transition-transform transform hover:scale-105">Siguiente</Link> {/*aqui va la ruta para FormTermsCon*/}
                                     <Link to={'/'} className="text-center w-1/4 bg-semiBlack text-semiWhite px-4 py-3 rounded-xl font-semibold hover:bg-slate-900 transition-transform transform hover:scale-105">Omitir</Link>
                                 </div>
                             </div>
