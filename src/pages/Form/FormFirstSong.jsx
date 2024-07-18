@@ -36,9 +36,9 @@ export default function FormFirstSong() {
                                     <FormInputDesigner text={'Etiquetas'} placeholder={'Ej: #salso o #bachata'}/>
                                     <FormInputDesigner text={'Registro del Número del Onda'} placeholder={'Ej: #500/07/2024'}/>
                                </div>
-                               <div className="flex justify-around">
-                                    
-                                    <textarea placeholder="Escriba su letra aquí..." className="w-1/2 h-32 bg-semiBlack border-blue-600 text-white text-white p-2 rounded mt-2"></textarea>
+                               <div>
+                               <h1 className="text-2xl mt-6 mb-6">Letra</h1>
+                                    <textarea placeholder="Escriba su letra aquí..." className="w-full h-32 bg-semiBlack border-blue-600 text-white text-white p-2 rounded mt-2"></textarea>
                                </div>
                             </div>
                             
