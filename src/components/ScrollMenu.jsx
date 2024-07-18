@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function FormSelectDesigner({ text, options }) {
+export default function ScrollMenu({ text, options }) {
     return (
         <div className="mb-4">
             <label className="block text-sm font-medium text-gray-400 mb-2">{text}</label>
