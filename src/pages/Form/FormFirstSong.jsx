@@ -32,7 +32,7 @@ export default function FormFirstSong() {
                                 <h1 className="text-2xl mt-6 mb-6">Composición</h1>
                                 <div className="flex flex-wrap justify-around gap-6">
                                     <FormInputDesigner text={'Título'} placeholder={'Título de la canción'}/>
-                                    <ScrollMenu text={'Género'} options={genres} />  {/* Usar el nuevo componente */}
+                                    <ScrollMenu text={'Género'} placeholder={'Seleccione un género'} options={genres} />  {/* Usar el nuevo componente */}
                                     <FormInputDesigner text={'Etiquetas'} placeholder={'Ej: #salsa o #bachata'}/>
                                     <FormInputDesigner text={'Compositor o compositores'} placeholder={'Nombre de los autores, compositores o arreglistas'}/>
                                     <FormInputDesigner text={'Intérpretes'} placeholder={'Nombre de los intérpretes'}/>
