@@ -55,8 +55,8 @@ export default function FormPersonalInfo() {
                                     <div className="mb-6 text-3xl font-semibold">Información Personal</div>
                                     <FormInput
                                         name="nationality"
-                                        text="Nacionalidad"
-                                        placeholder="Dominicano"
+                                        text="Cédula"
+                                        placeholder="001-0000000-1"
                                     />
                                     <FormInput
                                         name="phone"
