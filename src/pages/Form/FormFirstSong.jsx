@@ -10,8 +10,11 @@ import { RiFolderMusicFill } from "react-icons/ri";
 
 export default function FormFirstSong() {
     const genres = [
-        "Pop", "Rock", "Jazz", "Hip Hop", "Classical", "Electronic", "Reggae", 
-        "Country", "Blues", "Latin", "Folk", "Disco", "Soul", "R&B", "Metal"
+        "MERENGUE", "BACHATA", "DEMBOW", "SALSA", "BOELRO", "BALADA", "DISCO",
+        "MAMBO", "ROCK", "MERENGUE SON", "MERENGUE HOUSE", "MERENGUE TIPICO",
+        "POP", "POP ROCK LATINO", "RANCHERA", "REGGAE", "REGGEATON", "SON",
+        "URBANO", "VALLENATO", "CRISTIANO", "JAZZ", "CUMBIA", "ACUSTICO",
+        "FUSIÓN", "OTRO" 
     ];
 
     return (
