@@ -32,6 +32,7 @@ export default function FormFirstSong() {
                             </div>
                             
                             <div>
+                                <Timeline paso1={'completed'} paso2={'completed'} paso3={'completed'} paso4={'upcoming'} />
                                 <h1 className="text-2xl mt-6 mb-6">Composición</h1>
                                 <div className="flex flex-wrap justify-around gap-6">
                                     <FormInputDesigner text={'Título'} placeholder={'Título de la canción'}/>
@@ -69,7 +70,6 @@ export default function FormFirstSong() {
                             </div>
 
                             <div className="flex justify-around">
-                                <Timeline paso1={'completed'} paso2={'completed'} paso3={'completed'} paso4={'upcoming'} />
                                 <div className="mt-16">
                                     <Link to={'/FormPersonalInfo'} className="w-1/4 text-center bg-semiBlack text-semiWhite px-4 py-3 rounded-xl font-semibold hover:bg-slate-900 transition-transform transform hover:scale-105">Atrás</Link>&nbsp;&nbsp;&nbsp;&nbsp;
                                     <Link to={'/'} className="mr-4 text-center w-1/2 bg-cyan-700 text-white px-12 py-3 rounded-xl font-semibold transition-transform transform hover:scale-105">Siguiente</Link>
