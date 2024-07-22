@@ -31,9 +31,6 @@ export default function HomePageV1(){
 
         </div>
 
-            <div className="bottom-0 fixed h-[5.5rem] w-full max-w-[80rem]">
-                 <AudioPlayer />
-            </div>
 
         </div>
 

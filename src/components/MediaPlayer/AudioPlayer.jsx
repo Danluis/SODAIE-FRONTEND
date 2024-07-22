@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useAudioStore } from "../../store/audioStore.js";
 import { IoMdClose } from "react-icons/io";
+import { FaStepBackward, FaStepForward } from "react-icons/fa";
+import { IoMdVolumeHigh, IoMdVolumeLow, IoMdVolumeOff } from "react-icons/io";
+import { SongControl } from './SongControl.jsx';
+import { CurrentSong } from './CurrentSong.jsx';
 import Slider from "./Slider";
 
 export const Play = () => (
@@ -15,63 +19,37 @@ export const Pause = () => (
   </svg>
 );
 
-const CurrentSong = ({ cover, title, composers }) => {
-  return (
-    <div className="flex items-center gap-5 relative overflow-hidden">
-      <div className="w-16 h-16 bg-zinc-800 rounded-md shadow-lg overflow-hidden">
-        <img src={cover} alt={title} className="w-full h-full object-cover" />
-      </div>
-      <div className="text-white">
-        <div className="text-lg font-semibold">{title}</div>
-        <div className="text-gray-400 text-sm">{composers.join(', ')}</div>
-      </div>
-    </div>
-  );
-};
-
-const SongControl = ({ audio }) => {
-  const [currentTime, setCurrentTime] = useState(0);
-
-  const handleTimeUpdate = () => {
-    setCurrentTime(audio.currentTime);
-  };
-
-  const handleSeek = (event) => {
-    audio.currentTime = event.target.value;
-  };
+export function AudioPlayer() {
+  const { isPlaying, setIsPlaying, audio, currentMusic, isHiddenPlayer, setIsHiddenPlayer, playNextSong, playPreviousSong } = useAudioStore(state => state);
+  const [volume, setVolume] = useState(audio.volume * 100);
+  const [isMuted, setIsMuted] = useState(false);
+  const volumeMultiplier = 1; // Ajusta este valor para aumentar el volumen
 
   useEffect(() => {
-    audio.addEventListener('timeupdate', handleTimeUpdate);
-    return () => {
-      audio.removeEventListener('timeupdate', handleTimeUpdate);
-    };
-  }, [audio]);
+    if (currentMusic.song) {
+      audio.src = currentMusic.song.audio;
+      audio.load(); // Asegúrate de que el audio se cargue
+      audio.addEventListener('canplaythrough', handleCanPlayThrough);
+    }
+  }, [currentMusic.song, audio]);
 
-  return (
-    <div className="flex items-center justify-center gap-2 w-full">
-      <span className='text-sm text-semiWhite font-semibold mr-4 w-12 text-center'>{formatTime(currentTime)}</span>
-      <Slider
-        min={0}
-        max={audio.duration || 0}
-        value={currentTime}
-        onChange={handleSeek}
-        className="w-[30rem]"
-      />
-      <span className='text-sm text-semiWhite font-semibold w-12 text-center'>{formatTime(audio.duration || '')}</span>
-    </div>
-  );
-};
+  useEffect(() => {
+    if (isMuted) {
+      audio.muted = true;
+    } else {
+      audio.muted = false;
+      audio.volume = volume / 100 * volumeMultiplier;
+    }
+  }, [isMuted, volume, audio]);
 
-const formatTime = (time) => {
-  const minutes = Math.floor(time / 60);
-  const seconds = Math.floor(time % 60);
-  return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-};
-
-export function AudioPlayer() {
-  const { isPlaying, setIsPlaying, audio, currentMusic, isHiddenPlayer, setIsHiddenPlayer } = useAudioStore(state => state);
-  const [volume, setVolume] = useState(audio.volume * 100);
-  const volumeMultiplier = 1; // Ajusta este valor para aumentar el volumen
+  const handleCanPlayThrough = () => {
+    if (isPlaying) {
+      audio.play();
+    } else {
+      audio.pause();
+    }
+    audio.removeEventListener('canplaythrough', handleCanPlayThrough);
+  };
 
   const handleClick = () => {
     if (isPlaying) {
@@ -84,7 +62,6 @@ export function AudioPlayer() {
 
   const handleVolumeChange = (event) => {
     const newVolume = event.target.value;
-    audio.volume = Math.min(newVolume / 100 * volumeMultiplier, 1);
     setVolume(newVolume);
   };
 
@@ -98,38 +75,61 @@ export function AudioPlayer() {
     };
   }, [audio]);
 
+  const toggleMute = () => {
+    setIsMuted(prev => !prev);
+  };
+
+  const getVolumeIcon = () => {
+    if (isMuted) return <IoMdVolumeOff className='w-5 h-5 text-gray-300 hover:text-gray-400 cursor-pointer' onClick={toggleMute} />;
+    if (volume === 0) return <IoMdVolumeOff className='w-5 h-5 text-gray-300 hover:text-gray-400 cursor-pointer' onClick={toggleMute} />;
+    if (volume <= 30) return <IoMdVolumeLow className='w-5 h-5 text-gray-300 hover:text-gray-400 cursor-pointer' onClick={toggleMute} />;
+    if (volume <= 70) return <IoMdVolumeHigh className='w-5 h-5 text-gray-300 hover:text-gray-400 cursor-pointer' onClick={toggleMute} />;
+    return <IoMdVolumeHigh className='w-5 h-5 text-gray-300 hover:text-gray-400 cursor-pointer' onClick={toggleMute} />;
+  };
+
   const handleClose = () => {
     audio.pause();
     audio.currentTime = 0;
     setIsPlaying(false);
     setIsHiddenPlayer(false);
-  }
+  };
 
   return (
-    <div className={`${isHiddenPlayer ? '' : 'hidden'} bg-black p-4 flex items-center flex-row justify-between w-full px-4 z-50 text-white relative`}>
-      <IoMdClose className='w-5 h-5 absolute top-3 right-3 cursor-pointer hover:text-semiWhite' onClick={handleClose} />
-      <div className='w-1/3 h-full'>
-        {currentMusic.song ? <CurrentSong {...currentMusic.song} /> : "No song playing"}
-      </div>
-
-      <div className="w-1/3 grid place-content-center items-center flex-1">
-        <div className="flex justify-center">
-          <button className="bg-white rounded-full p-2" onClick={handleClick}>
-            {isPlaying ? <Pause /> : <Play />}
-          </button>
+    <div className="bottom-0 fixed h-[5.5rem] w-full max-w-[80rem] z-20">
+      <div className={`${isHiddenPlayer ? '' : 'hidden'} bg-black p-4 flex items-center flex-row justify-between w-full px-4 z-50 text-white relative`}>
+        <IoMdClose className='w-5 h-5 absolute top-3 right-3 cursor-pointer hover:text-semiWhite' onClick={handleClose} />
+        <div className='w-1/3 h-full'>
+          {currentMusic.song ? <CurrentSong {...currentMusic.song} /> : "No song playing"}
         </div>
-        <SongControl audio={audio}/>
-      </div>
 
-      <div className='w-1/3 flex justify-end'>
-        <div className="w-[95px]">
-          <Slider 
-            min={0}
-            max={100}
-            value={volume}
-            onChange={handleVolumeChange}
-            className="slider w-full"
-          />
+        <div className="w-1/3 grid place-content-center items-center flex-1">
+          <div className="flex justify-center items-center gap-2">
+            <button className="rounded-full p-2" onClick={playPreviousSong}>
+              <FaStepBackward className='w-6 h-5 text-gray-300 hover:text-gray-400' />
+            </button>
+            <button className="bg-white rounded-full p-2 mx-2" onClick={handleClick}>
+              {isPlaying ? <Pause /> : <Play />}
+            </button>
+            <button className="rounded-full p-2" onClick={playNextSong}>
+              <FaStepForward className='w-6 h-5 text-gray-300 hover:text-gray-400' />
+            </button>
+          </div>
+          <SongControl audio={audio}/>
+        </div>
+
+        <div className='w-1/3 flex items-center justify-end'>
+          <div className="w-[95px] flex items-center">
+            <div className='relative top-1'>
+              {getVolumeIcon()}
+            </div>
+            <Slider 
+              min={0}
+              max={100}
+              value={volume}
+              onChange={handleVolumeChange}
+              className="slider w-full ml-2"
+            />
+          </div>
         </div>
       </div>
     </div>

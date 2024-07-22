@@ -49,10 +49,6 @@ export default function ExplorePageV1(){
 
         </div>
 
-        <div className="bottom-0 fixed w-full max-w-[80rem]">
-                 <AudioPlayer />
-        </div>
-
         </div>
 
     )
