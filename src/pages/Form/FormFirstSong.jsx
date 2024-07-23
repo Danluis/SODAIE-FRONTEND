@@ -5,42 +5,39 @@ import HeaderLogged from "../../components/Home/HeaderLogged";
 import Footer from "../../components/Footer";
 import NavbarComposer from "../../components/Home/NavbarComposer";
 import FormInput from "../../components/Form/FormInput";
-<<<<<<< HEAD
-=======
-import FormInputDesigner from "../../components/Form/FormInputDesigner";
 import ScrollMenu from "../../components/ScrollMenu";
->>>>>>> b8f3f3cb471a0f2e7b3feb515e23e7638f60d03a
 import Timeline from "../../components/Form/Timeline";
 import { RiFolderMusicFill } from "react-icons/ri";
 import { supabase } from "../../supabase/supabaseClient";
 import { apiCreateSong } from "../../api/auth"; // Asegúrate de ajustar la ruta según tu estructura de proyecto
 
 export default function FormFirstSong() {
-<<<<<<< HEAD
     const methods = useForm();
     const { handleSubmit } = methods;
     const navigate = useNavigate();
     const [coverFile, setCoverFile] = useState(null);
     const [audioFile, setAudioFile] = useState(null);
     const [composers, setComposers] = useState(['']);
+    const [etiquetas, setEtiquetas] = useState(['']);
+    const [interpreters, setInterpreters] = useState(['']);
 
     const handleFileChange = (e, setFile) => {
         setFile(e.target.files[0]);
     };
 
-    const handleComposerChange = (index, value) => {
-        const newComposers = [...composers];
-        newComposers[index] = value;
-        setComposers(newComposers);
+    const handleListChange = (index, value, list, setList) => {
+        const newList = [...list];
+        newList[index] = value;
+        setList(newList);
     };
 
-    const addComposer = () => {
-        setComposers([...composers, '']);
+    const addToList = (list, setList) => {
+        setList([...list, '']);
     };
 
-    const removeComposer = (index) => {
-        const newComposers = composers.filter((_, i) => i !== index);
-        setComposers(newComposers);
+    const removeFromList = (index, list, setList) => {
+        const newList = list.filter((_, i) => i !== index);
+        setList(newList);
     };
 
     const uploadFile = async (file, bucket) => {
@@ -73,15 +70,15 @@ export default function FormFirstSong() {
         const song = {
             ...values,
             composers,
-            interpreters: ["Interpreqeqeter 1", "Interqdqwxpreter 2"],
-            gender: ['asdadcweasd'],
-            etiquetas: ['dasda', 'adasd'],
+            interpreters,
+            gender: values.gender,
+            etiquetas,
             cover: coverURL,
-            letter: "Un video xwqeqwwerwemaswqdasd mi dqwgedqwnte, udawdhhhhh",
+            letter: values.letter,
             likes: 100,
             audio: audioURL,
             favorites: 100,
-            registro_ONDA:'afkdajf1fewfweasda2421acdsdwqdaczxcmclksdcm'
+            registro_ONDA: values.registro_ONDA
         };
 
         try {
@@ -92,15 +89,14 @@ export default function FormFirstSong() {
             console.error("Error creating song:", error);
         }
     });
-=======
+
     const genres = [
         "MERENGUE", "BACHATA", "DEMBOW", "SALSA", "BOLERO", "BALADA", "DISCO",
         "MAMBO", "ROCK", "MERENGUE SON", "MERENHOUSE", "MERENGUE TIPICO",
         "POP", "POP ROCK LATINO", "RANCHERA", "REGGAE", "REGGEATON", "SON",
         "URBANO", "VALLENATO", "CRISTIANO", "JAZZ", "CUMBIA", "ACUSTICO",
-        "FUSION", "OTRO" 
+        "FUSION", "OTRO"
     ];
->>>>>>> b8f3f3cb471a0f2e7b3feb515e23e7638f60d03a
 
     return (
         <div className="w-full h-full max-w-full-xl mt-2 bg-blackMain text-white">
@@ -114,29 +110,33 @@ export default function FormFirstSong() {
                                 <h1 className="text-3xl font-semibold text-center">Sube tu primera canción</h1>
                                 <RiFolderMusicFill className="w-10 h-10"/>
                             </div>
-<<<<<<< HEAD
                             <FormProvider {...methods}>
                                 <form onSubmit={onSubmit}>
                                     <div>
                                         <h1 className="text-2xl mt-6 mb-6">Composición</h1>
                                         <div className="flex justify-around">
                                             <FormInput name="title" text="Título" placeholder="Título de la canción"/>
+                                            <ScrollMenu text={'Género'} placeholder={'Seleccione un género'} options={genres} name="gender" />
+
+                                        </div>
+
+                                        <div className="flex flex-wrap justify-around gap-6">
                                             <div>
                                                 <label className="block text-sm font-medium text-gray-400 mb-2">Compositor o compositores</label>
                                                 {composers.map((composer, index) => (
                                                     <div key={index} className="flex items-center mb-2">
                                                         <input
                                                             type="text"
-                                                            className="w-[28rem] px-4 py-2 rounded-lg bg-semiBlack text-white"
+                                                            className="w-[28rem] px-4 pl-7 py-3 rounded-lg bg-semiBlack text-white"
                                                             value={composer}
-                                                            onChange={(e) => handleComposerChange(index, e.target.value)}
-                                                            placeholder="Nombre del compositor"
+                                                            onChange={(e) => handleListChange(index, e.target.value, composers, setComposers)}
+                                                            placeholder="Nombre de los autores, compositores o arreglistas"
                                                         />
                                                         {index > 0 && (
                                                             <button
                                                                 type="button"
                                                                 className="ml-2 px-2 py-1 rounded bg-red-600 text-white"
-                                                                onClick={() => removeComposer(index)}
+                                                                onClick={() => removeFromList(index, composers, setComposers)}
                                                             >
                                                                 -
                                                             </button>
@@ -146,11 +146,82 @@ export default function FormFirstSong() {
                                                 <button
                                                     type="button"
                                                     className="mt-2 px-4 py-2 rounded bg-cyan-700 text-white"
-                                                    onClick={addComposer}
+                                                    onClick={() => addToList(composers, setComposers)}
                                                 >
                                                     +
                                                 </button>
                                             </div>
+                                            <div>
+                                                <label className="block text-sm font-medium text-gray-400 mb-2">Etiquetas</label>
+                                                {etiquetas.map((etiqueta, index) => (
+                                                    <div key={index} className="flex items-center mb-2">
+                                                        <input
+                                                            type="text"
+                                                            className="w-[28rem] px-4 pl-7 py-3 rounded-lg bg-semiBlack text-white"
+                                                            value={etiqueta}
+                                                            onChange={(e) => handleListChange(index, e.target.value, etiquetas, setEtiquetas)}
+                                                            placeholder="Ej: #salsa o #bachata"
+                                                        />
+                                                        {index > 0 && (
+                                                            <button
+                                                                type="button"
+                                                                className="ml-2 px-2 py-1 rounded bg-red-600 text-white"
+                                                                onClick={() => removeFromList(index, etiquetas, setEtiquetas)}
+                                                            >
+                                                                -
+                                                            </button>
+                                                        )}
+                                                    </div>
+                                                ))}
+                                                <button
+                                                    type="button"
+                                                    className="mt-2 px-4 py-2 rounded bg-cyan-700 text-white"
+                                                    onClick={() => addToList(etiquetas, setEtiquetas)}
+                                                >
+                                                    +
+                                                </button>
+                                            </div>
+                                            <div>
+                                                <label className="block text-sm font-medium text-gray-400 mb-2">Intérpretes</label>
+                                                {interpreters.map((interpreter, index) => (
+                                                    <div key={index} className="flex items-center mb-2">
+                                                        <input
+                                                            type="text"
+                                                            className="w-[28rem] px-4 pl-7 py-3 rounded-lg bg-semiBlack text-white"
+                                                            value={interpreter}
+                                                            onChange={(e) => handleListChange(index, e.target.value, interpreters, setInterpreters)}
+                                                            placeholder="Nombre de los intérpretes"
+                                                        />
+                                                        {index > 0 && (
+                                                            <button
+                                                                type="button"
+                                                                className="ml-2 px-2 py-1 rounded bg-red-600 text-white"
+                                                                onClick={() => removeFromList(index, interpreters, setInterpreters)}
+                                                            >
+                                                                -
+                                                            </button>
+                                                        )}
+                                                    </div>
+                                                ))}
+                                                <button
+                                                    type="button"
+                                                    className="mt-2 px-4 py-2 rounded bg-cyan-700 text-white"
+                                                    onClick={() => addToList(interpreters, setInterpreters)}
+                                                >
+                                                    +
+                                                </button>
+                                            </div>
+                                            <FormInput name="registro_ONDA" text={'Registro del Número del Onda'} placeholder={'Ej: #500/07/2024'} />
+                                        </div>
+
+                                        <div className="w-[63rem]">
+                                            <h1 className="text-2xl mt-6 mb-6">Letra</h1>
+                                            <textarea
+                                                name="letter"
+                                                placeholder="Escriba la letra aquí..."
+                                                className="w-full h-32 ml-10 px-6 py-3 bg-semiBlack border-blue-600 text-white p-2 rounded mt-2"
+                                                {...methods.register('letter')}
+                                            ></textarea>
                                         </div>
                                     </div>
                                     <div>
@@ -186,55 +257,6 @@ export default function FormFirstSong() {
                                     </div>
                                 </form>
                             </FormProvider>
-=======
-                            
-                            <div>
-                                <Timeline paso1={'completed'} paso2={'completed'} paso3={'completed'} paso4={'upcoming'} />
-                                <h1 className="text-2xl mt-6 mb-6">Composición</h1>
-                                <div className="flex flex-wrap justify-around gap-6">
-                                    <FormInputDesigner text={'Título'} placeholder={'Título de la canción'}/>
-                                    <ScrollMenu text={'Género'} placeholder={'Seleccione un género'} options={genres} />  {/* Usar el nuevo componente */}
-                                    <FormInputDesigner text={'Etiquetas'} placeholder={'Ej: #salsa o #bachata'}/>
-                                    <FormInputDesigner text={'Compositor o compositores'} placeholder={'Nombre de los autores, compositores o arreglistas'}/>
-                                    <FormInputDesigner text={'Intérpretes'} placeholder={'Nombre de los intérpretes'}/>
-                                    <FormInputDesigner text={'Registro del Número del Onda'} placeholder={'Ej: #500/07/2024'}/>
-                                </div>
-                            </div>
-                            
-                            <div>
-                                <h1 className="text-2xl mt-6 mb-6">Letra</h1>
-                                <textarea placeholder="Escriba la letra aquí" className="w-full h-32 bg-semiBlack border-blue-600 text-white p-2 rounded mt-2"></textarea>
-                            </div>
-
-                            <div>
-                                <h1 className="text-2xl mt-6 mb-6">Subir archivos</h1>
-                                <div className="flex justify-around">
-                                    <div className="mb-4">
-                                        <label className="block text-sm font-medium text-gray-400 mb-2">Subir Portada</label>
-                                        <input
-                                            type="file"
-                                            className="w-[28rem] px-6 py-3 rounded-lg bg-semiBlack text-white cursor-pointer"
-                                        />
-                                    </div>
-                                    <div className="mb-4">
-                                        <label className="block text-sm font-medium text-gray-400 mb-2">Subir Audio</label>
-                                        <input
-                                            type="file"
-                                            className="w-[28rem] px-6 py-3 rounded-lg bg-semiBlack text-white cursor-pointer "
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="flex justify-around">
-                                <div className="mt-16">
-                                    <Link to={'/FormPersonalInfo'} className="w-1/4 text-center bg-semiBlack text-semiWhite px-4 py-3 rounded-xl font-semibold hover:bg-slate-900 transition-transform transform hover:scale-105">Atrás</Link>&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <Link to={'/'} className="mr-4 text-center w-1/2 bg-cyan-700 text-white px-12 py-3 rounded-xl font-semibold transition-transform transform hover:scale-105">Siguiente</Link>
-                                    <Link to={'/'} className="text-center w-1/4 bg-semiBlack text-semiWhite px-4 py-3 rounded-xl font-semibold hover:bg-slate-900 transition-transform transform hover:scale-105">Omitir</Link>
-                                </div>
-                            </div>
-
->>>>>>> b8f3f3cb471a0f2e7b3feb515e23e7638f60d03a
                         </div>
                         <Footer />
                     </div>
