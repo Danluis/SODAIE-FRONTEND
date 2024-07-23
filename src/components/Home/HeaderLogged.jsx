@@ -36,9 +36,13 @@ export default function HeaderLogged() {
             </button>
             {menuOpen && (
               <div className="absolute right-0 mt-2 w-48 bg-slate-800 rounded-md shadow-lg z-20">
-                <button className="w-full block px-4 py-2 text-white text-left hover:bg-gray-900">Perfil</button>
-                <button onClick={logout} className="w-full block px-4 py-2 text-white text-left hover:bg-gray-900">Cerrar sesión</button>
-              </div>
+              <Link to="/Perfil" className="w-full block px-4 py-2 text-white text-left hover:bg-gray-900">
+                Perfil
+              </Link>
+              <button onClick={logout} className="w-full block px-4 py-2 text-white text-left hover:bg-gray-900">
+                Cerrar sesión
+              </button>
+            </div>
             )}
           </div>
         </div>

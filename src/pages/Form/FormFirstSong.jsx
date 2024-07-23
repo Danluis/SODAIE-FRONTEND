@@ -5,12 +5,18 @@ import HeaderLogged from "../../components/Home/HeaderLogged";
 import Footer from "../../components/Footer";
 import NavbarComposer from "../../components/Home/NavbarComposer";
 import FormInput from "../../components/Form/FormInput";
+<<<<<<< HEAD
+=======
+import FormInputDesigner from "../../components/Form/FormInputDesigner";
+import ScrollMenu from "../../components/ScrollMenu";
+>>>>>>> b8f3f3cb471a0f2e7b3feb515e23e7638f60d03a
 import Timeline from "../../components/Form/Timeline";
 import { RiFolderMusicFill } from "react-icons/ri";
 import { supabase } from "../../supabase/supabaseClient";
 import { apiCreateSong } from "../../api/auth"; // Asegúrate de ajustar la ruta según tu estructura de proyecto
 
 export default function FormFirstSong() {
+<<<<<<< HEAD
     const methods = useForm();
     const { handleSubmit } = methods;
     const navigate = useNavigate();
@@ -86,6 +92,15 @@ export default function FormFirstSong() {
             console.error("Error creating song:", error);
         }
     });
+=======
+    const genres = [
+        "MERENGUE", "BACHATA", "DEMBOW", "SALSA", "BOLERO", "BALADA", "DISCO",
+        "MAMBO", "ROCK", "MERENGUE SON", "MERENHOUSE", "MERENGUE TIPICO",
+        "POP", "POP ROCK LATINO", "RANCHERA", "REGGAE", "REGGEATON", "SON",
+        "URBANO", "VALLENATO", "CRISTIANO", "JAZZ", "CUMBIA", "ACUSTICO",
+        "FUSION", "OTRO" 
+    ];
+>>>>>>> b8f3f3cb471a0f2e7b3feb515e23e7638f60d03a
 
     return (
         <div className="w-full h-full max-w-full-xl mt-2 bg-blackMain text-white">
@@ -99,6 +114,7 @@ export default function FormFirstSong() {
                                 <h1 className="text-3xl font-semibold text-center">Sube tu primera canción</h1>
                                 <RiFolderMusicFill className="w-10 h-10"/>
                             </div>
+<<<<<<< HEAD
                             <FormProvider {...methods}>
                                 <form onSubmit={onSubmit}>
                                     <div>
@@ -170,6 +186,55 @@ export default function FormFirstSong() {
                                     </div>
                                 </form>
                             </FormProvider>
+=======
+                            
+                            <div>
+                                <Timeline paso1={'completed'} paso2={'completed'} paso3={'completed'} paso4={'upcoming'} />
+                                <h1 className="text-2xl mt-6 mb-6">Composición</h1>
+                                <div className="flex flex-wrap justify-around gap-6">
+                                    <FormInputDesigner text={'Título'} placeholder={'Título de la canción'}/>
+                                    <ScrollMenu text={'Género'} placeholder={'Seleccione un género'} options={genres} />  {/* Usar el nuevo componente */}
+                                    <FormInputDesigner text={'Etiquetas'} placeholder={'Ej: #salsa o #bachata'}/>
+                                    <FormInputDesigner text={'Compositor o compositores'} placeholder={'Nombre de los autores, compositores o arreglistas'}/>
+                                    <FormInputDesigner text={'Intérpretes'} placeholder={'Nombre de los intérpretes'}/>
+                                    <FormInputDesigner text={'Registro del Número del Onda'} placeholder={'Ej: #500/07/2024'}/>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h1 className="text-2xl mt-6 mb-6">Letra</h1>
+                                <textarea placeholder="Escriba la letra aquí" className="w-full h-32 bg-semiBlack border-blue-600 text-white p-2 rounded mt-2"></textarea>
+                            </div>
+
+                            <div>
+                                <h1 className="text-2xl mt-6 mb-6">Subir archivos</h1>
+                                <div className="flex justify-around">
+                                    <div className="mb-4">
+                                        <label className="block text-sm font-medium text-gray-400 mb-2">Subir Portada</label>
+                                        <input
+                                            type="file"
+                                            className="w-[28rem] px-6 py-3 rounded-lg bg-semiBlack text-white cursor-pointer"
+                                        />
+                                    </div>
+                                    <div className="mb-4">
+                                        <label className="block text-sm font-medium text-gray-400 mb-2">Subir Audio</label>
+                                        <input
+                                            type="file"
+                                            className="w-[28rem] px-6 py-3 rounded-lg bg-semiBlack text-white cursor-pointer "
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="flex justify-around">
+                                <div className="mt-16">
+                                    <Link to={'/FormPersonalInfo'} className="w-1/4 text-center bg-semiBlack text-semiWhite px-4 py-3 rounded-xl font-semibold hover:bg-slate-900 transition-transform transform hover:scale-105">Atrás</Link>&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <Link to={'/'} className="mr-4 text-center w-1/2 bg-cyan-700 text-white px-12 py-3 rounded-xl font-semibold transition-transform transform hover:scale-105">Siguiente</Link>
+                                    <Link to={'/'} className="text-center w-1/4 bg-semiBlack text-semiWhite px-4 py-3 rounded-xl font-semibold hover:bg-slate-900 transition-transform transform hover:scale-105">Omitir</Link>
+                                </div>
+                            </div>
+
+>>>>>>> b8f3f3cb471a0f2e7b3feb515e23e7638f60d03a
                         </div>
                         <Footer />
                     </div>

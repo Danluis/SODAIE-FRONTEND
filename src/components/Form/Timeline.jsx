@@ -2,12 +2,13 @@
 
 
 
-const Timeline = ({paso1,paso2,paso3}) => {
+const Timeline = ({paso1,paso2,paso3,paso4}) => {
   
     const steps = [
         { id: 1, name: 'Paso 1', status: `${paso1}` },
         { id: 2, name: 'Paso 2', status: `${paso2}` },
         { id: 3, name: 'Paso 3', status: `${paso3}` },
+        { id: 4, name: 'Paso 4', status: `${paso4}` }
       ];
 
   

@@ -55,8 +55,8 @@ export default function FormPersonalInfo() {
                                     <div className="mb-6 text-3xl font-semibold">Información Personal</div>
                                     <FormInput
                                         name="nationality"
-                                        text="Nacionalidad"
-                                        placeholder="Dominicano"
+                                        text="Cédula"
+                                        placeholder="001-0000000-1"
                                     />
                                     <FormInput
                                         name="phone"
@@ -69,7 +69,7 @@ export default function FormPersonalInfo() {
                                         <button type="submit" className="w-1/2 text-center bg-cyan-700 text-white px-12 py-3 rounded-xl font-semibold transition-transform transform hover:scale-105">Siguiente</button>
                                         <Link to="/FormFirstSong" className="w-1/4 text-center bg-semiBlack text-semiWhite px-4 py-3 rounded-xl font-semibold hover:bg-slate-900 transition-transform transform hover:scale-105">Omitir</Link>
                                     </div>
-                                    <Timeline paso1="completed" paso2="completed" paso3="upcoming" />
+                                    <Timeline paso1="completed" paso2="completed" paso3="upcoming" paso4="upcoming" />
                                 </form>
                             </FormProvider>
                         </div>
