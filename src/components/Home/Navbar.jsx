@@ -21,28 +21,31 @@ export default function Navbar() {
             </div>
 
             {/* Menú desplegable */}
-            {menuOpen && (
-                <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-40" onClick={() => setMenuOpen(false)}>
-                    <div 
-                        className="fixed top-0 left-0 h-full flex flex-col items-center pt-[9vh] w-[6rem] bg-gray-800 border-r-2 border-opacity-5 z-50"
-                        onClick={(e) => e.stopPropagation()}
-                    >
-                        <div className="flex flex-col gap-4">
-                            <Link to={'/'} className="hover:bg-slate-600 flex flex-col items-center p-2 rounded-lg cursor-pointer">
-                                <IoHome className="w-6 h-6" />
-                                <span>Inicio</span>
-                            </Link>
-                            <Link to={'/search'} className="hover:bg-slate-600 flex flex-col items-center p-2 rounded-lg cursor-pointer">
-                                <MdOutlineExplore className="w-6 h-6" />
-                                <span>Explorar</span>
-                            </Link>
-                            <Link to={'/Library'} className="hover:bg-slate-600 flex flex-col items-center p-2 rounded-lg cursor-pointer">
-                                <MdLibraryMusic className="w-6 h-6" />
-                                <span>Biblioteca</span>
-                            </Link>
-                        </div>
-                    </div>
+            <div 
+                className={`fixed top-0 left-0 h-full flex flex-col items-center pt-[9vh] w-[6rem] bg-gray-800 border-r-2 border-opacity-5 z-50 transform transition-transform duration-300 ${menuOpen ? 'translate-x-0' : '-translate-x-full'}`}
+            >
+                <div className="flex flex-col gap-4">
+                    <Link to={'/'} className="hover:bg-slate-600 flex flex-col items-center p-2 rounded-lg cursor-pointer">
+                        <IoHome className="w-6 h-6" />
+                        <span>Inicio</span>
+                    </Link>
+                    <Link to={'/search'} className="hover:bg-slate-600 flex flex-col items-center p-2 rounded-lg cursor-pointer">
+                        <MdOutlineExplore className="w-6 h-6" />
+                        <span>Explorar</span>
+                    </Link>
+                    <Link to={'/Library'} className="hover:bg-slate-600 flex flex-col items-center p-2 rounded-lg cursor-pointer">
+                        <MdLibraryMusic className="w-6 h-6" />
+                        <span>Biblioteca</span>
+                    </Link>
                 </div>
+            </div>
+
+            {/* Fondo oscuro para desenfoque */}
+            {menuOpen && (
+                <div 
+                    className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-40"
+                    onClick={() => setMenuOpen(false)}
+                />
             )}
         </div>
     );
