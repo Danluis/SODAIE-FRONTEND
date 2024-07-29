@@ -10,7 +10,7 @@ export default function HeaderUnlogged() {
   <div className=" w-full bg-blackMain max-w-full-xl flex flex-wrap items-center justify-between mx-auto px-8 p-2">
     
     <Link to={'/'} className="flex items-center space-x-3 rtl:space-x-reverse">
-        <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">REPERDOM</span>
+        <span className="pl-20 self-center text-2xl font-semibold whitespace-nowrap dark:text-white">REPERDOM</span>
     </Link>
 
     <div className="flex items-center">
