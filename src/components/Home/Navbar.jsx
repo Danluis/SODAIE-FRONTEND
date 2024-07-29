@@ -12,7 +12,7 @@ export default function Navbar() {
     return (
         <div className="relative">
             {/* Botón del menú */}
-            <div className="fixed top-0 left-3 mt-4 ml-4 z-50">
+            <div className="fixed top-0 left-3 mt-3 ml-4 z-50">
                 <div 
                     className="flex items-center justify-center hover:bg-slate-600 p-2 rounded-full cursor-pointer"
                     onClick={() => setMenuOpen(!menuOpen)}
