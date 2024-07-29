@@ -13,21 +13,43 @@ import AdminHomePageV1 from "../pages/Admin/AdminHomePage";
 import ScrollToTop from "../components/Utilities/ScrollToTop";
 import ArtistPage from "../pages/Artist/ArtistPage";
 import ComposerPerfil from "../pages/Artist/ComposerPerfil";
+import { ProtectedRoute } from "../components/Utilities/ProtectedRoute";
+import { ProtectedRouteUser } from "../components/Utilities/ProtectedRouteUser";
+import { ProtectedRouteAdmin } from "../components/Utilities/ProtectedRouteAdmin";
+import { ProtectedRouteComposer } from "../components/Utilities/ProtectedRouteComposer";
 const RoutesApp = () => {
   return (
     <Routes>
       <Route element={<ScrollToTop />}> 
+        
+      <Route element={<ProtectedRoute />}>
+
+          <Route path="/Library" element={<Library /> }/>
+          <Route path="/ChooseRegister" element={<ChooseRegister /> }/>
+
+        <Route element={<ProtectedRouteAdmin />}>
+           <Route path="/AdminPage" element={<AdminHomePageV1 /> }/>
+        </Route>
+
+        <Route element={<ProtectedRouteComposer />}>
+          <Route path="/FormGeneralInfo" element={<FormGeneralInfo /> }/>
+          <Route path="/FormPersonalInfo" element={<FormPersonalInfo /> }/>
+          <Route path="/FormFirstSong" element={<FormFirstSong /> }/>
+
+        </Route>
+
+        <Route element={<ProtectedRouteUser />}>
+        
+        </Route>
+
+      </Route>
+        
         <Route index path="/" element={<HomePageV1/>} />
         <Route path="/search" element={<ExplorePageV1/>} />
         <Route path="/LoginPageV1" element={<LoginPageV1 /> }/>
         <Route path="/RegisterPageV1" element={<RegisterPageV1 /> }/>
-        <Route path="/ChooseRegister" element={<ChooseRegister /> }/>
-        <Route path="/FormGeneralInfo" element={<FormGeneralInfo /> }/>
-        <Route path="/FormPersonalInfo" element={<FormPersonalInfo /> }/>
-        <Route path="/FormFirstSong" element={<FormFirstSong /> }/>
-        <Route path="/Library" element={<Library /> }/>
-        <Route path="/Artist" element={<Artist /> }/>
-        <Route path="/AdminPage" element={<AdminHomePageV1 /> }/>
+  
+        <Route path="/Artist" element={<Artist /> }/>      
         <Route path="/artists" element={<ArtistPage />} />
         <Route path="/Perfil" element={<ComposerPerfil />} />
       </Route>
