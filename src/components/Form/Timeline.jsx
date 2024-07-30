@@ -34,7 +34,7 @@ const Timeline = ({paso1,paso2,paso3,paso4}) => {
           </div>
           {index < steps.length - 1 && (
             <div className="flex items-center">
-              <hr className="border-t-2 border-gray-400 w-16 mx-4" />
+              <hr className="border-t-2 border-gray-400 w-16 mx-4 mb-5" />
             </div>
           )}
         </div>
