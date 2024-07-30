@@ -23,7 +23,7 @@ export default function ExplorePageV1(){
                     
                 </div>
 
-                <div className='flex flex-col items-center w-full h-full mt-4 gap-4 mb-96'>
+                <div className='flex flex-col items-center w-full h-full mt-4 gap-4 mb-96 ml-16'>
                     <span className='text-2xl font-semibold'>Encuentra a nuevos autores, compositores y arreglistas</span>
                     <span></span>         
                     
