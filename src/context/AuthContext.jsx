@@ -1,6 +1,9 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom'; // Importar useNavigate
 import { registerRequest, loginRequest, logoutRequest } from '../api/auth.js';
-import Cookies from 'js-cookie'
+import { useAuthStore } from "../store/authStore.js";
+import Cookies from 'js-cookie';
+
 export const AuthContext = createContext();
 
 export const useAuth = () => {
@@ -12,10 +15,14 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({ children }) => {
+  const { setGoogleUser } = useAuthStore(state => state);
+
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isRegister, setIsRegister] = useState(false);
   const [errors, setErrors] = useState([]);
+
+  const navigate = useNavigate(); // Usar useNavigate
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
@@ -30,7 +37,7 @@ export const AuthProvider = ({ children }) => {
       const res = await registerRequest(user);
       setUser(res.data);
       localStorage.setItem('user', JSON.stringify(res.data));
-      setIsAuthenticated(true)
+      setIsAuthenticated(true);
       setIsRegister(true);
     } catch (error) {
       console.log(error.response);
@@ -62,6 +69,8 @@ export const AuthProvider = ({ children }) => {
       setUser(null);
       setIsAuthenticated(false);
       setIsRegister(false);
+      setGoogleUser('');
+      navigate('/'); // Redirigir a la página raíz
     } catch (error) {
       if (Array.isArray(error.response.data)) {
         setErrors(error.response.data);
@@ -81,18 +90,22 @@ export const AuthProvider = ({ children }) => {
   }, [errors]);
 
   useEffect(() => {
-    const cookies = Cookies.get()
+    const cookies = Cookies.get();
 
-    if(cookies){
+    if (cookies) {
       console.log(cookies.token);
     }
-  })
+  }, []);
 
   return (
     <AuthContext.Provider value={{
       signup,
       signin,
       logout,
+      setUser,
+      setIsAuthenticated,
+      setIsRegister,
+      setErrors,
       user,
       isRegister,
       isAuthenticated,

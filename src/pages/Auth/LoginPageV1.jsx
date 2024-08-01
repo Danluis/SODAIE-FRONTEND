@@ -2,6 +2,7 @@
 import Header from "../../components/Home/Header";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Home/Navbar";
+import AuthGoogleLogin from "../../components/auth/AuthGoogleLogin";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../../context/AuthContext";
@@ -41,10 +42,7 @@ export default function LoginPageV1() {
                             <div className="flex items-center flex-col">
                                 <span className="text-4xl mb-8">Iniciar Sesion</span>
                                 <div className="flex gap-4 mb-4">
-                                    <button className="flex rounded-lg text-sm font-semibold px-10 py-3 hover:bg-slate-900 bg-semiBlack">
-                                        <img className="w-5 h-5 mr-2" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg" />
-                                        Continuar con Google
-                                    </button>
+                                    <AuthGoogleLogin/>
                                     <button className="flex text-sm rounded-lg font-semibold px-10 py-3 hover:bg-slate-900 bg-semiBlack">
                                         <img className="w-5 h-5 mr-2" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/facebook/facebook-original.svg" />
                                         Continuar con Facebook

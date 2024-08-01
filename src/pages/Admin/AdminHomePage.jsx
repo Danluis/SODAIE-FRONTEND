@@ -14,19 +14,21 @@ export default function AdminHomePageV1(){
         <div className="flex flex-col-2">
                 <Navbar/>
 
-            <div className="w-full h-full">
+            <div className="w-[90%] h-full">
                 <div className='bg-blackMain mr-2 p-8 w-full h-full text-white'>
                 <Slider/>
-                    <ArtistList title={'Artistas mas Escuchados'}/>
+                    <ArtistList title={'Compositores'}/>
                     <SongCardList title={'Escuchado recientemente'}/>
                     <SongCardList title={'Subidas recientemente'}/>
                     <SongCardList title={'Las mas votadas'}/>
                     <SongCardList title={'Musica de Temporada'}/>
                     <Footer/>
+                    
                 </div>
             </div>
 
         </div>
+
 
         </div>
 
