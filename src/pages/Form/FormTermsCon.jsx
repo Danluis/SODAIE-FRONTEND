@@ -1,10 +1,12 @@
-import Header from "../../components/Home/Header"
-import Footer from "../../components/Footer"
-import Navbar from "../../components/Home/Navbar"
-import { useState } from "react"
+import Header from "../../components/Home/Header";
+import Footer from "../../components/Footer";
+import Navbar from "../../components/Home/Navbar";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function FormTermsCon() {
     const [accepted, setAccepted] = useState(false);
+    const navigate = useNavigate();
 
     const handleCheckboxChange = () => {
         setAccepted(!accepted);
@@ -14,6 +16,7 @@ export default function FormTermsCon() {
         e.preventDefault();
         if (accepted) {
             alert("Has aceptado los términos y condiciones.");
+            navigate('/'); // Redirige a la página de inicio
         } else {
             alert("Debes aceptar los términos y condiciones para continuar.");
         }
