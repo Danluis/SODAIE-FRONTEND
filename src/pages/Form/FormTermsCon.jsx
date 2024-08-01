@@ -2,7 +2,8 @@ import Header from "../../components/Home/Header";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Home/Navbar";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import Timeline from "../../components/Form/Timeline"; // Asegúrate de que la ruta sea correcta
 
 export default function FormTermsCon() {
     const [accepted, setAccepted] = useState(false);
@@ -28,14 +29,14 @@ export default function FormTermsCon() {
             <div className="flex">
                 <Navbar />
                 <div className="w-full h-full">
-                    <div className="bg-blackMain mr-2 p-8 object-cover w-full h-full">
-                        <div className="mt-12 w-full h-full">
+                    <div className="bg-blackMain mr-2 p-8 object-cover w-full h-full flex flex-col">
+                        <div className="mt-12 w-full h-full flex flex-col">
                             <div className="flex gap-2 items-center justify-center">
                                 <h1 className="text-3xl font-semibold text-center">Términos y condiciones de uso</h1>
                             </div>
-                            <div className="mt-8">
-                                <form onSubmit={handleSubmit}>
-                                    <div className="bg-gray-800 p-4 rounded-md">
+                            <div className="mt-8 flex-grow">
+                                <form onSubmit={handleSubmit} className="flex flex-col h-full">
+                                    <div className="bg-gray-800 p-4 rounded-md flex-grow">
                                         <textarea
                                             readOnly
                                             className="w-full h-64 p-4 bg-gray-900 text-white rounded-md"
@@ -78,13 +79,22 @@ Al aceptar estos términos y condiciones, confirmas que has leído y comprendido
                                         />
                                         <label htmlFor="terms" className="text-white">Acepto los términos y condiciones</label>
                                     </div>
-                                    <div className="mt-4">
-                                        <button
-                                            type="submit"
-                                            className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
-                                        >
-                                            Enviar
-                                        </button>
+                                    <div className="mt-4 flex flex-col items-center">
+                                        <Timeline paso1="completed" paso2="completed" paso3="completed" paso4="completed" />
+                                        <div className="mt-4 flex justify-between w-full">
+                                            <Link
+                                                to="/FormFirstSong"
+                                                className="w-1/4 text-center bg-semiBlack text-semiWhite px-2 py-2 rounded-xl font-semibold hover:bg-slate-900 transition-transform transform hover:scale-105"
+                                            >
+                                                Atrás
+                                            </Link>
+                                            <button
+                                                type="submit"
+                                                className="text-center w-1/4 bg-cyan-700 text-white px-4 py-2 rounded-xl font-semibold transition-transform transform hover:scale-105"
+                                            >
+                                                Enviar
+                                            </button>
+                                        </div>
                                     </div>
                                 </form>
                             </div>
