@@ -13,6 +13,7 @@ import AdminHomePageV1 from "../pages/Admin/AdminHomePage";
 import ScrollToTop from "../components/Utilities/ScrollToTop";
 import ArtistPage from "../pages/Artist/ArtistPage";
 import ComposerPerfil from "../pages/Artist/ComposerPerfil";
+import FormTermsCon from "../pages/Form/FormTermsCon";
 import { ProtectedRoute } from "../components/Utilities/ProtectedRoute";
 import { ProtectedRouteUser } from "../components/Utilities/ProtectedRouteUser";
 import { ProtectedRouteAdmin } from "../components/Utilities/ProtectedRouteAdmin";
@@ -35,6 +36,7 @@ const RoutesApp = () => {
           <Route path="/FormGeneralInfo" element={<FormGeneralInfo /> }/>
           <Route path="/FormPersonalInfo" element={<FormPersonalInfo /> }/>
           <Route path="/FormFirstSong" element={<FormFirstSong /> }/>
+          <Route path="/FormTermsCon" element={<FormTermsCon /> }/>
 
         </Route>
 

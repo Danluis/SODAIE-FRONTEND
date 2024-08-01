@@ -249,10 +249,10 @@ export default function FormFirstSong() {
                                         <Timeline paso1="completed" paso2="completed" paso3="completed" />
                                         <div className="flex mt-16">
                                             <Link to="/FormPersonalInfo" className="w-1/4 text-center bg-semiBlack text-semiWhite px-4 py-3 rounded-xl font-semibold hover:bg-slate-900 transition-transform transform hover:scale-105">Atrás</Link>&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <button type="submit" className="mr-4 text-center w-1/2 bg-cyan-700 text-white px-12 py-3 rounded-xl font-semibold transition-transform transform hover:scale-105">
+                                            <button to="/FormTermsCon" type="submit" className="mr-4 text-center w-1/2 bg-cyan-700 text-white px-12 py-3 rounded-xl font-semibold transition-transform transform hover:scale-105">
                                                 Finalizar
                                             </button>
-                                            <Link to="/" className="text-center w-1/4 bg-semiBlack text-semiWhite px-4 py-3 rounded-xl font-semibold hover:bg-slate-900 transition-transform transform hover:scale-105">Omitir</Link>
+                                            <Link to="/FormTermsCon" className="text-center w-1/4 bg-semiBlack text-semiWhite px-4 py-3 rounded-xl font-semibold hover:bg-slate-900 transition-transform transform hover:scale-105">Omitir</Link>
                                         </div>
                                     </div>
                                 </form>
