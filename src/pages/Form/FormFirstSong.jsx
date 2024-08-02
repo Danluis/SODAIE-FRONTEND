@@ -120,7 +120,7 @@ export default function FormFirstSong() {
                                         </div>
 
                                         <div className="flex gap-6">
-                                            <div className="flex flex-col gap-6 flex-grow">
+                                            <div className="flex flex-col gap-6 flex-grow ml-32">
                                                 <div>
                                                     <label className="block text-sm font-medium text-gray-400 mb-2">Compositor o compositores</label>
                                                     {composers.map((composer, index) => (
@@ -183,7 +183,7 @@ export default function FormFirstSong() {
                                                 </div>
                                             </div>
 
-                                            <div className="flex flex-col gap-6 ml-auto">
+                                            <div className="flex flex-col gap-6 mr-32">
                                                 <div>
                                                     <label className="block text-sm font-medium text-gray-400 mb-2">Intérpretes</label>
                                                     {interpreters.map((interpreter, index) => (
