@@ -117,101 +117,105 @@ export default function FormFirstSong() {
                                         <div className="flex justify-around">
                                             <FormInput name="title" text="Título" placeholder="Título de la canción"/>
                                             <ScrollMenu text={'Género'} placeholder={'Seleccione un género'} options={genres} name="gender" />
-
                                         </div>
 
-                                        <div className="flex flex-wrap justify-around gap-6">
-                                            <div>
-                                                <label className="block text-sm font-medium text-gray-400 mb-2">Compositor o compositores</label>
-                                                {composers.map((composer, index) => (
-                                                    <div key={index} className="flex items-center mb-2">
-                                                        <input
-                                                            type="text"
-                                                            className="w-[28rem] px-4 pl-7 py-3 rounded-lg bg-semiBlack text-white"
-                                                            value={composer}
-                                                            onChange={(e) => handleListChange(index, e.target.value, composers, setComposers)}
-                                                            placeholder="Nombre de los autores, compositores o arreglistas"
-                                                        />
-                                                        {index > 0 && (
-                                                            <button
-                                                                type="button"
-                                                                className="ml-2 px-2 py-1 rounded bg-red-600 text-white"
-                                                                onClick={() => removeFromList(index, composers, setComposers)}
-                                                            >
-                                                                -
-                                                            </button>
-                                                        )}
-                                                    </div>
-                                                ))}
-                                                <button
-                                                    type="button"
-                                                    className="mt-2 px-4 py-2 rounded bg-cyan-700 text-white"
-                                                    onClick={() => addToList(composers, setComposers)}
-                                                >
-                                                    +
-                                                </button>
+                                        <div className="flex gap-6">
+                                            <div className="flex flex-col gap-6 flex-grow">
+                                                <div>
+                                                    <label className="block text-sm font-medium text-gray-400 mb-2">Compositor o compositores</label>
+                                                    {composers.map((composer, index) => (
+                                                        <div key={index} className="flex items-center mb-2">
+                                                            <input
+                                                                type="text"
+                                                                className="w-[28rem] px-4 pl-7 py-3 rounded-lg bg-semiBlack text-white"
+                                                                value={composer}
+                                                                onChange={(e) => handleListChange(index, e.target.value, composers, setComposers)}
+                                                                placeholder="Nombre de los autores, compositores o arreglistas"
+                                                            />
+                                                            {index > 0 && (
+                                                                <button
+                                                                    type="button"
+                                                                    className="ml-2 px-2 py-1 rounded bg-red-600 text-white"
+                                                                    onClick={() => removeFromList(index, composers, setComposers)}
+                                                                >
+                                                                    -
+                                                                </button>
+                                                            )}
+                                                        </div>
+                                                    ))}
+                                                    <button
+                                                        type="button"
+                                                        className="mt-2 px-4 py-2 rounded bg-cyan-700 text-white"
+                                                        onClick={() => addToList(composers, setComposers)}
+                                                    >
+                                                        +
+                                                    </button>
+                                                </div>
+                                                <div>
+                                                    <label className="block text-sm font-medium text-gray-400 mb-2">Etiquetas</label>
+                                                    {etiquetas.map((etiqueta, index) => (
+                                                        <div key={index} className="flex items-center mb-2">
+                                                            <input
+                                                                type="text"
+                                                                className="w-[28rem] px-4 pl-7 py-3 rounded-lg bg-semiBlack text-white"
+                                                                value={etiqueta}
+                                                                onChange={(e) => handleListChange(index, e.target.value, etiquetas, setEtiquetas)}
+                                                                placeholder="Ej: #salsa o #bachata"
+                                                            />
+                                                            {index > 0 && (
+                                                                <button
+                                                                    type="button"
+                                                                    className="ml-2 px-2 py-1 rounded bg-red-600 text-white"
+                                                                    onClick={() => removeFromList(index, etiquetas, setEtiquetas)}
+                                                                >
+                                                                    -
+                                                                </button>
+                                                            )}
+                                                        </div>
+                                                    ))}
+                                                    <button
+                                                        type="button"
+                                                        className="mt-2 px-4 py-2 rounded bg-cyan-700 text-white"
+                                                        onClick={() => addToList(etiquetas, setEtiquetas)}
+                                                    >
+                                                        +
+                                                    </button>
+                                                </div>
                                             </div>
-                                            <div>
-                                                <label className="block text-sm font-medium text-gray-400 mb-2">Etiquetas</label>
-                                                {etiquetas.map((etiqueta, index) => (
-                                                    <div key={index} className="flex items-center mb-2">
-                                                        <input
-                                                            type="text"
-                                                            className="w-[28rem] px-4 pl-7 py-3 rounded-lg bg-semiBlack text-white"
-                                                            value={etiqueta}
-                                                            onChange={(e) => handleListChange(index, e.target.value, etiquetas, setEtiquetas)}
-                                                            placeholder="Ej: #salsa o #bachata"
-                                                        />
-                                                        {index > 0 && (
-                                                            <button
-                                                                type="button"
-                                                                className="ml-2 px-2 py-1 rounded bg-red-600 text-white"
-                                                                onClick={() => removeFromList(index, etiquetas, setEtiquetas)}
-                                                            >
-                                                                -
-                                                            </button>
-                                                        )}
-                                                    </div>
-                                                ))}
-                                                <button
-                                                    type="button"
-                                                    className="mt-2 px-4 py-2 rounded bg-cyan-700 text-white"
-                                                    onClick={() => addToList(etiquetas, setEtiquetas)}
-                                                >
-                                                    +
-                                                </button>
+
+                                            <div className="flex flex-col gap-6 ml-auto">
+                                                <div>
+                                                    <label className="block text-sm font-medium text-gray-400 mb-2">Intérpretes</label>
+                                                    {interpreters.map((interpreter, index) => (
+                                                        <div key={index} className="flex items-center mb-2">
+                                                            <input
+                                                                type="text"
+                                                                className="w-[28rem] px-4 pl-7 py-3 rounded-lg bg-semiBlack text-white"
+                                                                value={interpreter}
+                                                                onChange={(e) => handleListChange(index, e.target.value, interpreters, setInterpreters)}
+                                                                placeholder="Nombre de los intérpretes"
+                                                            />
+                                                            {index > 0 && (
+                                                                <button
+                                                                    type="button"
+                                                                    className="ml-2 px-2 py-1 rounded bg-red-600 text-white"
+                                                                    onClick={() => removeFromList(index, interpreters, setInterpreters)}
+                                                                >
+                                                                    -
+                                                                </button>
+                                                            )}
+                                                        </div>
+                                                    ))}
+                                                    <button
+                                                        type="button"
+                                                        className="mt-2 px-4 py-2 rounded bg-cyan-700 text-white"
+                                                        onClick={() => addToList(interpreters, setInterpreters)}
+                                                    >
+                                                        +
+                                                    </button>
+                                                </div>
+                                                <FormInput name="registro_ONDA" text={'Registro del Número del Onda'} placeholder={'Ej: #500/07/2024'} />
                                             </div>
-                                            <div>
-                                                <label className="block text-sm font-medium text-gray-400 mb-2">Intérpretes</label>
-                                                {interpreters.map((interpreter, index) => (
-                                                    <div key={index} className="flex items-center mb-2">
-                                                        <input
-                                                            type="text"
-                                                            className="w-[28rem] px-4 pl-7 py-3 rounded-lg bg-semiBlack text-white"
-                                                            value={interpreter}
-                                                            onChange={(e) => handleListChange(index, e.target.value, interpreters, setInterpreters)}
-                                                            placeholder="Nombre de los intérpretes"
-                                                        />
-                                                        {index > 0 && (
-                                                            <button
-                                                                type="button"
-                                                                className="ml-2 px-2 py-1 rounded bg-red-600 text-white"
-                                                                onClick={() => removeFromList(index, interpreters, setInterpreters)}
-                                                            >
-                                                                -
-                                                            </button>
-                                                        )}
-                                                    </div>
-                                                ))}
-                                                <button
-                                                    type="button"
-                                                    className="mt-2 px-4 py-2 rounded bg-cyan-700 text-white"
-                                                    onClick={() => addToList(interpreters, setInterpreters)}
-                                                >
-                                                    +
-                                                </button>
-                                            </div>
-                                            <FormInput name="registro_ONDA" text={'Registro del Número del Onda'} placeholder={'Ej: #500/07/2024'} />
                                         </div>
 
                                         <div className="w-[63rem]">
