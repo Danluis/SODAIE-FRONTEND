@@ -2,12 +2,12 @@ import { useEffect } from "react";
 import GoogleLogin from "react-google-login";
 import { gapi } from "gapi-script";
 import { useAuthStore } from '../../store/authStore';
-import { loginRequest } from "../../api/auth";
+import { googleLoginRequest } from "../../api/auth";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
 export default function AuthGoogleLogin() {
-    const clientID = "898812907175-7q1cf8rsslvuokphc9rbnp0bbudbagqh.apps.googleusercontent.com";
+    const clientID = import.meta.env.VITE_GOOGLE_AUTH_CLIEND_ID
     const { googleUser, setGoogleUser } = useAuthStore(state => ({
         googleUser: state.googleUser,
         setGoogleUser: state.setGoogleUser
@@ -39,9 +39,8 @@ export default function AuthGoogleLogin() {
 
     const sendUserDataToBackend = async (user) => {
         try {
-            const response = await loginRequest({
-                email: user.email,
-                password: user.googleId, // Usando googleId como contraseña
+            const response = await googleLoginRequest({
+                email: user.email
             });
 
             console.log('User registered:', response.data);
@@ -83,6 +82,7 @@ export default function AuthGoogleLogin() {
                 onSuccess={onSuccess}
                 onFailure={onFailure}
                 cookiePolicy={"single_host_origin"}
+                prompt="select_account" // Forzar selección de cuenta
                 render={renderProps => (
                     <button
                         className="flex text-sm rounded-lg font-semibold px-10 py-3 hover:bg-slate-900 bg-semiBlack"

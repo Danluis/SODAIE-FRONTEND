@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
 export default function AuthGoogleRegister() {
-    const clientID = "898812907175-7q1cf8rsslvuokphc9rbnp0bbudbagqh.apps.googleusercontent.com";
+    const clientID = import.meta.env.VITE_GOOGLE_AUTH_CLIEND_ID
     const { googleUser, setGoogleUser } = useAuthStore(state => ({
         googleUser: state.googleUser,
         setGoogleUser: state.setGoogleUser
