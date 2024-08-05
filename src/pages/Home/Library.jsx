@@ -12,7 +12,7 @@ export default function Library(){
         <div className="flex flex-col-2">
                 <Navbar/>
 
-            <div className="w-[90%] h-full">
+            <div className="w-full h-full">
                 <div className='bg-blackMain mr-2 p-8 w-full h-full text-white mt-10'>
                     <SongCardList title={'Escuchado recientemente'}/>
                     <SongCardList title={'Tus listas de reproduccion'}/>

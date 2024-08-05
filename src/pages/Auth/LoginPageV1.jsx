@@ -31,6 +31,10 @@ export default function LoginPageV1() {
         await signin(data);
     });
 
+    const handleForgotPasswordClick = () => {
+        navigate('/FormPasswordForgotten');
+    };
+
     return (
         <div className="w-full h-full max-w-full-xl mt-2 bg-blackMain text-white">
             <Header />
@@ -90,7 +94,7 @@ export default function LoginPageV1() {
                                     </div>
                                     <div className="w-[28rem] flex justify-between text-sm">
                                         <Link to={'/RegisterPageV1'} className="cursor-pointer hover:text-semiWhite">Registrarse</Link>
-                                        <span className="cursor-pointer text-blue-600 hover:text-blue-700">¿Olvidaste tu contraseña?</span>
+                                        <span className="cursor-pointer text-blue-600 hover:text-blue-700" onClick={handleForgotPasswordClick}>¿Olvidaste tu contraseña?</span>
                                     </div>
                                     <button className="w-[28rem] p-3 font-semibold bg-cyan-700 rounded-lg mt-4 transition-transform transform hover:scale-105">Iniciar Sesion</button>
                                 </form>
@@ -103,5 +107,3 @@ export default function LoginPageV1() {
         </div>
     );
 }
-
-
