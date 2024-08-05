@@ -3,6 +3,7 @@ import axios from './axios';
 //AUTHENTICATION APIS
 export const registerRequest = user => axios.post(`/register`, user);
 export const loginRequest = user => axios.post(`/login`, user);
+export const googleLoginRequest = user => axios.post(`/googleLogin`, user);
 export const logoutRequest = user => axios.post(`/logout`, user);
 
 //CREDENTIALS API

@@ -27,8 +27,8 @@ const RoutesApp = () => {
         
       <Route element={<ProtectedRoute />}>
 
-          <Route path="/Library" element={<Library /> }/>
           <Route path="/ChooseRegister" element={<ChooseRegister /> }/>
+          <Route path="/Library" element={<Library /> }/>
 
         <Route element={<ProtectedRouteAdmin />}>
            <Route path="/AdminPage" element={<AdminHomePageV1 /> }/>

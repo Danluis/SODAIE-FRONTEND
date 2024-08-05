@@ -9,6 +9,9 @@ export const useAudioStore = create((set, get) => ({
 
   setIsPlaying: (isPlaying) => set({ isPlaying }),
   setAudio: (audio) => set({ audio }),
+  setCurrentMusic: (currentMusic) => set({ currentMusic }),
+  setIsHiddenPlayer: (isHiddenPlayer) => set({ isHiddenPlayer }),
+
   setCurrentSong: (song) => set(state => {
     const allSongsData = state.currentMusic.allSongsData;
     const updatedSong = allSongsData.find(item => item.song_id === song.song_id) || song;
@@ -19,8 +22,6 @@ export const useAudioStore = create((set, get) => ({
       }
     };
   }),
-  setCurrentMusic: (currentMusic) => set({ currentMusic }),
-  setIsHiddenPlayer: (isHiddenPlayer) => set({ isHiddenPlayer }),
 
   playNextSong: () => {
     const { currentMusic, audio, setCurrentSong, setIsPlaying } = get();
