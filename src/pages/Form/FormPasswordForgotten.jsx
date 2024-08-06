@@ -17,7 +17,7 @@ export default function FormPasswordForgotten() {
         setIsLoading(true);
         try {
             await checkEmail(data.email);
-            setMessage('Si el correo electrónico está registrado, recibirás instrucciones para restablecer tu contraseña.');
+            setMessage('Si el correo electrónico está registrado, recibirás instrucciones para restablecer tu contraseña a tu correo.');
             
             // Redirigir después de 5 segundos para permitir la lectura del mensaje
             setTimeout(() => {
