@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom'; // Importar useNavigate
-import { registerRequest, loginRequest, logoutRequest } from '../api/auth.js';
+import { useNavigate } from 'react-router-dom';
+import { registerRequest, loginRequest, logoutRequest, check_emailRequest, update_passwordRequest } from '../api/auth.js';
 import { useAuthStore } from "../store/authStore.js";
 import Cookies from 'js-cookie';
 
@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
   const [isRegister, setIsRegister] = useState(false);
   const [errors, setErrors] = useState([]);
 
-  const navigate = useNavigate(); // Usar useNavigate
+  const navigate = useNavigate();
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
@@ -70,13 +70,33 @@ export const AuthProvider = ({ children }) => {
       setIsAuthenticated(false);
       setIsRegister(false);
       setGoogleUser('');
-      navigate('/'); // Redirigir a la página raíz
+      navigate('/');
     } catch (error) {
       if (Array.isArray(error.response.data)) {
         setErrors(error.response.data);
       } else {
         setErrors([error.response.data.message]);
       }
+    }
+  };
+
+  const checkEmail = async (email) => {
+    try {
+      const res = await check_emailRequest({ email });
+      return res.data;
+    } catch (error) {
+      setErrors([error.response.data.message]);
+      throw error;
+    }
+  };
+
+  const updatePassword = async (email, newPassword) => {
+    try {
+      const res = await update_passwordRequest({ email, newPassword });
+      return res.data;
+    } catch (error) {
+      setErrors([error.response.data.message]);
+      throw error;
     }
   };
 
@@ -102,6 +122,8 @@ export const AuthProvider = ({ children }) => {
       signup,
       signin,
       logout,
+      checkEmail,
+      updatePassword,
       setUser,
       setIsAuthenticated,
       setIsRegister,
