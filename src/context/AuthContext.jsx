@@ -21,6 +21,7 @@ export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isRegister, setIsRegister] = useState(false);
   const [errors, setErrors] = useState([]);
+  const [emailToReset, setEmailToReset] = useState(''); // Estado para almacenar el email al que se va a restablecer la contraseña
 
   const navigate = useNavigate();
 
@@ -83,6 +84,7 @@ export const AuthProvider = ({ children }) => {
   const checkEmail = async (email) => {
     try {
       const res = await check_emailRequest({ email });
+      setEmailToReset(email); // Almacenar el email en el contexto
       return res.data;
     } catch (error) {
       setErrors([error.response.data.message]);
@@ -90,15 +92,15 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const updatePassword = async (email, newPassword) => {
+  const updatePassword = async (newPassword) => {
     try {
-      const res = await update_passwordRequest({ email, newPassword });
-      return res.data;
+        const res = await update_passwordRequest({ email: emailToReset, newPassword });
+        return res.data;
     } catch (error) {
-      setErrors([error.response.data.message]);
-      throw error;
+        setErrors([error.response.data.message]);
+        throw error;
     }
-  };
+};
 
   useEffect(() => {
     if (errors.length > 0) {

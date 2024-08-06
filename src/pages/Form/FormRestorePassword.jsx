@@ -2,13 +2,37 @@ import Header from "../../components/Home/Header";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Home/Navbar";
 import { useForm } from 'react-hook-form';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext'; // Asegúrate de importar el hook useAuth
 
 export default function FormRestorePassword() {
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const { updatePassword } = useAuth(); // Obtener la función updatePassword del contexto
+    const [message, setMessage] = useState(''); // Estado para mensajes de error o éxito
+    const [isLoading, setIsLoading] = useState(false); // Estado para el cargando
+    const navigate = useNavigate(); // Inicializar useNavigate
 
-    const onSubmit = (data) => {
-        console.log(data);
-        // Manejar el envío del formulario aquí
+    const onSubmit = async (data) => {
+        if (data.newPassword !== data.confirmPassword) {
+            setMessage('Las contraseñas no coinciden');
+            return;
+        }
+
+        setIsLoading(true);
+        try {
+            await updatePassword(data.newPassword);
+            setMessage('Contraseña actualizada con éxito');
+
+            // Redirigir después de 5 segundos para permitir la lectura del mensaje
+            setTimeout(() => {
+                navigate('/LoginPageV1'); // Reemplaza con la ruta correcta para el inicio de sesión
+            }, 5000); // 5000 milisegundos = 5 segundos
+        } catch (error) {
+            setMessage(error.response ? error.response.data.message : 'Ocurrió un error');
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -28,13 +52,13 @@ export default function FormRestorePassword() {
                                             Nueva Contraseña
                                         </span>
                                         <input
-                                            {...register('newPassword', { required: true })}
+                                            {...register('newPassword', { required: true, minLength: 6 })}
                                             type="password"
                                             placeholder="**********"
                                             className="w-[28rem] px-6 py-3 rounded-lg mt-1 bg-semiBlack border-blue-600 text-white"
                                         />
                                         {errors.newPassword && (
-                                            <p className="text-red-500">Nueva contraseña es requerida</p>
+                                            <p className="text-red-500">Nueva contraseña es requerida y debe tener al menos 6 caracteres</p>
                                         )}
                                     </div>
                                     <div className="mb-4">
@@ -51,9 +75,14 @@ export default function FormRestorePassword() {
                                             <p className="text-red-500">Confirmación de la nueva contraseña es requerida</p>
                                         )}
                                     </div>
-                                    <button className="w-[28rem] p-3 font-semibold bg-cyan-700 rounded-lg mt-4 transition-transform transform hover:scale-105">
-                                        Restablecer Contraseña
+                                    <button
+                                        type="submit"
+                                        className="w-[28rem] p-3 font-semibold bg-cyan-700 rounded-lg mt-4 transition-transform transform hover:scale-105"
+                                        disabled={isLoading}
+                                    >
+                                        {isLoading ? 'Enviando...' : 'Restablecer Contraseña'}
                                     </button>
+                                    {message && <p className="mt-4 text-center">{message}</p>}
                                 </form>
                             </div>
                         </div>
