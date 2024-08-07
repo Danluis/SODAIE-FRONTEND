@@ -1,16 +1,33 @@
 import Header from "../../components/Home/Header";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Home/Navbar";
-import FormInput from "../../components/Form/FormInput";
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext'; // Asegúrate de importar el hook useAuth
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Importar useNavigate
 
 export default function FormPasswordForgotten() {
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const { checkEmail } = useAuth(); // Obtener la función checkEmail del contexto
+    const [message, setMessage] = useState(''); // Estado para mensajes de error o éxito
+    const [isLoading, setIsLoading] = useState(false); // Estado para el cargando
+    const navigate = useNavigate(); // Inicializar useNavigate
 
-    const onSubmit = (data) => {
-        console.log(data);
-        // Manejar el envío del formulario aquí
+    const onSubmit = async (data) => {
+        setIsLoading(true);
+        try {
+            await checkEmail(data.email);
+            setMessage('Si el correo electrónico está registrado, recibirás instrucciones para restablecer tu contraseña a tu correo.');
+            
+            // Redirigir después de 5 segundos para permitir la lectura del mensaje
+            setTimeout(() => {
+                navigate('/FormRestorePassword'); // Reemplaza con la ruta correcta para el formulario de restablecimiento de contraseña
+            }, 5000); // 5000 milisegundos = 5 segundos
+        } catch (error) {
+            setMessage(error.response ? error.response.data.message : 'Ocurrió un error');
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -39,9 +56,14 @@ export default function FormPasswordForgotten() {
                                             <p className="text-red-500">Email is required</p>
                                         )}
                                     </div>
-                                    <button className="w-[28rem] p-3 font-semibold bg-cyan-700 rounded-lg mt-4 transition-transform transform hover:scale-105">
-                                        Restablecer Contraseña
+                                    <button
+                                        type="submit"
+                                        className="w-[28rem] p-3 font-semibold bg-cyan-700 rounded-lg mt-4 transition-transform transform hover:scale-105"
+                                        disabled={isLoading}
+                                    >
+                                        {isLoading ? 'Enviando...' : 'Restablecer Contraseña'}
                                     </button>
+                                    {message && <p className="mt-4 text-center">{message}</p>}
                                 </form>
                             </div>
                         </div>
