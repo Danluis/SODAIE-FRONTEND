@@ -27,7 +27,7 @@ export default function FormRestorePassword() {
             // Redirigir después de 5 segundos para permitir la lectura del mensaje
             setTimeout(() => {
                 navigate('/LoginPageV1'); // Reemplaza con la ruta correcta para el inicio de sesión
-            }, 5000); // 5000 milisegundos = 5 segundos
+            }, 2000); // 5000 milisegundos = 5 segundos
         } catch (error) {
             setMessage(error.response ? error.response.data.message : 'Ocurrió un error');
         } finally {

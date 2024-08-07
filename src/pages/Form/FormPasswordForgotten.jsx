@@ -22,7 +22,7 @@ export default function FormPasswordForgotten() {
             // Redirigir después de 5 segundos para permitir la lectura del mensaje
             setTimeout(() => {
                 navigate('/FormRestorePassword'); // Reemplaza con la ruta correcta para el formulario de restablecimiento de contraseña
-            }, 5000); // 5000 milisegundos = 5 segundos
+            }, 2000); // 5000 milisegundos = 5 segundos
         } catch (error) {
             setMessage(error.response ? error.response.data.message : 'Ocurrió un error');
         } finally {
