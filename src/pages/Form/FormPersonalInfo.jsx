@@ -54,7 +54,7 @@ export default function FormPersonalInfo() {
                                 <form onSubmit={onSubmit} className="mt-10">
                                     <div className="mb-6 text-3xl font-semibold">Información Personal</div>
                                     <FormInput
-                                        name="nationality"
+                                        name="dni"
                                         text="Cédula"
                                         placeholder="001-0000000-1"
                                     />
