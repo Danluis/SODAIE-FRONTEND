@@ -15,7 +15,7 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({ children }) => {
-  const { setGoogleUser } = useAuthStore(state => state);
+  const { setGoogleUser, setFacebookUser } = useAuthStore(state => state);
 
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -71,7 +71,8 @@ export const AuthProvider = ({ children }) => {
       setIsAuthenticated(false);
       setIsRegister(false);
       setGoogleUser('');
-      navigate('/');
+      setFacebookUser('');
+      navigate('/'); // Redirigir a la página raíz
     } catch (error) {
       if (Array.isArray(error.response.data)) {
         setErrors(error.response.data);

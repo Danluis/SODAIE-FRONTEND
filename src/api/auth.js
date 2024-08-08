@@ -6,6 +6,7 @@ export const loginRequest = user => axios.post(`/login`, user);
 export const googleLoginRequest = user => axios.post(`/googleLogin`, user);
 export const check_emailRequest = user => axios.post(`/check_email`, user);
 export const update_passwordRequest = user => axios.post(`/update_password`, user);
+export const facebookLoginRequest = user => axios.post(`/facebookLogin`, user);
 export const logoutRequest = user => axios.post(`/logout`, user);
 
 //CREDENTIALS API
