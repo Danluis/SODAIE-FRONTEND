@@ -16,7 +16,7 @@ export default function FormPersonalInfo() {
     const navigate = useNavigate();
     const [redirect, setRedirect] = useState(false);
 
-    const { errors, setErrors } = useAuth(); // Obtén errors y setErrors desde el contexto
+    const {setErrors,errors: RegisterErrors } = useAuth() // Obtén errors y setErrors desde el contexto
 
     useEffect(() => {
         if (redirect) {
@@ -65,7 +65,14 @@ export default function FormPersonalInfo() {
                         <div className="flex gap-16 flex-col-2 justify-center">
                             <FormProvider {...methods}>
                                 <form onSubmit={onSubmit} className="mt-10">
-                                    <div className="mb-6 text-3xl font-semibold">Información Personal</div>
+                                    <div className="mb-6 text-3xl font-semibold">Información Personal</div>  
+                                {
+                                    RegisterErrors.map((error,i) => (
+                                        <div className="w-[28rem] mb-2 bg-red-500 p-2 text-white" key={i}>
+                                            {error}
+                                        </div>
+                                    ))
+                                }
                                     <FormInput
                                         name="dni"
                                         text="Cédula"
@@ -76,9 +83,7 @@ export default function FormPersonalInfo() {
                                         text="Teléfono"
                                         placeholder="854-456-7890"
                                     />
-                                    {errors && errors.length > 0 && (
-                                        <p className="text-red-500">{errors[0]}</p>
-                                    )}
+
                                     <div className="flex justify-between gap-10 mt-6">
                                         <Link to="/FormGeneralInfo" className="w-1/4 text-center bg-semiBlack text-semiWhite px-4 py-3 rounded-xl font-semibold hover:bg-slate-900 transition-transform transform hover:scale-105">Atrás</Link>
                                         <button type="submit" className="w-1/2 text-center bg-cyan-700 text-white px-12 py-3 rounded-xl font-semibold transition-transform transform hover:scale-105">Siguiente</button>
