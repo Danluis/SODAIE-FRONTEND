@@ -19,10 +19,10 @@ export default function FormPasswordForgotten() {
             await checkEmail(data.email);
             setMessage('Si el correo electrónico está registrado, recibirás instrucciones para restablecer tu contraseña a tu correo.');
             
-            // Redirigir después de 5 segundos para permitir la lectura del mensaje
+            // Redirigir después de 2 segundos para permitir la lectura del mensaje
             setTimeout(() => {
                 navigate('/FormRestorePassword'); // Reemplaza con la ruta correcta para el formulario de restablecimiento de contraseña
-            }, 2000); // 5000 milisegundos = 5 segundos
+            }, 2000); // 2000 milisegundos = 2 segundos
         } catch (error) {
             setMessage(error.response ? error.response.data.message : 'Ocurrió un error');
         } finally {
