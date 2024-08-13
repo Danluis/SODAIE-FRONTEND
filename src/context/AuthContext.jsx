@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom'; // Importar useNavigate
-import { registerRequest, loginRequest, logoutRequest } from '../api/auth.js';
-import { useAuthStore } from "../store/authStore.js";
+import { useNavigate } from 'react-router-dom';
+import { registerRequest, loginRequest, logoutRequest, request_password_reset_with_code, update_passwordRequest } from '../api/auth.js';
+import { useAuthStore } from '../store/authStore.js'
 import Cookies from 'js-cookie';
 
 export const AuthContext = createContext();
@@ -15,14 +15,15 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({ children }) => {
-  const { setGoogleUser } = useAuthStore(state => state);
+  const { setGoogleUser, setFacebookUser } = useAuthStore(state => state);
 
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isRegister, setIsRegister] = useState(false);
   const [errors, setErrors] = useState([]);
+  const [emailToReset, setEmailToReset] = useState(''); // Estado para almacenar el email al que se va a restablecer la contraseña
 
-  const navigate = useNavigate(); // Usar useNavigate
+  const navigate = useNavigate();
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
@@ -70,6 +71,7 @@ export const AuthProvider = ({ children }) => {
       setIsAuthenticated(false);
       setIsRegister(false);
       setGoogleUser('');
+      setFacebookUser('');
       navigate('/'); // Redirigir a la página raíz
     } catch (error) {
       if (Array.isArray(error.response.data)) {
@@ -79,6 +81,33 @@ export const AuthProvider = ({ children }) => {
       }
     }
   };
+
+  const requestPasswordResetWithCode = async (email) => {
+    try {
+      const res = await request_password_reset_with_code({ email });
+      setEmailToReset(email); // Almacenar el email en el contexto
+      return res.data;
+    } catch (error) {
+      setErrors([error.response.data.message]);
+      throw error;
+    }
+  };
+
+  const updatePassword = async (newPassword) => {
+    try {
+        console.log('Email to reset:', emailToReset); // Depuración
+        if (!emailToReset) {
+            throw new Error("No email found for password reset");
+        }
+
+        const res = await update_passwordRequest({ email: emailToReset, newPassword });
+        return res.data;
+    } catch (error) {
+        setErrors([error.response ? error.response.data.message : error.message]);
+        throw error;
+    }
+};
+
 
   useEffect(() => {
     if (errors.length > 0) {
@@ -102,10 +131,13 @@ export const AuthProvider = ({ children }) => {
       signup,
       signin,
       logout,
+      requestPasswordResetWithCode,
+      updatePassword,
       setUser,
       setIsAuthenticated,
       setIsRegister,
       setErrors,
+      setEmailToReset,
       user,
       isRegister,
       isAuthenticated,

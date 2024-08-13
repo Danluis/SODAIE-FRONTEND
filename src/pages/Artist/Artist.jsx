@@ -21,7 +21,7 @@ export default function Artist(){
             <p className="text-sm text-gray-400 mb-12">
                 <Link to="/Perfil" className="hover:text-white">Artistas o Compositores</Link> • Año de la canción</p>
             <div className="flex justify-between items-center mb-4">
-                <button className="relative top-16 z-20 left-14 ">
+                <button className="relative z-20 left-14 -mt-20 ">
                     <CardPlayButton/>
                 </button>
             </div>

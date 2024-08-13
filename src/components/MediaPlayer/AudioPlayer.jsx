@@ -95,7 +95,7 @@ export function AudioPlayer() {
   };
 
   return (
-    <div className="bottom-0 fixed h-[5.5rem] w-full max-w-[80rem] z-20">
+    <div className="bottom-0 fixed h-[5.5rem] w-full  z-20">
       <div className={`${isHiddenPlayer ? '' : 'hidden'} bg-black p-4 flex items-center flex-row justify-between w-full px-4 z-50 text-white relative`}>
         <IoMdClose className='w-5 h-5 absolute top-3 right-3 cursor-pointer hover:text-semiWhite' onClick={handleClose} />
         <div className='w-1/3 h-full'>
