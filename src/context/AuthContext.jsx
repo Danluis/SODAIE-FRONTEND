@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
-import { registerRequest, loginRequest, logoutRequest, check_emailRequest, update_passwordRequest } from '../api/auth.js';
-import { useAuthStore } from "../store/authStore.js";
+import { registerRequest, loginRequest, logoutRequest, request_password_reset_with_code, update_passwordRequest } from '../api/auth.js';
+import { useAuthStore } from '../store/authStore.js'
 import Cookies from 'js-cookie';
 
 export const AuthContext = createContext();
@@ -82,9 +82,9 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const checkEmail = async (email) => {
+  const requestPasswordResetWithCode = async (email) => {
     try {
-      const res = await check_emailRequest({ email });
+      const res = await request_password_reset_with_code({ email });
       setEmailToReset(email); // Almacenar el email en el contexto
       return res.data;
     } catch (error) {
@@ -95,13 +95,19 @@ export const AuthProvider = ({ children }) => {
 
   const updatePassword = async (newPassword) => {
     try {
+        console.log('Email to reset:', emailToReset); // Depuración
+        if (!emailToReset) {
+            throw new Error("No email found for password reset");
+        }
+
         const res = await update_passwordRequest({ email: emailToReset, newPassword });
         return res.data;
     } catch (error) {
-        setErrors([error.response.data.message]);
+        setErrors([error.response ? error.response.data.message : error.message]);
         throw error;
     }
 };
+
 
   useEffect(() => {
     if (errors.length > 0) {
@@ -125,12 +131,13 @@ export const AuthProvider = ({ children }) => {
       signup,
       signin,
       logout,
-      checkEmail,
+      requestPasswordResetWithCode,
       updatePassword,
       setUser,
       setIsAuthenticated,
       setIsRegister,
       setErrors,
+      setEmailToReset,
       user,
       isRegister,
       isAuthenticated,

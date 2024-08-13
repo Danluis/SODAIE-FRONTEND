@@ -2,33 +2,40 @@ import Header from "../../components/Home/Header";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Home/Navbar";
 import { useForm } from 'react-hook-form';
-import { useAuth } from '../../context/AuthContext'; // Asegúrate de importar el hook useAuth
+import { useAuth } from '../../context/AuthContext';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Importar useNavigate
+import { useNavigate } from 'react-router-dom';
+import { useAuthStore } from "../../store/authStore";
 
 export default function FormPasswordForgotten() {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { checkEmail } = useAuth(); // Obtener la función checkEmail del contexto
-    const [message, setMessage] = useState(''); // Estado para mensajes de error o éxito
-    const [isLoading, setIsLoading] = useState(false); // Estado para el cargando
-    const navigate = useNavigate(); // Inicializar useNavigate
+    const { requestPasswordResetWithCode } = useAuth(); // Using the correct function from the context
+    const [message, setMessage] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+    const {setForgottenPasswordResponse} = useAuthStore(state => state);
+    const navigate = useNavigate();
 
     const onSubmit = async (data) => {
         setIsLoading(true);
         try {
-            await checkEmail(data.email);
+            const response = await requestPasswordResetWithCode(data.email);
+            setForgottenPasswordResponse(response);
+            const token = response.resetToken; // Asegúrate de que esta propiedad existe en el response
+            
             setMessage('Si el correo electrónico está registrado, recibirás instrucciones para restablecer tu contraseña a tu correo.');
             
-            // Redirigir después de 5 segundos para permitir la lectura del mensaje
+            // Redirect to the next route with the token as a URL parameter
             setTimeout(() => {
-                navigate('/FormRestorePassword'); // Reemplaza con la ruta correcta para el formulario de restablecimiento de contraseña
-            }, 2000); // 5000 milisegundos = 5 segundos
+                navigate(`/FormOTPInput?token=${token}`);
+            }, 2000);
         } catch (error) {
-            setMessage(error.response ? error.response.data.message : 'Ocurrió un error');
+            console.error('Error:', error);
+            setMessage(error.message || 'Ocurrió un error');
         } finally {
             setIsLoading(false);
         }
     };
+    
 
     return (
         <div className="w-full h-full max-w-full-xl mt-2 bg-blackMain text-white">

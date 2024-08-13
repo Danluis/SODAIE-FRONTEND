@@ -5,12 +5,13 @@ import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext'; // Asegúrate de importar el hook useAuth
-
+import { useAuthStore } from "../../store/authStore";
 export default function FormRestorePassword() {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { updatePassword } = useAuth(); // Obtener la función updatePassword del contexto
+    const { updatePassword, setEmailToReset } = useAuth(); // Obtener la función updatePassword del contexto
     const [message, setMessage] = useState(''); // Estado para mensajes de error o éxito
     const [isLoading, setIsLoading] = useState(false); // Estado para el cargando
+    const {forgottenPasswordResponse} = useAuthStore(state => state);
     const navigate = useNavigate(); // Inicializar useNavigate
 
     const onSubmit = async (data) => {
@@ -18,22 +19,23 @@ export default function FormRestorePassword() {
             setMessage('Las contraseñas no coinciden');
             return;
         }
-
+    
         setIsLoading(true);
         try {
-            await updatePassword(data.newPassword);
+            setEmailToReset(forgottenPasswordResponse.email)
+            await updatePassword(data.newPassword); // Pasa solo la contraseña como string
             setMessage('Contraseña actualizada con éxito');
-
-            // Redirigir después de 5 segundos para permitir la lectura del mensaje
+            
             setTimeout(() => {
-                navigate('/LoginPageV1'); // Reemplaza con la ruta correcta para el inicio de sesión
-            }, 2000); // 5000 milisegundos = 5 segundos
+                navigate('/LoginPageV1');
+            }, 2000);
         } catch (error) {
             setMessage(error.response ? error.response.data.message : 'Ocurrió un error');
         } finally {
             setIsLoading(false);
         }
     };
+    
 
     return (
         <div className="w-full h-full max-w-full-xl mt-2 bg-blackMain text-white">

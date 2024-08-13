@@ -4,7 +4,6 @@ import SongCardList from "../../components/Home/SongCardListV1"
 import Footer from "../../components/Footer"
 import Navbar from "../../components/Home/Navbar"
 import ArtistList from "../../components/Home/ArtistList"
-import { AudioPlayer } from "./../../components/MediaPlayer/AudioPlayer";
 
 export default function HomePageV1(){
 
