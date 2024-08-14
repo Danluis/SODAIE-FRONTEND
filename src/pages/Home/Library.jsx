@@ -1,29 +1,52 @@
-import Header from "../../components/Home/Header"
-import SongCardList from "../../components/Home/SongCardListV1"
-import Footer from "../../components/Footer"
-import Navbar from "../../components/Home/Navbar"
-export default function Library(){
+import { useState } from "react";
+import Header from "../../components/Home/Header";
+import LibrarySongCardList from "../../components/Home/LibrarySongCardList";
+import Footer from "../../components/Footer";
+import Navbar from "../../components/Home/Navbar";
+
+// Componente de barra de búsqueda
+function SongSearchBar({ onSearch }) {
+    return (
+        <div className="w-full p-4">
+            <input
+                type="text"
+                placeholder="Buscar canciones..."
+                onChange={(e) => onSearch(e.target.value)}
+                className="w-full p-2 rounded-lg bg-semiBlack text-semiWhite placeholder-semiWhite focus:outline-none"
+            />
+        </div>
+    );
+}
+
+export default function Library() {
+    const [searchTerm, setSearchTerm] = useState("");
+
+    // Función para manejar la búsqueda
+    const handleSearch = (term) => {
+        setSearchTerm(term.toLowerCase());
+    };
 
     return (
-        <div className=" w-full h-full max-w-full-xl mt-2 bg-blackMain">
-                <Header/>
+        <div className="w-full h-full max-w-full-xl mt-2 bg-blackMain">
+            <Header />
 
+            <div className="flex flex-col-2">
+                <Navbar />
 
-        <div className="flex flex-col-2">
-                <Navbar/>
+                <div className="w-full h-full">
+                    <div className="bg-blackMain mr-2 p-8 w-full h-full text-semiWhite mt-10">
+                        {/* Componente de búsqueda */}
+                        <SongSearchBar onSearch={handleSearch} />
 
-            <div className="w-full h-full">
-                <div className='bg-blackMain mr-2 p-8 w-full h-full text-white mt-10'>
-                    <SongCardList title={'Escuchado recientemente'}/>
-                    <SongCardList title={'Tus listas de reproduccion'}/>
-                    <SongCardList title={'Canciones que te han gustado'}/>
-                    <Footer/>
+                        {/* Filtrar y mostrar listas de canciones */}
+                        <LibrarySongCardList title={"Escuchado recientemente"} searchTerm={searchTerm} />
+                        <LibrarySongCardList title={"Tus listas de reproducción"} searchTerm={searchTerm} />
+                        <LibrarySongCardList title={"Canciones que te han gustado"} searchTerm={searchTerm} />
+                        
+                        <Footer />
+                    </div>
                 </div>
             </div>
-
         </div>
-
-        </div>
-
-    )
+    );
 }
