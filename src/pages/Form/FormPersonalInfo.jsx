@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { useNavigate, Link } from "react-router-dom";
 import Header from "../../components/Home/Header";
@@ -7,12 +7,16 @@ import Navbar from "../../components/Home/Navbar";
 import FormInput from "../../components/Form/FormInput";
 import Timeline from "../../components/Form/Timeline";
 import { updateUserRequest } from "../../api/auth";
+import { validateCedulaRequest } from "../../api/jce/jce";
+import { useAuth } from "../../context/AuthContext"; // Importa useAuth desde tu contexto
 
 export default function FormPersonalInfo() {
     const methods = useForm();
-    const { register, handleSubmit, formState: { errors } } = methods;
+    const { handleSubmit } = methods;
     const navigate = useNavigate();
     const [redirect, setRedirect] = useState(false);
+
+    const {setErrors,errors: RegisterErrors } = useAuth() // Obtén errors y setErrors desde el contexto
 
     useEffect(() => {
         if (redirect) {
@@ -29,13 +33,22 @@ export default function FormPersonalInfo() {
             };
 
             try {
-                await updateUserRequest(user.credentials_id, updatedUser);
-                // Actualizar el localStorage con los datos actualizados
-                localStorage.setItem('user', JSON.stringify(updatedUser));
-                // Establecer el estado de redirección
-                setRedirect(true);
+                const response = await validateCedulaRequest(values.dni);
+                console.log('Response from validateCedulaRequest:', response.data);
+
+                if (response.data && response.data.valid) {
+                    updatedUser.nationality = "Dominicano/a";
+                    await updateUserRequest(user.credentials_id, updatedUser);
+                    // Actualizar el localStorage con los datos actualizados
+                    localStorage.setItem('user', JSON.stringify(updatedUser));
+                    // Establecer el estado de redirección
+                    setRedirect(true);
+                } else {
+                    setErrors(["Cédula o documento inválido"]);
+                }
             } catch (error) {
-                console.error('Error actualizando los datos del usuario: ', error.response ? error.response.data : error.message);
+                console.error('Error actualizando los datos del usuario:', error.response ? error.response.data : error.message);
+                setErrors([error.response ? error.response.data.message : 'Error actualizando los datos del usuario']);
             }
         } else {
             console.error('No se encontró ningún usuario');
@@ -52,9 +65,16 @@ export default function FormPersonalInfo() {
                         <div className="flex gap-16 flex-col-2 justify-center">
                             <FormProvider {...methods}>
                                 <form onSubmit={onSubmit} className="mt-10">
-                                    <div className="mb-6 text-3xl font-semibold">Información Personal</div>
+                                    <div className="mb-6 text-3xl font-semibold">Información Personal</div>  
+                                {
+                                    RegisterErrors.map((error,i) => (
+                                        <div className="w-[28rem] mb-2 bg-red-500 p-2 text-white" key={i}>
+                                            {error}
+                                        </div>
+                                    ))
+                                }
                                     <FormInput
-                                        name="nationality"
+                                        name="dni"
                                         text="Cédula"
                                         placeholder="001-0000000-1"
                                     />

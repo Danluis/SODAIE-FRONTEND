@@ -2,6 +2,7 @@ import Header from "../../components/Home/Header";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Home/Navbar";
 import AuthGoogleRegister from "../../components/auth/AuthGoogleRegister";
+import AuthFacebookRegister from "../../components/auth/AuthFacebookRegister";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../../context/AuthContext";
 import { useEffect } from "react";
@@ -32,10 +33,7 @@ export default function RegisterPageV1() {
                                 <div className="flex gap-4 mb-4">
                                       <AuthGoogleRegister/>
                                     
-                                    <button className="flex text-sm rounded-lg font-semibold px-10 py-3 hover:bg-slate-900 bg-semiBlack">
-                                    <img className="w-5 h-5 mr-2" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/facebook/facebook-original.svg" />
-                                        Registrarse con Facebook
-                                    </button>
+                                    <AuthFacebookRegister/>
                                 </div>
                                 <div className="flex items-center mb-4 pt-3 w-full">
                                     <hr className="flex-1 border-t border-gray-700 min-h-[1px]" />
