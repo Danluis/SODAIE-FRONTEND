@@ -57,7 +57,7 @@ const RoutesApp = () => {
         <Route path="/RegisterPageV1" element={<RegisterPageV1 /> }/>
         <Route path="/FormOTPInput" element={<FormOTPInput />} />
   
-        <Route path="/Artist" element={<Artist /> }/>      
+        <Route path="/Artist/:songId" element={<Artist /> }/>      
         <Route path="/artists" element={<ArtistPage />} />
         <Route path="/Perfil" element={<ComposerPerfil />} />
       </Route>
