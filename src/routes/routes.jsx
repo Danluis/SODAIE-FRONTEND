@@ -17,6 +17,8 @@ import FormTermsCon from "../pages/Form/FormTermsCon";
 import FormPasswordForgotten from "../pages/Form/FormPasswordForgotten";
 import FormRestorePassword from "../pages/Form/FormRestorePassword";
 import FormOTPInput from "../pages/Form/FormOTPInput";
+import FormGeneralInfoUser from "../pages/Form/FormGeneralInfoUser";
+import FormPersonalInfoUser from "../pages/Form/FormPersonalInfoUser";
 import { ProtectedRoute } from "../components/Utilities/ProtectedRoute";
 import { ProtectedRouteUser } from "../components/Utilities/ProtectedRouteUser";
 import { ProtectedRouteAdmin } from "../components/Utilities/ProtectedRouteAdmin";
@@ -44,7 +46,9 @@ const RoutesApp = () => {
         </Route>
 
         <Route element={<ProtectedRouteUser />}>
-        
+          <Route path="/FormGeneralInfoUser" element={<FormGeneralInfoUser /> }/>
+          <Route path="/FormPersonalInfoUser" element={<FormPersonalInfoUser /> }/>
+          <Route path="/FormTermsCon" element={<FormTermsCon /> }/>
         </Route>
 
       </Route>
