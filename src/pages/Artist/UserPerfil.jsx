@@ -3,7 +3,7 @@ import Footer from "../../components/Footer";
 import Navbar from "../../components/Home/Navbar";
 import FollowButton from "../../components/Utilities/FollowButton";
 
-export default function ComposerPerfil() {
+export default function UserPerfil() {
   return (
     <div className="w-full h-full max-w-full-xl mt-2 bg-blackMain">
       <Header />
@@ -23,17 +23,6 @@ export default function ComposerPerfil() {
                 <div className="bg-gray-500 rounded-full h-12 w-12 mr-4"></div>
                 <FollowButton />
               </div>
-              <div className="flex items-center space-x-2">
-                <span>Cancion mas escuchada:</span>
-                <div className="bg-gray-500 h-12 w-12 inline-block"></div>
-              </div>
-            </div>
-
-            <div className="border-b border-gray-500 my-4"></div>
-
-            <div className="mb-4">
-              <span>Generos que toca:</span>
-              <span> etiquetas irian aqui</span>
             </div>
 
             <div className="border-b border-gray-500 my-4"></div>
@@ -48,22 +37,13 @@ export default function ComposerPerfil() {
             <div className="border-b border-gray-500 my-4"></div>
 
             <div className="mb-4">
-              <span>Composiciones:</span>
+              <span>Artistas con los que trabajó:</span>
               <div className="flex space-x-2">
                 <div className="bg-gray-500 h-12 w-12"></div>
                 <div className="bg-gray-500 h-12 w-12"></div>
                 <div className="bg-gray-500 h-12 w-12"></div>
                 <div className="bg-gray-500 h-12 w-12"></div>
               </div>
-            </div>
-
-            <div className="border-b border-gray-500 my-4"></div>
-
-            <div>
-              <span>
-                Estadisticas? (interrogacion significa que no se si lo ponemos o
-                no)
-              </span>
             </div>
 
             <div className="border-b border-gray-500 my-4"></div>
