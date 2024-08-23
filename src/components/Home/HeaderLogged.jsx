@@ -1,14 +1,62 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { IoNotifications } from "react-icons/io5";
 import { CiSearch } from "react-icons/ci";
 import { useAuth } from "../../context/AuthContext";
+import { apiGetCredential } from "../../api/auth";
+
 export default function HeaderLogged() {
   const { logout } = useAuth();
+  const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [role, setRole] = useState(null);
+  const [loading, setLoading] = useState(true); // Añadido para manejar el estado de carga
+
+  // Parse user data from localStorage
+  const user = JSON.parse(localStorage.getItem("user"));
+  const { credentials_id } = user || {};
+
+  useEffect(() => {
+    if (credentials_id) {
+      // Obtener el rol del usuario a partir de su credentials_id
+      apiGetCredential(credentials_id)
+        .then((response) => {
+          console.log("API response data:", response.data); // Verifica la respuesta completa
+          if (response.data && response.data.roles) {
+            setRole(response.data.roles);
+          } else {
+            console.error("Role not found in the API response");
+          }
+        })
+        .catch((error) => {
+          console.error("Error al obtener el rol del usuario:", error);
+        })
+        .finally(() => {
+          setLoading(false); // Establece loading en false una vez que la solicitud ha terminado
+        });
+    } else {
+      console.error("No credentials_id available");
+      setLoading(false); // Asegúrate de actualizar el estado de carga si no hay credentials_id
+    }
+  }, [credentials_id]);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
+  };
+
+  const handleNavigate = () => {
+    if (role) {
+      console.log("Current role:", role); // Verifica el rol antes de navegar
+      if (role === "composer") {
+        navigate(`/ComposerPerfil/${credentials_id}`);
+      } else if (role === "user") {
+        navigate(`/UserPerfil/${credentials_id}`);
+      } else {
+        console.error("Rol no reconocido");
+      }
+    } else {
+      console.error("No role available");
+    }
   };
 
   return (
@@ -18,7 +66,7 @@ export default function HeaderLogged() {
           to={"/"}
           className="flex items-center space-x-3 rtl:space-x-reverse"
         >
-          <span className=" pl-12 self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+          <span className="pl-12 self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
             REPERDOM
           </span>
         </Link>
@@ -45,12 +93,12 @@ export default function HeaderLogged() {
             </button>
             {menuOpen && (
               <div className="absolute right-0 mt-2 w-48 bg-slate-800 rounded-md shadow-lg z-20">
-                <Link
-                  to="/ComposerPerfil"
+                <div
+                  onClick={handleNavigate}
                   className="w-full block px-4 py-2 text-white text-left hover:bg-gray-900"
                 >
                   Perfil
-                </Link>
+                </div>
                 <button
                   onClick={logout}
                   className="w-full block px-4 py-2 text-white text-left hover:bg-gray-900"

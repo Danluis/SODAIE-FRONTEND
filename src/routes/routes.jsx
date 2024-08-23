@@ -69,8 +69,8 @@ const RoutesApp = () => {
 
         <Route path="/Artist/:songId" element={<Artist />} />
         <Route path="/artists" element={<ArtistPage />} />
-        <Route path="/ComposerPerfil" element={<ComposerPerfil />} />
-        <Route path="/UserPerfil" element={<UserPerfil />} />
+        <Route path="/ComposerPerfil/:userId" element={<ComposerPerfil />} />
+        <Route path="/UserPerfil/:userId" element={<UserPerfil />} />
       </Route>
     </Routes>
   );

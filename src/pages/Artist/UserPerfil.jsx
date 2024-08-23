@@ -1,9 +1,39 @@
+import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 import Header from "../../components/Home/Header";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Home/Navbar";
 import FollowButton from "../../components/Utilities/FollowButton";
+import { apiGetUser } from "../../api/auth";
 
 export default function UserPerfil() {
+  const { userId } = useParams();
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Define la función para obtener los datos del usuario
+    const fetchUserData = async () => {
+      try {
+        const response = await apiGetUser(userId);
+        setUser(response.data);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUserData();
+  }, [userId]);
+
+  if (loading) {
+    return <div className="text-white">Cargando...</div>;
+  }
+
+  if (!user) {
+    return <div className="text-white">Usuario no encontrado</div>;
+  }
   return (
     <div className="w-full h-full max-w-full-xl mt-2 bg-blackMain">
       <Header />
@@ -21,6 +51,9 @@ export default function UserPerfil() {
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center">
                 <div className="bg-gray-500 rounded-full h-12 w-12 mr-4"></div>
+                <sapn className="text-xl font-bold text-white mr-4">
+                  {user.nickname}
+                </sapn>
                 <FollowButton />
               </div>
             </div>

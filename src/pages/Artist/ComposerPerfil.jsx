@@ -1,9 +1,40 @@
+import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 import Header from "../../components/Home/Header";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Home/Navbar";
 import FollowButton from "../../components/Utilities/FollowButton";
+import { apiGetUser } from "../../api/auth";
 
 export default function ComposerPerfil() {
+  const { userId } = useParams();
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Define la función para obtener los datos del usuario
+    const fetchUserData = async () => {
+      try {
+        const response = await apiGetUser(userId);
+        setUser(response.data);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUserData();
+  }, [userId]);
+
+  if (loading) {
+    return <div className="text-white">Cargando...</div>;
+  }
+
+  if (!user) {
+    return <div className="text-white">Usuario no encontrado</div>;
+  }
+
   return (
     <div className="w-full h-full max-w-full-xl mt-2 bg-blackMain">
       <Header />
@@ -21,19 +52,18 @@ export default function ComposerPerfil() {
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center">
                 <div className="bg-gray-500 rounded-full h-12 w-12 mr-4"></div>
+                <sapn className="text-xl font-bold text-white mr-4">
+                  {user.nickname}
+                </sapn>
                 <FollowButton />
-              </div>
-              <div className="flex items-center space-x-2">
-                <span>Cancion mas escuchada:</span>
-                <div className="bg-gray-500 h-12 w-12 inline-block"></div>
               </div>
             </div>
 
             <div className="border-b border-gray-500 my-4"></div>
 
             <div className="mb-4">
-              <span>Generos que toca:</span>
-              <span> etiquetas irian aqui</span>
+              <span>Géneros que toca:</span>
+              <span> etiquetas irían aquí</span>
             </div>
 
             <div className="border-b border-gray-500 my-4"></div>
@@ -61,8 +91,8 @@ export default function ComposerPerfil() {
 
             <div>
               <span>
-                Estadisticas? (interrogacion significa que no se si lo ponemos o
-                no)
+                ¿Estadísticas? (interrogación significa que no sé si lo ponemos
+                o no)
               </span>
             </div>
 
