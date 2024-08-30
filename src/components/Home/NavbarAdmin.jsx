@@ -4,6 +4,7 @@ import { IoHome } from "react-icons/io5";
 import { MdOutlineExplore } from "react-icons/md";
 import { MdLibraryMusic } from "react-icons/md";
 import { IoClose } from "react-icons/io5"; // Importar el ícono de cerrar
+import { FaUserShield } from "react-icons/fa"; // Icono para Admin
 import { Link } from "react-router-dom";
 
 export default function Navbar() {
@@ -56,6 +57,13 @@ export default function Navbar() {
           >
             <MdLibraryMusic className=" text-white w-6 h-6" />
             <span className=" text-white">Biblioteca</span>
+          </Link>
+          <Link
+            to={"/AdminStadisticPage"}
+            className="hover:bg-slate-600 flex flex-col items-center p-2 rounded-lg cursor-pointer"
+          >
+            <FaUserShield className=" text-white w-6 h-6" />
+            <span className=" text-white">Admin</span>
           </Link>
         </div>
       </div>

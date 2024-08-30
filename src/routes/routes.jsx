@@ -10,6 +10,7 @@ import FormFirstSong from "../pages/Form/FormFirstSong";
 import Library from "../pages/Home/Library";
 import Artist from "../pages/Artist/Artist";
 import AdminHomePageV1 from "../pages/Admin/AdminHomePage";
+import AdminStadisticPage from "../pages/Admin/AdminStadistcPage";
 import ScrollToTop from "../components/Utilities/ScrollToTop";
 import ArtistPage from "../pages/Artist/ArtistPage";
 import ComposerPerfil from "../pages/Artist/ComposerPerfil";
@@ -34,6 +35,10 @@ const RoutesApp = () => {
 
           <Route element={<ProtectedRouteAdmin />}>
             <Route path="/AdminPage" element={<AdminHomePageV1 />} />
+            <Route
+              path="/AdminStadisticPage"
+              element={<AdminStadisticPage />}
+            />
           </Route>
 
           <Route element={<ProtectedRouteComposer />}>
