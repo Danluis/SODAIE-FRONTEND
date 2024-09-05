@@ -1,23 +1,24 @@
+import { useParams } from "react-router-dom"; // Importar useParams
 import Header from "../../components/Home/Header";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Home/Navbar";
 import FormInput from "../../components/Form/FormInput";
-import Timeline from "../../components/Form/Timeline";
 import ScrollMenu from "../../components/ScrollMenu";
 import { updateUserRequest } from "../../api/auth";
 import { useEffect, useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { useNavigate, Link } from "react-router-dom";
 
-export default function FormGeneralInfo() {
+export default function EditPerfil() {
+  const { userId } = useParams(); // Obtener el userId dinámicamente
   const methods = useForm();
   const { handleSubmit } = methods;
   const navigate = useNavigate();
   const [redirect, setRedirect] = useState(false);
 
   useEffect(() => {
-    if (redirect) navigate("/FormPersonalInfo");
-  }, [redirect, navigate]);
+    if (redirect) navigate(`/ComposerPerfil/${userId}`); // Redirigir a la página del perfil con el userId
+  }, [redirect, navigate, userId]);
 
   const onSubmit = handleSubmit(async (values) => {
     const user = JSON.parse(localStorage.getItem("user"));
@@ -40,36 +41,74 @@ export default function FormGeneralInfo() {
         );
       }
     } else {
-      console.error("No se encontró ningun usuario");
+      console.error("No se encontró ningún usuario");
     }
   });
 
   const instruments = [
     "Guitarra",
-    "Piano",
-    "Bajo",
-    "Batería",
     "Violín",
-    "Saxofón",
-    "Trompeta",
-    "Flauta",
-    "Clarinete",
-    "Oboe",
-    "Trombón",
+    "Viola",
     "Violonchelo",
     "Contrabajo",
     "Arpa",
-    "Percusión",
-    "Acordeón",
-    "Banjo",
+    "Laúd",
     "Mandolina",
-    "Ukelele",
+    "Banjo",
+    "Ukulele",
+    "Cítara",
+    "Balalaica",
+    "Clavecín",
+    "Flauta",
+    "Flautín",
+    "Clarinete",
+    "Oboe",
+    "Fagot",
+    "Contrafagot",
+    "Saxofón alto",
+    "Saxofón tenor",
+    "Saxofón soprano",
+    "Saxofón barítono",
+    "Corno inglés",
+    "Duduk",
+    "Ocarina",
+    "Quena",
+    "Trompeta",
+    "Trombón",
+    "Tuba",
+    "Corno francés",
+    "Flicorno",
+    "Trompa",
+    "Batería",
+    "Timbal",
+    "Xilófono",
+    "Marimba",
+    "Vibráfono",
+    "Caja",
+    "Platillos",
+    "Bongos",
+    "Conga",
+    "Darbuka",
+    "Pandereta",
+    "Djembe",
+    "Piano",
     "Teclado",
     "Órgano",
-    "Armónica",
-    "Fagot",
-    "Tuba",
-    "Marimba",
+    "Clave",
+    "Acordeón",
+    "Sintetizador",
+    "Sitar",
+    "Tambura",
+    "Shamisen",
+    "Koto",
+    "Erhu",
+    "Dulcémele",
+    "Charango",
+    "Bandoneón",
+    "Maracas",
+    "Cuatro",
+    "Zampoña",
+    "Kalimba",
   ];
 
   return (
@@ -83,14 +122,8 @@ export default function FormGeneralInfo() {
               <FormProvider {...methods}>
                 <form onSubmit={onSubmit} className="mt-10">
                   <div className="mb-6 text-3xl font-semibold">
-                    Información General
+                    Edicion del Perfil
                   </div>
-                  <FormInput name="name" text="Nombre" placeholder="Nombre" />
-                  <FormInput
-                    name="lastName"
-                    text="Apellido"
-                    placeholder="Apellido"
-                  />
                   <FormInput name="nickname" text="Apodo" placeholder="Apodo" />
                   <ScrollMenu
                     text={"Instrumento"}
@@ -106,18 +139,12 @@ export default function FormGeneralInfo() {
                       Siguiente
                     </button>
                     <Link
-                      to="/FormPersonalInfo"
+                      to={`/ComposerPerfil/${userId}`} // Redirigir al perfil dinámicamente
                       className="text-center w-1/4 bg-semiBlack text-semiWhite px-4 py-3 rounded-xl font-semibold hover:bg-slate-900 transition-transform transform hover:scale-105"
                     >
                       Omitir
                     </Link>
                   </div>
-                  <Timeline
-                    paso1="completed"
-                    paso2="upcoming"
-                    paso3="upcoming"
-                    paso4="upcoming"
-                  />
                 </form>
               </FormProvider>
             </div>

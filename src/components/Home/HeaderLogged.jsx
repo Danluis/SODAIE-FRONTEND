@@ -59,6 +59,10 @@ export default function HeaderLogged() {
     }
   };
 
+  const handleEditProfile = () => {
+    navigate(`/EditPerfil/${credentials_id}`); // Redirigir a la página de edición del perfil dinámicamente
+  };
+
   return (
     <header className="fixed top-0 z-10 max-w-full-xl flex flex-wrap w-full border-b-2 border-b-white border-opacity-5">
       <div className="w-full bg-blackMain max-w-full-xl flex flex-wrap items-center justify-between mx-auto px-8 p-2">
@@ -98,6 +102,12 @@ export default function HeaderLogged() {
                   className="w-full block px-4 py-2 text-white text-left hover:bg-gray-900"
                 >
                   Perfil
+                </div>
+                <div
+                  onClick={handleEditProfile} // Añadido botón para editar perfil
+                  className="w-full block px-4 py-2 text-white text-left hover:bg-gray-900"
+                >
+                  Editar Perfil
                 </div>
                 <button
                   onClick={logout}

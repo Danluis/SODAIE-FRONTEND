@@ -14,6 +14,7 @@ import AdminStadisticPage from "../pages/Admin/AdminStadistcPage";
 import ScrollToTop from "../components/Utilities/ScrollToTop";
 import ArtistPage from "../pages/Artist/ArtistPage";
 import ComposerPerfil from "../pages/Artist/ComposerPerfil";
+import EditPerfil from "../pages/Artist/EditPerfil";
 import UserPerfil from "../pages/Artist/UserPerfil";
 import FormTermsCon from "../pages/Form/FormTermsCon";
 import FormPasswordForgotten from "../pages/Form/FormPasswordForgotten";
@@ -74,6 +75,7 @@ const RoutesApp = () => {
 
         <Route path="/Artist/:songId" element={<Artist />} />
         <Route path="/artists" element={<ArtistPage />} />
+        <Route path="/EditPerfil/:userId" element={<EditPerfil />} />
         <Route path="/ComposerPerfil/:userId" element={<ComposerPerfil />} />
         <Route path="/UserPerfil/:userId" element={<UserPerfil />} />
       </Route>

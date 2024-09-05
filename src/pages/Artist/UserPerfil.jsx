@@ -51,7 +51,7 @@ export default function UserPerfil() {
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center">
                 <div className="bg-gray-500 rounded-full h-12 w-12 mr-4"></div>
-                <sapn className="text-xl font-bold text-white mr-4">
+                <sapn className="text-2xl font-bold text-white mr-4">
                   {user.nickname}
                 </sapn>
                 <FollowButton />
@@ -62,6 +62,7 @@ export default function UserPerfil() {
 
             <div className="mb-4">
               <textarea
+                readOnly
                 className="w-1/2 h-32 bg-gray-600 text-white p-2 rounded mt-2"
                 placeholder="Escriba su biografía aquí..."
               ></textarea>
@@ -70,7 +71,9 @@ export default function UserPerfil() {
             <div className="border-b border-gray-500 my-4"></div>
 
             <div className="mb-4">
-              <span>Artistas con los que trabajó:</span>
+              <span className="text-2xl font-bold mb-4 text-white">
+                Artistas con los que trabajó:
+              </span>
               <div className="flex space-x-2">
                 <div className="bg-gray-500 h-12 w-12"></div>
                 <div className="bg-gray-500 h-12 w-12"></div>
@@ -81,8 +84,13 @@ export default function UserPerfil() {
 
             <div className="border-b border-gray-500 my-4"></div>
 
-            <div className="mb-4">
-              <span>Redes Sociales:</span>
+            <div>
+              <span className="text-2xl font-bold mb-4 text-white">
+                Contacto:
+              </span>
+              <div className="text-2xl font-bold mb-4 text-white mt-6">
+                Numero Telefonico: {user.phone}
+              </div>
             </div>
           </div>
 

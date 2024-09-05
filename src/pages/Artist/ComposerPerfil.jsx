@@ -52,7 +52,7 @@ export default function ComposerPerfil() {
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center">
                 <div className="bg-gray-500 rounded-full h-12 w-12 mr-4"></div>
-                <span className="text-xl font-bold text-white mr-4">
+                <span className="text-2xl font-bold text-white mr-4">
                   {user.nickname}
                 </span>
                 <FollowButton />
@@ -62,14 +62,19 @@ export default function ComposerPerfil() {
             <div className="border-b border-gray-500 my-4"></div>
 
             <div className="mb-4">
-              <span>Géneros que toca:</span>
-              <span> etiquetas irían aquí</span>
+              <span className="text-2xl font-bold mb-4 text-white">
+                Instrumentos que toca:
+              </span>
+              <div className="text-2xl font-bold mb-4 text-white mt-6">
+                {user.instruments}
+              </div>
             </div>
 
             <div className="border-b border-gray-500 my-4"></div>
 
             <div className="mb-4">
               <textarea
+                readOnly
                 className="w-1/2 h-32 bg-gray-600 text-white p-2 rounded mt-2"
                 placeholder="Escriba su biografía aquí..."
               ></textarea>
@@ -79,24 +84,22 @@ export default function ComposerPerfil() {
 
             {/* Composiciones */}
             <div className="mb-4">
-              <span className="text-xl text-white">Composiciones:</span>
-              <SongCardList title="Composiciones" userId={user.id} />{" "}
+              <span className="text-2xl font-bold mb-4 text-white">
+                Composiciones:
+              </span>
+              <SongCardList userId={user.id} />{" "}
               {/* Filtrar las canciones por userId */}
             </div>
 
             <div className="border-b border-gray-500 my-4"></div>
 
-            <div>
-              <span>
-                ¿Estadísticas? (interrogación significa que no sé si lo ponemos
-                o no)
-              </span>
-            </div>
-
-            <div className="border-b border-gray-500 my-4"></div>
-
             <div className="mb-4">
-              <span>Redes Sociales:</span>
+              <span className="text-2xl font-bold mb-4 text-white">
+                Contacto y Redes Sociales:
+              </span>
+              <div className="text-2xl font-bold mb-4 text-white mt-6">
+                Numero de telefono: {user.phone}
+              </div>
             </div>
           </div>
 
