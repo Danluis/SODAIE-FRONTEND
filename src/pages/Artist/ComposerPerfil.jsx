@@ -4,6 +4,7 @@ import Header from "../../components/Home/Header";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Home/Navbar";
 import FollowButton from "../../components/Utilities/FollowButton";
+import SongCardList from "../../components/Home/SongCardListV1"; // Importar el componente SongCardList
 import { apiGetUser } from "../../api/auth";
 
 export default function ComposerPerfil() {
@@ -12,7 +13,6 @@ export default function ComposerPerfil() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Define la función para obtener los datos del usuario
     const fetchUserData = async () => {
       try {
         const response = await apiGetUser(userId);
@@ -52,9 +52,9 @@ export default function ComposerPerfil() {
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center">
                 <div className="bg-gray-500 rounded-full h-12 w-12 mr-4"></div>
-                <sapn className="text-xl font-bold text-white mr-4">
+                <span className="text-xl font-bold text-white mr-4">
                   {user.nickname}
-                </sapn>
+                </span>
                 <FollowButton />
               </div>
             </div>
@@ -77,14 +77,11 @@ export default function ComposerPerfil() {
 
             <div className="border-b border-gray-500 my-4"></div>
 
+            {/* Composiciones */}
             <div className="mb-4">
-              <span>Composiciones:</span>
-              <div className="flex space-x-2">
-                <div className="bg-gray-500 h-12 w-12"></div>
-                <div className="bg-gray-500 h-12 w-12"></div>
-                <div className="bg-gray-500 h-12 w-12"></div>
-                <div className="bg-gray-500 h-12 w-12"></div>
-              </div>
+              <span className="text-xl text-white">Composiciones:</span>
+              <SongCardList title="Composiciones" userId={user.id} />{" "}
+              {/* Filtrar las canciones por userId */}
             </div>
 
             <div className="border-b border-gray-500 my-4"></div>
