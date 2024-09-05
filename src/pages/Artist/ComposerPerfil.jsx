@@ -8,7 +8,7 @@ import SongCardList from "../../components/Home/SongCardListV1"; // Importar el 
 import { apiGetUser } from "../../api/auth";
 
 export default function ComposerPerfil() {
-  const { userId } = useParams();
+  const { userId } = useParams(); // Obtener el userId de los parámetros de la URL
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -16,7 +16,7 @@ export default function ComposerPerfil() {
     const fetchUserData = async () => {
       try {
         const response = await apiGetUser(userId);
-        setUser(response.data);
+        setUser(response.data); // Guardar los datos del usuario
       } catch (error) {
         console.error("Error fetching user data:", error);
       } finally {
@@ -87,8 +87,8 @@ export default function ComposerPerfil() {
               <span className="text-2xl font-bold mb-4 text-white">
                 Composiciones:
               </span>
-              <SongCardList userId={user.id} />{" "}
-              {/* Filtrar las canciones por userId */}
+              <SongCardList userId={userId} />{" "}
+              {/* Pasar el userId al SongCardList */}
             </div>
 
             <div className="border-b border-gray-500 my-4"></div>

@@ -14,7 +14,7 @@ export default function SongCardList({ title, userId }) {
       try {
         const response = await apiGetSongs();
         const filteredSongs = userId
-          ? response.data.filter((song) => song.user_id === userId)
+          ? response.data.filter((song) => song.user_id === Number(userId))
           : response.data;
         setSongs(filteredSongs);
       } catch (error) {
