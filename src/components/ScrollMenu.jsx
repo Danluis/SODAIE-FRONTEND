@@ -5,10 +5,17 @@ export default function ScrollMenu({ text, placeholder, options, name }) {
 
     return (
         <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-400 mb-2">{text}</label>
+            <label 
+                htmlFor={name} 
+                className="block text-sm font-medium text-gray-400 mb-2"
+            >
+                {text}
+            </label>
             <select
+                id={name}
                 {...register(name)}
-                className="w-[28rem] px-6 py-3 rounded-lg mt-1 bg-semiBlack border-blue-600 text-white"
+                className="w-full max-w-md px-4 py-2 rounded-lg mt-1 bg-semiBlack border-blue-600 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                aria-label={text}
             >
                 <option value="" disabled selected>{placeholder}</option>
                 {options.map((option, index) => (

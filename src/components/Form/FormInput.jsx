@@ -5,14 +5,18 @@ export default function FormInput({ text, placeholder, name }) {
 
     return (
         <div className="mb-4">
-            <span className="block bg-transparent px-1 mb-1 text-sm font-semibold text-gray-400">
+            <label 
+                htmlFor={name} 
+                className="block bg-transparent px-1 mb-1 text-sm font-semibold text-gray-400"
+            >
                 {text}
-            </span>
+            </label>
             <input
                 {...register(name, { required: true })}
                 type="text"
+                id={name}
                 placeholder={placeholder}
-                className="w-[28rem] px-6 py-3 rounded-lg mt-1 bg-semiBlack border-blue-600 text-white"
+                className="w-full max-w-xs sm:max-w-sm lg:max-w-md px-6 py-3 rounded-lg mt-1 bg-semiBlack border-blue-600 text-white"
             />
             {errors[name] && (
                 <p className="text-red-500 mb-4">Campo es requerido</p>

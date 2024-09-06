@@ -17,6 +17,7 @@ import FormTermsCon from "../pages/Form/FormTermsCon";
 import FormPasswordForgotten from "../pages/Form/FormPasswordForgotten";
 import FormRestorePassword from "../pages/Form/FormRestorePassword";
 import FormOTPInput from "../pages/Form/FormOTPInput";
+import FormRepertoire from "../pages/Form/FormRepertoire";
 import { ProtectedRoute } from "../components/Utilities/ProtectedRoute";
 import { ProtectedRouteUser } from "../components/Utilities/ProtectedRouteUser";
 import { ProtectedRouteAdmin } from "../components/Utilities/ProtectedRouteAdmin";
@@ -56,6 +57,7 @@ const RoutesApp = () => {
         <Route path="/FormRestorePassword" element={<FormRestorePassword /> }/>
         <Route path="/RegisterPageV1" element={<RegisterPageV1 /> }/>
         <Route path="/FormOTPInput" element={<FormOTPInput />} />
+        <Route path="/repertoire" element={<FormRepertoire />} />
   
         <Route path="/Artist/:songId" element={<Artist /> }/>      
         <Route path="/artists" element={<ArtistPage />} />
