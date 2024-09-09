@@ -131,6 +131,23 @@ export default function EditPerfil() {
                     options={instruments}
                     name="instruments"
                   />
+                  <FormInput
+                    name="phone"
+                    text="Teléfono"
+                    placeholder="Número de teléfono"
+                  />
+                  <div className="mt-4">
+                    <label htmlFor="bio" className="block text-sm font-medium">
+                      Biografía
+                    </label>
+                    <textarea
+                      id="bio"
+                      name="bio"
+                      rows="4"
+                      className="w-full p-2 bg-gray-600 text-white rounded"
+                      placeholder="Escriba su biografía..."
+                    />
+                  </div>
                   <div className="flex justify-between gap-10 mt-6">
                     <button
                       type="submit"
@@ -142,7 +159,7 @@ export default function EditPerfil() {
                       to={`/ComposerPerfil/${userId}`} // Redirigir al perfil dinámicamente
                       className="text-center w-1/4 bg-semiBlack text-semiWhite px-4 py-3 rounded-xl font-semibold hover:bg-slate-900 transition-transform transform hover:scale-105"
                     >
-                      Omitir
+                      Cancelar
                     </Link>
                   </div>
                 </form>
