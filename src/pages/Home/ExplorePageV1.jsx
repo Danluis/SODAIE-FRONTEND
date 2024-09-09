@@ -19,7 +19,6 @@ export default function ExplorePageV1() {
     const fetchSongs = async () => {
       try {
         const response = await apiGetSongs();
-        console.log("Datos obtenidos:", response.data); // Verifica si los datos están llegando
         setSongs(response.data);
       } catch (error) {
         console.error("Error fetching songs:", error);
@@ -29,9 +28,6 @@ export default function ExplorePageV1() {
   }, []);
 
   const handleSearch = () => {
-    console.log("Título ingresado:", title);
-    console.log("Compositor o intérprete ingresado:", filterValue);
-
     let filtered = songs;
 
     if (title) {
@@ -58,7 +54,6 @@ export default function ExplorePageV1() {
       );
     }
 
-    console.log("Filtrado por título y compositor/intérprete:", filtered);
     setFilteredSongs(filtered);
   };
 

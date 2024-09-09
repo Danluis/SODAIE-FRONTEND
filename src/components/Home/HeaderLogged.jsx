@@ -21,7 +21,6 @@ export default function HeaderLogged() {
       // Obtener el rol del usuario a partir de su credentials_id
       apiGetCredential(credentials_id)
         .then((response) => {
-          console.log("API response data:", response.data); // Verifica la respuesta completa
           if (response.data && response.data.roles) {
             setRole(response.data.roles);
           } else {
@@ -46,7 +45,6 @@ export default function HeaderLogged() {
 
   const handleNavigate = () => {
     if (role) {
-      console.log("Current role:", role); // Verifica el rol antes de navegar
       if (role === "composer") {
         navigate(`/ComposerPerfil/${credentials_id}`);
       } else if (role === "user") {
