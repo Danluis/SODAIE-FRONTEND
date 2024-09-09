@@ -1,134 +1,48 @@
 import { useEffect, useState, useRef } from 'react';
 import { 
-    apiGetSongs, 
-    apiGetSong, 
-    apiCreatePlaylists, 
-    apiCreateSongPlaylists, 
-    apiAddPlaylistToLibrary, 
-    apiGetLibrary, 
+    apiGetLibrary,
     apiAddSongToLibrary,
     apiRemoveSongFromLibrary
 } from "../../api/auth";
 import CardPlayButton from "../../components/MediaPlayer/CardPlayButton";
 
-export default function LibrarySongCardList({ title, searchTerm, id = '' }) {
+export default function LibrarySongsLiked({ title, searchTerm }) {
     const [songs, setSongs] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [hoveredSongId, setHoveredSongId] = useState(null);
     const [menuVisible, setMenuVisible] = useState(null);
-    const [playlists, setPlaylists] = useState([]);
-    const [likedSongs, setLikedSongs] = useState([]); // Estado para gestionar las canciones que le gustan al usuario
+    const [likedSongs, setLikedSongs] = useState([]);
     const menuRef = useRef(null);
 
     useEffect(() => {
-        console.log("Recibido searchTerm en LibrarySongCardList:", searchTerm);
-
-        const fetchSongs = async () => {
+        const fetchLibrarySongs = async () => {
             try {
-                if (id !== '') {
-                    const response = await apiGetSong(id);
-                    console.log('Fetched song:', response.data);
-                    setSongs([response.data]);
-                } else {
-                    const response = await apiGetSongs();
-                    console.log('Fetched songs:', response.data);
-
-                    if (response.data && Array.isArray(response.data)) {
-                        setSongs(response.data);
-                    } else {
-                        console.error('Unexpected response format:', response.data);
-                    }
+                const user = JSON.parse(localStorage.getItem('user'));
+                const response = await apiGetLibrary(user.credentials_id);
+                console.log('Fetched library songs:', response.data);
+                
+                if (response.data && response.data.Song_Libraries) {
+                    const librarySongs = response.data.Song_Libraries.map(songLib => songLib.Song);
+                    setSongs(librarySongs);
+                    setLikedSongs(librarySongs.map(song => song.song_id));
                 }
             } catch (error) {
                 setError(error);
-                console.error('Error fetching songs:', error);
+                console.error('Error fetching library songs:', error);
             } finally {
                 setLoading(false);
             }
         };
 
-        const fetchLibraryPlaylists = async () => {
-            try {
-                const user = JSON.parse(localStorage.getItem('user'));
-                const response = await apiGetLibrary(user.credentials_id);
-                console.log('Fetched library:', response.data);
-                setPlaylists(response.data.Playlist_Libraries.map(lib => lib.Playlist));
-                
-                // Guardar las canciones favoritas en el estado
-                setLikedSongs(response.data.Song_Libraries.map(songLib => songLib.song_id));
-            } catch (error) {
-                console.error('Error fetching library:', error);
-            }
-        };
-
-        fetchSongs();
-        fetchLibraryPlaylists();
-    }, [id]);
-
-    const handleCreatePlaylist = async (song, event) => {
-        event.stopPropagation();
-    
-        console.log('handleCreatePlaylist triggered', song);
-        const user = JSON.parse(localStorage.getItem('user'));
-        const newPlaylist = {
-            name: song.title,
-            cover: song.cover,
-            public: false,
-            user_id: user.credentials_id
-        };
-    
-        try {
-            const response = await apiCreatePlaylists(newPlaylist);
-            console.log('API response (playlist creada):', response);
-            const playlistId = response.data.playlist_id;
-    
-            const newSongPlaylist = {
-                song_id: song.song_id,
-                playlist_id: playlistId,
-            };
-            await apiCreateSongPlaylists(newSongPlaylist);
-            console.log('API response (song-playlist creada):', newSongPlaylist);
-    
-            const playlistLibrary = {
-                library_id: user.credentials_id,
-                playlist_id: playlistId,
-            };
-            await apiAddPlaylistToLibrary(playlistLibrary);
-            console.log('API response (playlist añadida a librería):', playlistLibrary);
-    
-            alert('Playlist creada y añadida a tu librería con éxito');
-        } catch (error) {
-            console.error('Error creando playlist o añadiéndola a la librería:', error);
-            alert('Hubo un error al crear la playlist o añadirla a la librería');
-        } finally {
-            setMenuVisible(null);
-        }
-    };
-
-    const handleAddSongToPlaylist = async (song, playlistId) => {
-        try {
-            const newSongPlaylist = {
-                song_id: song.song_id,
-                playlist_id: playlistId,
-            };
-            await apiCreateSongPlaylists(newSongPlaylist);
-            console.log('API response (song-playlist añadida):', newSongPlaylist);
-            alert('Canción añadida a la playlist con éxito');
-        } catch (error) {
-            console.error('Error añadiendo canción a la playlist:', error);
-            alert('Hubo un error al añadir la canción a la playlist');
-        }
-    };
+        fetchLibrarySongs();
+    }, []);
 
     const handleToggleLikedSong = async (song) => {
         const user = JSON.parse(localStorage.getItem('user'));
         const isLiked = likedSongs.includes(song.song_id);
         
         try {
-            console.log('library ID:   ',user.credentials_id);
-                console.log('Song ID', song.song_id );
-                
             if (isLiked) {
                 await apiRemoveSongFromLibrary({ 
                     library_id: user.credentials_id, 
@@ -225,21 +139,13 @@ export default function LibrarySongCardList({ title, searchTerm, id = '' }) {
                                     {menuVisible === song.song_id && (
                                         <div className="absolute right-0 mt-2 z-20 bg-semiBlack text-white rounded-md shadow-lg w-48">
                                             <ul className='flex flex-col items-center'>
+                                                {/* Opciones del menú, por ejemplo: */}
                                                 <li 
-                                                    className='w-full hover:bg-primaryColor cursor-pointer p-2 text-center' 
-                                                    onClick={(event) => handleCreatePlaylist(song, event)}
+                                                    className='w-full hover:bg-primaryColor cursor-pointer p-2 text-center'
+                                                    onClick={() => console.log('Añadir a playlist')}
                                                 >
-                                                    Crear playlist
+                                                    Añadir a playlist
                                                 </li>
-                                                {playlists.map(playlist => (
-                                                    <li 
-                                                        key={playlist.playlist_id} 
-                                                        className='w-full hover:bg-primaryColor cursor-pointer p-2 text-center'
-                                                        onClick={() => handleAddSongToPlaylist(song, playlist.playlist_id)}
-                                                    >
-                                                        Añadir a {playlist.name}
-                                                    </li>
-                                                ))}
                                             </ul>
                                         </div>
                                     )}

@@ -28,3 +28,8 @@ export const apiCreateSongPlaylists = playlists => axios.post(`/song_playlists`,
 //LIBRARY API
 export const apiGetLibrary = user_id => axios.get(`/libraries/${user_id}`)
 export const apiAddPlaylistToLibrary = (playlistLibrary) => axios.post(`playlist_libraries`, playlistLibrary)
+export const apiAddSongToLibrary = (addSongToLibrary) => axios.post(`/song_libraries`, addSongToLibrary)
+export const apiRemoveSongFromLibrary = (removeSongFromLibrary) => axios.delete(`/song_libraries`, {
+    data: removeSongFromLibrary
+});
+
