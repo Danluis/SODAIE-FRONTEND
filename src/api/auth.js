@@ -11,9 +11,11 @@ export const logoutRequest = user => axios.post(`/logout`, user);
 
 //CREDENTIALS API
 export const updateCredentialRequest = (id, updatedCredential) => axios.put(`/credentials/${id}`, updatedCredential);
+export const apiGetCredential = credentialId => axios.get(`/credentials/${credentialId}`);
 
 //USER API
 export const updateUserRequest = (id, updatedCredential) => axios.put(`/users/${id}`, updatedCredential);
+export const apiGetUser = userId => axios.get(`/users/${userId}`);
 
 //SONG API
 export const apiCreateSong = song => axios.post(`/songs`, song);

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { LuMenu } from "react-icons/lu";
 import { IoHome, IoClose } from "react-icons/io5";
 import { MdOutlineExplore, MdLibraryMusic } from "react-icons/md";
@@ -80,5 +80,5 @@ export default function Navbar() {
                 />
             )}
         </div>
-    );
+)
 }

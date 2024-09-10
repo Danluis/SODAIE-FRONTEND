@@ -1,6 +1,5 @@
 import Header from "../../components/Home/Header";
 import Footer from "../../components/Footer";
-import Navbar from "../../components/Home/Navbar";
 import LibrarySongCardList from "../../components/Home/LibrarySongCardList";
 import { apiGetSong } from "../../api/auth";
 import { Link, useParams } from "react-router-dom";
@@ -20,14 +19,10 @@ export default function Artist() {
             }
         };
 
-        if (songId) {
-            fetchSongData();
-        }
-    }, [songId]);
-
-    if (!songData) {
-        return <div>Loading...</div>;
+    if (songId) {
+      fetchSongData();
     }
+  }, [songId]);
 
     // Extraer el año de createdAt y releaseDate
     const createdAtYear = new Date(songData.createdAt).getFullYear();
@@ -35,9 +30,6 @@ export default function Artist() {
     return (
         <div className="w-full h-full max-w-full-xl mt-2 bg-blackMain">
             <Header />
-
-            <div className="flex flex-col-2">
-                <Navbar />
 
                 <div className="w-full h-full">
                     <div className="bg-blackMain mr-2 p-8 w-full h-full text-white mt-10">
@@ -70,7 +62,16 @@ export default function Artist() {
                         <Footer />
                     </div>
                 </div>
-            </div>
-        </div>
-    );
+                <div className="border-t border-gray-700 pt-2 mb-4">
+                  <div className="flex justify-between text-gray-400">
+                    <span>{songData.title}</span>
+                    <span>{songData.duration}</span>
+                  </div>
+                </div>
+                <p className="text-xs text-gray-400 mb-2">
+                  {songData.releaseDate}
+                </p>
+                <p className="text-xs text-gray-400">{songData.copyright}</p>
+              </div>
+  )
 }

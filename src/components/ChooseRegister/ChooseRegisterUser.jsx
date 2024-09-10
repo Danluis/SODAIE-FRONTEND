@@ -28,7 +28,7 @@ export default function ChooseRegisterUser({ img, NameUser, title, subTitle }) {
     };
 
     if (redirect) {
-        return <Navigate to="/FormGeneralInfo" />;
+        return <Navigate to="/FormGeneralInfoUser" />;
     }
 
     return (

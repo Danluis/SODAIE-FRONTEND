@@ -29,8 +29,13 @@ export default function HeaderLogged() {
   return (
     <header className="fixed top-0 z-10 max-w-full-xl flex flex-wrap w-full border-b-2 border-b-white border-opacity-5">
       <div className="w-full bg-blackMain max-w-full-xl flex flex-wrap items-center justify-between mx-auto px-8 p-2">
-        <Link to={'/'} className="flex items-center space-x-3 rtl:space-x-reverse">
-          <span className=" pl-12 self-center text-2xl font-semibold whitespace-nowrap dark:text-white">REPERDOM</span>
+        <Link
+          to={"/"}
+          className="flex items-center space-x-3 rtl:space-x-reverse"
+        >
+          <span className="pl-12 self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+            REPERDOM
+          </span>
         </Link>
 
         <div className="flex items-center">
