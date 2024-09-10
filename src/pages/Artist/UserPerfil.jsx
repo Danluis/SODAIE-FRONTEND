@@ -4,19 +4,19 @@ import Header from "../../components/Home/Header";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Home/Navbar";
 import FollowButton from "../../components/Utilities/FollowButton";
-import SongCardList from "../../components/Home/SongCardListV1"; // Importar el componente SongCardList
 import { apiGetUser } from "../../api/auth";
 
-export default function ComposerPerfil() {
-  const { userId } = useParams(); // Obtener el userId de los parámetros de la URL
+export default function UserPerfil() {
+  const { userId } = useParams();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Define la función para obtener los datos del usuario
     const fetchUserData = async () => {
       try {
         const response = await apiGetUser(userId);
-        setUser(response.data); // Guardar los datos del usuario
+        setUser(response.data);
       } catch (error) {
         console.error("Error fetching user data:", error);
       } finally {
@@ -34,7 +34,6 @@ export default function ComposerPerfil() {
   if (!user) {
     return <div className="text-white">Usuario no encontrado</div>;
   }
-
   return (
     <div className="w-full h-full max-w-full-xl mt-2 bg-blackMain">
       <Header />
@@ -52,21 +51,10 @@ export default function ComposerPerfil() {
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center">
                 <div className="bg-gray-500 rounded-full h-12 w-12 mr-4"></div>
-                <span className="text-2xl font-bold text-white mr-4">
+                <sapn className="text-2xl font-bold text-white mr-4">
                   {user.nickname}
-                </span>
+                </sapn>
                 <FollowButton />
-              </div>
-            </div>
-
-            <div className="border-b border-gray-500 my-4"></div>
-
-            <div className="mb-4">
-              <span className="text-2xl font-bold mb-4 text-white">
-                Instrumentos que toco:
-              </span>
-              <div className="text-2xl font-bold mb-4 text-white mt-6">
-                {user.instruments}
               </div>
             </div>
 
@@ -82,23 +70,26 @@ export default function ComposerPerfil() {
 
             <div className="border-b border-gray-500 my-4"></div>
 
-            {/* Composiciones */}
             <div className="mb-4">
               <span className="text-2xl font-bold mb-4 text-white">
-                Composiciones:
+                Artistas con los que trabajó:
               </span>
-              <SongCardList userId={userId} />{" "}
-              {/* Pasar el userId al SongCardList */}
+              <div className="flex space-x-2">
+                <div className="bg-gray-500 h-12 w-12"></div>
+                <div className="bg-gray-500 h-12 w-12"></div>
+                <div className="bg-gray-500 h-12 w-12"></div>
+                <div className="bg-gray-500 h-12 w-12"></div>
+              </div>
             </div>
 
             <div className="border-b border-gray-500 my-4"></div>
 
-            <div className="mb-4">
+            <div>
               <span className="text-2xl font-bold mb-4 text-white">
-                Contacto y Redes Sociales:
+                Contacto:
               </span>
               <div className="text-2xl font-bold mb-4 text-white mt-6">
-                Numero de telefono: {user.phone}
+                Numero Telefonico: {user.phone}
               </div>
             </div>
           </div>

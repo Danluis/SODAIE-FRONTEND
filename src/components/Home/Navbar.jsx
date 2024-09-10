@@ -1,13 +1,22 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { LuMenu } from "react-icons/lu";
-import { IoHome } from "react-icons/io5";
-import { MdOutlineExplore } from "react-icons/md";
-import { MdLibraryMusic } from "react-icons/md";
-import { IoClose } from "react-icons/io5"; // Importar el ícono de cerrar
+import { IoHome, IoClose } from "react-icons/io5";
+import { MdOutlineExplore, MdLibraryMusic } from "react-icons/md";
+import { RiFolderMusicFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
 export default function Navbar() {
     const [menuOpen, setMenuOpen] = useState(false);
+    const [userRole, setUserRole] = useState(null);
+
+    useEffect(() => {
+        // Obtener el rol del usuario desde el almacenamiento local o desde algún contexto
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
+            const user = JSON.parse(storedUser);
+            setUserRole(user.roles); // Suponiendo que 'roles' contiene el rol del usuario
+        }
+    }, []);
 
     return (
         <div className="relative">
@@ -34,17 +43,32 @@ export default function Navbar() {
 
                 <div className="flex flex-col gap-4 mt-4">
                     <Link to={'/'} className="hover:bg-slate-600 flex flex-col items-center p-2 rounded-lg cursor-pointer">
-                        <IoHome className=" text-white w-6 h-6" />
-                        <span className=" text-white">Inicio</span>
+                        <IoHome className="text-white w-6 h-6" />
+                        <span className="text-white">Inicio</span>
                     </Link>
                     <Link to={'/search'} className="hover:bg-slate-600 flex flex-col items-center p-2 rounded-lg cursor-pointer">
-                        <MdOutlineExplore className=" text-white w-6 h-6" />
-                        <span className=" text-white">Explorar</span>
+                        <MdOutlineExplore className="text-white w-6 h-6" />
+                        <span className="text-white">Explorar</span>
                     </Link>
                     <Link to={'/Library'} className="hover:bg-slate-600 flex flex-col items-center p-2 rounded-lg cursor-pointer">
-                        <MdLibraryMusic className=" text-white w-6 h-6" />
-                        <span className=" text-white">Biblioteca</span>
+                        <MdLibraryMusic className="text-white w-6 h-6" />
+                        <span className="text-white">Biblioteca</span>
                     </Link>
+
+                    {/* Opciones adicionales según el rol del usuario */}
+                    {userRole === 'composer' && (
+                        <Link to={'/repertoire'} className="hover:bg-slate-600 flex flex-col items-center p-2 rounded-lg cursor-pointer">
+                            <RiFolderMusicFill className="text-white w-6 h-6" />
+                            <span className="text-white">Repertorio</span>
+                        </Link>
+                    )}
+
+                    {/* Agrega más opciones basadas en otros roles si es necesario */}
+                    {userRole === 'admin' && (
+                        <Link to={'/admin'} className="hover:bg-slate-600 flex flex-col items-center p-2 rounded-lg cursor-pointer">
+                            <span className="text-white">Admin</span>
+                        </Link>
+                    )}
                 </div>
             </div>
 
@@ -56,5 +80,5 @@ export default function Navbar() {
                 />
             )}
         </div>
-    );
+)
 }

@@ -1,47 +1,76 @@
-import Header from "../../components/Home/Header"
-import Footer from "../../components/Footer"
-import Navbar from "../../components/Home/Navbar"
-import CardPlayButton from "../../components/MediaPlayer/CardPlayButton"
-import { Link } from 'react-router-dom'; // Importar Link desde React Router
-export default function Artist(){
+import Header from "../../components/Home/Header";
+import Footer from "../../components/Footer";
+import Navbar from "../../components/Home/Navbar";
+import LibrarySongCardList from "../../components/Home/LibrarySongCardList";
+import { apiGetSong } from "../../api/auth";
+import { Link, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+
+export default function Artist() {
+    const { songId } = useParams();
+    const [songData, setSongData] = useState(null);
+    const [searchTerm] = useState("");
+
+    useEffect(() => {
+        const fetchSongData = async () => {
+            try {
+                const response = await apiGetSong(songId);
+                setSongData(response.data);   
+            } catch (error) {
+                console.error("Error fetching song data:", error);
+            }
+        };
+
+        if (songId) {
+            fetchSongData();
+        }
+    }, [songId]);
 
     return (
-        <div className=" w-full h-full max-w-full-xl mt-2 bg-blackMain">
-                <Header/>
-
-
-        <div className="flex flex-col-2">
-                <Navbar/>
-
-            <div className="w-full h-full">
-                <div className='bg-blackMain mr-2 p-8 w-full h-full text-white mt-10'>
-                <div className="w-full h-full max-w-full-xl mt-2 bg-blackMainmax-w-sm bg-gray-800 rounded-lg shadow-lg overflow-hidden">
-        <div className="p-6">
-            <h1 className="text-2xl font-bold text-white mb-2">Canción</h1>
-            <p className="text-sm text-gray-400 mb-12">
-                <Link to="/Perfil" className="hover:text-white">Artistas o Compositores</Link> • Año de la canción</p>
-            <div className="flex justify-between items-center mb-4">
-                <button className="relative z-20 left-14 -mt-20 ">
-                    <CardPlayButton/>
-                </button>
-            </div>
-            <div className="border-t border-gray-700 pt-2 mb-4">
-                <div className="flex justify-between text-gray-400">
-                    <span>Canción</span>
-                    <span>Duración de la canción</span>
+        <div className="min-h-screen flex flex-col bg-blackMain">
+            <Header />
+            <div className="flex-grow">
+              <Navbar/>
+                <div className="p-8 text-white mt-10">
+                    <div className="w-full max-w-full-xl bg-blackMain rounded-lg shadow-lg overflow-hidden mx-auto">
+                        <div className="p-6">
+                            {songData ? (
+                                <>
+                                    <div className="flex flex-col md:flex-row gap-6">
+                                        <img 
+                                            src={songData.cover} 
+                                            alt={songData.title} 
+                                            className="rounded-lg w-full md:w-[10rem] h-auto object-cover" 
+                                        />
+                                        <div className="flex flex-col justify-between">
+                                            <div>
+                                                <p className="text-sm text-gray-400">Canción</p>
+                                                <h1 className="text-3xl md:text-5xl font-bold text-white mb-2">{songData.title}</h1>
+                                                <p className="text-sm text-gray-400 mb-4 md:mb-12">
+                                                    <Link to="/Perfil" className="hover:text-white">
+                                                        {songData.composers.join(', ')}
+                                                    </Link> 
+                                                    • {new Date(songData.createdAt).getFullYear()}
+                                                </p>
+                                            </div>
+                                            <div>
+                                                <p className="text-xs text-gray-400 mb-2">{new Date(songData.releaseDate).getFullYear()}</p>
+                                                <p className="text-xs text-gray-400">{songData.copyright}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="mt-6 z-10 border-t border-gray-700 pt-2">
+                                        <LibrarySongCardList title='' searchTerm={searchTerm} id={songId} />
+                                    </div>
+                                </>
+                            ) : (
+                                <p className="text-white">Loading...</p>
+                            )}
+                        </div>
+                    </div>
                 </div>
             </div>
-            <p className="text-xs text-gray-400 mb-2">Fecha de publicacion</p>
-            <p className="text-xs text-gray-400">Sus derechos de autor</p>
+            <Footer />
         </div>
-    </div>
-                    <Footer/>
-                </div>
-            </div>
-
-        </div>
-
-        </div>
-
-    )
+    );
 }

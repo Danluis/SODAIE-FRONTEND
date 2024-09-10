@@ -5,7 +5,7 @@ export default function SongCard({ img, title, artists, id }) {
     const navigate = useNavigate();
 
     const handleNavigate = () => {
-        navigate('/Artist');
+        navigate(`/Artist/${id}`);
     };
 
     const handlePlayClick = (e) => {
@@ -37,7 +37,7 @@ export default function SongCard({ img, title, artists, id }) {
                 </div>
             </div>
             <div 
-                className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300 -mt-4"
+                className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300 mt-4"
             >
                 <div onClick={handlePlayClick}>
                     <CardPlayButton id={id} />

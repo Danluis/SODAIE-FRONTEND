@@ -1,8 +1,8 @@
 import Header from "../../components/Home/Header";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Home/Navbar";
-import AuthGoogleRegister from "../../components/auth/AuthGoogleRegister";
-import AuthFacebookRegister from "../../components/auth/AuthFacebookRegister";
+import AuthGoogle from "../../components/auth/AuthGoogle";
+import AuthFacebook from "../../components/auth/AuthFacebook";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../../context/AuthContext";
 import { useEffect } from "react";
@@ -31,9 +31,9 @@ export default function RegisterPageV1() {
                             <div className="flex items-center flex-col">
                                 <span className="text-4xl mb-10">Registrarse</span>
                                 <div className="flex gap-4 mb-4">
-                                      <AuthGoogleRegister/>
+                                      <AuthGoogle/>
                                     
-                                    <AuthFacebookRegister/>
+                                    <AuthFacebook/>
                                 </div>
                                 <div className="flex items-center mb-4 pt-3 w-full">
                                     <hr className="flex-1 border-t border-gray-700 min-h-[1px]" />

@@ -23,15 +23,30 @@ export default function CardPlayButton({ id }) {
   useEffect(() => {
     async function fetchData() {
       const { data } = await apiGetSongs();
-      const song = data.find(song => song.song_id === id);
-      setAudioUrl(song.audio);
-      setSong(song);
-      setAllSongsData(data); // Actualiza allSongsData
-
+  
+      console.log('Data:', data);
+      console.log('ID:', id);
+  
+      const songIdNumber = Number(id); // Convert id to a number
+      const song = data.find(song => {
+        console.log('Comparing:', song.song_id, songIdNumber);
+        return song.song_id === songIdNumber; // Compare with the converted number
+      });
+  
+      console.log('Found song:', song);
+  
+      if (song) {
+        setAudioUrl(song.audio);
+        setSong(song);
+        setAllSongsData(data); // Update allSongsData
+      } else {
+        console.error('No song found with the given ID:', songIdNumber);
+      }
     }
-
+  
     fetchData();
   }, [id]);
+  
 
   useEffect(() => {
     if (audio) {
@@ -45,6 +60,11 @@ export default function CardPlayButton({ id }) {
   }, [audio, playNextSong]);
 
   const handleClick = async () => {
+    if (!audio) {
+      console.error("Audio object is undefined");
+      return;
+    }
+  
     if (isPlayingPlaylist) {
       audio.pause();
       setIsPlaying(false);
@@ -52,20 +72,21 @@ export default function CardPlayButton({ id }) {
       console.log(isPlayingPlaylist);
       return;
     }
-
+  
     if (audioUrl) {
       if (audio.src !== audioUrl) {
         audio.src = audioUrl;
         setIsHiddenPlayer(true);
         await audio.load();
       }
-
-      setCurrentMusic({ playlist: { id }, song: song, songs: [song], allSongsData });
+  
+      setCurrentMusic({ playlist: { id }, song, songs: [song], allSongsData });
       setIsPlaying(true);
       setIsHiddenPlayer(true);
       await audio.play();
     }
   };
+  
 
   return (
     <button onClick={handleClick} className="p-3 bg-cyan-700 absolute right-4 transition-transform transform hover:scale-105 rounded-full">

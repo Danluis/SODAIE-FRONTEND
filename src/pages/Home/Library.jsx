@@ -1,6 +1,8 @@
 import { useState } from "react";
 import Header from "../../components/Home/Header";
 import LibrarySongCardList from "../../components/Home/LibrarySongCardList";
+import LibraryPlaylistCardList from "../../components/Home/LibraryPlaylistCardList";
+import LibrarySongsLiked from "../../components/Home/LibrarySongsLiked";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Home/Navbar";
 
@@ -20,10 +22,10 @@ function SongSearchBar({ onSearch }) {
 
 export default function Library() {
     const [searchTerm, setSearchTerm] = useState("");
-
     // Función para manejar la búsqueda
     const handleSearch = (term) => {
         setSearchTerm(term.toLowerCase());
+        console.log("searchTerm actualizado:", term.toLowerCase());
     };
 
     return (
@@ -40,8 +42,8 @@ export default function Library() {
 
                         {/* Filtrar y mostrar listas de canciones */}
                         <LibrarySongCardList title={"Escuchado recientemente"} searchTerm={searchTerm} />
-                        <LibrarySongCardList title={"Tus listas de reproducción"} searchTerm={searchTerm} />
-                        <LibrarySongCardList title={"Canciones que te han gustado"} searchTerm={searchTerm} />
+                        <LibraryPlaylistCardList title={"Tus listas de reproducción"} searchTerm={searchTerm} />
+                        <LibrarySongsLiked title={"Canciones que te han gustado"} searchTerm={searchTerm} />
                         
                         <Footer />
                     </div>

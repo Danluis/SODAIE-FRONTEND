@@ -2,8 +2,8 @@
 import Header from "../../components/Home/Header";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Home/Navbar";
-import AuthGoogleLogin from "../../components/auth/AuthGoogleLogin";
-import AuthFacebookLogin from "../../components/auth/AuthFacebookLogin";
+import AuthGoogle from "../../components/auth/AuthGoogle";
+import AuthFacebook from "../../components/auth/AuthFacebook";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../../context/AuthContext";
@@ -47,8 +47,8 @@ export default function LoginPageV1() {
                             <div className="flex items-center flex-col">
                                 <span className="text-4xl mb-8">Iniciar Sesion</span>
                                 <div className="flex gap-4 mb-4">
-                                    <AuthGoogleLogin/>
-                                    <AuthFacebookLogin/>
+                                    <AuthGoogle/>
+                                    <AuthFacebook/>
                                 </div>
                                 <div className="flex items-center mb-4 pt-3 w-full">
                                     <hr className="flex-1 border-t border-gray-700 min-h-[1px]" />

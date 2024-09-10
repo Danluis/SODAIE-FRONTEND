@@ -6,12 +6,12 @@ import Footer from "../../components/Footer";
 import NavbarComposer from "../../components/Home/NavbarComposer";
 import FormInput from "../../components/Form/FormInput";
 import ScrollMenu from "../../components/ScrollMenu";
-import Timeline from "../../components/Form/Timeline";
+
 import { RiFolderMusicFill } from "react-icons/ri";
 import { supabase } from "../../supabase/supabaseClient";
 import { apiCreateSong } from "../../api/auth";
 
-export default function FormFirstSong() {
+export default function FormRepertoire() {
     const methods = useForm();
     const { handleSubmit } = methods;
     const navigate = useNavigate();
@@ -26,13 +26,15 @@ export default function FormFirstSong() {
         const file = e.target.files[0];
         setFile(file);
     
+        console.log("File changed:", file);  // Verificar archivo
+    
         if (file && file.type.startsWith("audio/")) {
             try {
                 console.log("Selected audio file:", file);
                 const duration = await getAudioDuration(file);
                 if (duration) {
                     setAudioDuration(duration);
-                    console.log("Duration:", duration);  // Duración del audio en segundos
+                    console.log("Audio Duration:", duration);
                 } else {
                     console.error("Unable to retrieve audio duration.");
                 }
@@ -171,7 +173,7 @@ export default function FormFirstSong() {
                     <section className="bg-blackMain p-6 sm:p-8 lg:p-10 w-full h-full">
                     <div className="mt-12 w-full h-full">
                     <div className="flex flex-col items-center justify-center text-center">
-                            <h1 className="text-3xl font-semibold">Sube tu primera canción</h1>
+                            <h1 className="text-3xl font-semibold">Sube una canción</h1>
                             <RiFolderMusicFill className="w-10 h-10 mt-4"/>
                     </div>
                         <FormProvider {...methods}>
@@ -309,7 +311,6 @@ export default function FormFirstSong() {
                                     </div>
                                 </section>
 
-                                <Timeline paso1={'completed'} paso2={'completed'} paso3={'completed'} />
 
                                 <div className="mt-6 flex justify-center">
                                     <button
