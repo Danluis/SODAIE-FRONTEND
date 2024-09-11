@@ -64,15 +64,16 @@ export default function UserPerfil() {
               <textarea
                 readOnly
                 className="w-1/2 h-32 bg-gray-600 text-white p-2 rounded mt-2"
-                placeholder="Escriba su biografía aquí..."
-              ></textarea>
+              >
+                {user.biografia}
+              </textarea>
             </div>
 
             <div className="border-b border-gray-500 my-4"></div>
 
             <div className="mb-4">
               <span className="text-2xl font-bold mb-4 text-white">
-                Artistas con los que trabajó:
+                Artistas que sigo:
               </span>
               <div className="flex space-x-2">
                 <div className="bg-gray-500 h-12 w-12"></div>
@@ -86,10 +87,10 @@ export default function UserPerfil() {
 
             <div>
               <span className="text-2xl font-bold mb-4 text-white">
-                Contacto:
+                Contacto y Redes Sociales:
               </span>
               <div className="text-2xl font-bold mb-4 text-white mt-6">
-                Numero Telefonico: {user.phone}
+                Telefono: {user.phone}
               </div>
             </div>
           </div>

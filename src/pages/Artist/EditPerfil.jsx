@@ -120,44 +120,51 @@ export default function EditPerfil() {
           <div className="bg-blackMain mr-2 p-8 object-cover w-full h-full">
             <div className="flex gap-16 flex-col-2 justify-center">
               <FormProvider {...methods}>
-                <form onSubmit={onSubmit} className="mt-10">
-                  <div className="mb-6 text-3xl font-semibold">
-                    Edicion del Perfil
+                <form onSubmit={onSubmit} className="mt-10 w-full max-w-2xl">
+                  <div className="ml-56 mb-6 text-3xl font-semibold">
+                    Edición del Perfil
                   </div>
-                  <FormInput name="nickname" text="Apodo" placeholder="Apodo" />
+                  <FormInput
+                    name="nickname"
+                    text="Apodo"
+                    placeholder="Apodo"
+                    className="w-full"
+                  />
                   <ScrollMenu
-                    text={"Instrumento"}
-                    placeholder={"Seleccione un Instrumento"}
+                    text="Instrumento"
+                    placeholder="Seleccione un Instrumento"
                     options={instruments}
                     name="instruments"
+                    className="w-full"
                   />
                   <FormInput
                     name="phone"
                     text="Teléfono"
                     placeholder="Número de teléfono"
+                    className="w-full"
                   />
                   <div className="mt-4">
                     <label htmlFor="bio" className="block text-sm font-medium">
                       Biografía
                     </label>
                     <textarea
-                      id="bio"
-                      name="bio"
+                      name="biografia"
                       rows="4"
                       className="w-full p-2 bg-gray-600 text-white rounded"
                       placeholder="Escriba su biografía..."
+                      {...methods.register("biografia")} // Registrar el campo con react-hook-form
                     />
                   </div>
                   <div className="flex justify-between gap-10 mt-6">
                     <button
                       type="submit"
-                      className="text-center w-1/2 bg-cyan-700 text-white px-12 py-3 rounded-xl font-semibold transition-transform transform hover:scale-105"
+                      className="text-center w-full md:w-1/2 bg-cyan-700 text-white px-12 py-3 rounded-xl font-semibold transition-transform transform hover:scale-105"
                     >
                       Siguiente
                     </button>
                     <Link
                       to={`/ComposerPerfil/${userId}`} // Redirigir al perfil dinámicamente
-                      className="text-center w-1/4 bg-semiBlack text-semiWhite px-4 py-3 rounded-xl font-semibold hover:bg-slate-900 transition-transform transform hover:scale-105"
+                      className="text-center w-full md:w-1/4 bg-semiBlack text-semiWhite px-4 py-3 rounded-xl font-semibold hover:bg-slate-900 transition-transform transform hover:scale-105"
                     >
                       Cancelar
                     </Link>
