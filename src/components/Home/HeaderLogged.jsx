@@ -51,9 +51,9 @@ export default function HeaderLogged() {
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
   const handleNavigate = () => {
@@ -71,7 +71,17 @@ export default function HeaderLogged() {
   };
 
   const handleEditProfile = () => {
-    navigate(`/EditPerfil/${credentials_id}`); // Redirigir a la página de edición del perfil dinámicamente
+    if (role) {
+      if (role === "composer") {
+        navigate(`/EditPerfil/${credentials_id}`);
+      } else if (role === "user") {
+        navigate(`/EditPerfilUser/${credentials_id}`); // Cambiado para redirigir correctamente
+      } else {
+        console.error("Rol no reconocido");
+      }
+    } else {
+      console.error("No role available");
+    }
   };
 
   return (
@@ -87,10 +97,10 @@ export default function HeaderLogged() {
         </Link>
 
         <div className="flex items-center">
-          <input 
-            type="text" 
-            className="rounded-l-3xl py-2 px-6 w-[500px] bg-blackMain border-solid border-2 border-slate-800 text-white outline-none" 
-            placeholder="Buscar" 
+          <input
+            type="text"
+            className="rounded-l-3xl py-2 px-6 w-[500px] bg-blackMain border-solid border-2 border-slate-800 text-white outline-none"
+            placeholder="Buscar"
           />
           <div className="rounded-r-3xl py-3 px-6 bg-slate-800 cursor-pointer">
             <CiSearch className="text-white text-xl w-5 h-5" />
@@ -100,7 +110,7 @@ export default function HeaderLogged() {
         <div className="flex items-center gap-4 relative">
           <IoNotifications className="w-7 h-7 text-white" />
           <div className="relative" ref={menuRef}>
-            <button 
+            <button
               className="flex items-center justify-center w-10 h-10 p-4 text-center bg-semiBlack rounded-full cursor-pointer"
               onClick={toggleMenu}
             >

@@ -15,6 +15,7 @@ import ScrollToTop from "../components/Utilities/ScrollToTop";
 import ArtistPage from "../pages/Artist/ArtistPage";
 import ComposerPerfil from "../pages/Artist/ComposerPerfil";
 import EditPerfil from "../pages/Artist/EditPerfil";
+import EditPerfilUser from "../pages/Artist/EditPerfilUser";
 import UserPerfil from "../pages/Artist/UserPerfil";
 import FormTermsCon from "../pages/Form/FormTermsCon";
 import FormPasswordForgotten from "../pages/Form/FormPasswordForgotten";
@@ -48,6 +49,7 @@ const RoutesApp = () => {
             <Route path="/FormPersonalInfo" element={<FormPersonalInfo />} />
             <Route path="/FormFirstSong" element={<FormFirstSong />} />
             <Route path="/FormTermsCon" element={<FormTermsCon />} />
+            <Route path="/EditPerfil/:userId" element={<EditPerfil />} />
           </Route>
 
           <Route element={<ProtectedRouteUser />}>
@@ -60,6 +62,10 @@ const RoutesApp = () => {
               element={<FormPersonalInfoUser />}
             />
             <Route path="/FormTermsCon" element={<FormTermsCon />} />
+            <Route
+              path="/EditPerfilUser/:userId"
+              element={<EditPerfilUser />}
+            />
           </Route>
         </Route>
 
@@ -76,7 +82,6 @@ const RoutesApp = () => {
         <Route path="/repertoire" element={<FormRepertoire />} />
         <Route path="/Artist/:songId" element={<Artist />} />
         <Route path="/artists" element={<ArtistPage />} />
-        <Route path="/EditPerfil/:userId" element={<EditPerfil />} />
         <Route path="/ComposerPerfil/:userId" element={<ComposerPerfil />} />
         <Route path="/UserPerfil/:userId" element={<UserPerfil />} />
       </Route>

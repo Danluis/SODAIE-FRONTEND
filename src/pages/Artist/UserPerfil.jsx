@@ -54,7 +54,6 @@ export default function UserPerfil() {
                 <sapn className="text-2xl font-bold text-white mr-4">
                   {user.nickname}
                 </sapn>
-                <FollowButton />
               </div>
             </div>
 
