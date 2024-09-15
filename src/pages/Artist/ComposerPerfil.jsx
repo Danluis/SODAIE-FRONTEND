@@ -45,13 +45,32 @@ export default function ComposerPerfil() {
         <div className="flex-1 p-8">
           {/* Banner Section */}
           <div className="w-full h-64 bg-gray-900 flex items-center justify-center mb-8">
-            <span className="text-white text-2xl">Banner Placeholder</span>
+            {user.bannerImage ? (
+              <img
+                src={user.bannerImage}
+                alt="Banner"
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <div className="text-white">No banner image available</div>
+            )}
           </div>
 
           <div className="bg-gray-700 p-6 rounded mt-8">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center">
-                <div className="bg-gray-500 rounded-full h-12 w-12 mr-4"></div>
+                <div className="bg-gray-500 rounded-full h-24 w-24 mr-4">
+                  {user.profileImage ? (
+                    <img
+                      src={user.profileImage}
+                      alt="Profile"
+                      className="h-full w-full object-cover rounded-full"
+                    />
+                  ) : (
+                    <div className="text-white">No profile image available</div>
+                  )}
+                </div>
+
                 <span className="text-2xl font-bold text-white mr-4">
                   {user.nickname}
                 </span>
@@ -99,7 +118,7 @@ export default function ComposerPerfil() {
                 Contacto y Redes Sociales:
               </span>
               <div className="text-2xl font-bold mb-4 text-white mt-6">
-                Telefono: {user.phone}
+                Teléfono: {user.phone}
               </div>
             </div>
           </div>

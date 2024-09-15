@@ -11,11 +11,12 @@ export default function HeaderLogged() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [role, setRole] = useState(null);
   const [loading, setLoading] = useState(true); // Añadido para manejar el estado de carga
+  const [userImage, setUserImage] = useState(null); // Estado para la imagen de perfil
   const menuRef = useRef(null); // Referencia para el menú
 
   // Parse user data from localStorage
   const user = JSON.parse(localStorage.getItem("user"));
-  const { credentials_id } = user || {};
+  const { credentials_id, profileImage } = user || {};
 
   useEffect(() => {
     if (credentials_id) {
@@ -40,6 +41,12 @@ export default function HeaderLogged() {
     }
   }, [credentials_id]);
 
+  useEffect(() => {
+    if (profileImage) {
+      setUserImage(profileImage);
+    }
+  }, [profileImage]);
+
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
@@ -56,6 +63,7 @@ export default function HeaderLogged() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
   const handleNavigate = () => {
     if (role) {
       if (role === "composer") {
@@ -111,10 +119,18 @@ export default function HeaderLogged() {
           <IoNotifications className="w-7 h-7 text-white" />
           <div className="relative" ref={menuRef}>
             <button
-              className="flex items-center justify-center w-10 h-10 p-4 text-center bg-semiBlack rounded-full cursor-pointer"
+              className="flex items-center justify-center w-12 h-12 p-2 text-center bg-semiBlack rounded-full cursor-pointer"
               onClick={toggleMenu}
             >
-              <span className="text-white">D</span>
+              {userImage ? (
+                <img
+                  src={userImage}
+                  alt="Profile"
+                  className="w-full h-full object-cover rounded-full"
+                />
+              ) : (
+                <span className="text-white text-xl">D</span> // Alternativa si no hay imagen
+              )}
             </button>
             {menuOpen && (
               <div className="absolute right-0 mt-2 w-48 bg-slate-800 rounded-md shadow-lg z-20">
