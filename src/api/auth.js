@@ -35,3 +35,6 @@ export const apiRemoveSongFromLibrary = (removeSongFromLibrary) => axios.delete(
     data: removeSongFromLibrary
 });
 
+//SONG PLAYLIST
+export const apiGetSongPlaylistSongs = playlist_id => axios.get(`/song_playlists_songs/${playlist_id}`)
+

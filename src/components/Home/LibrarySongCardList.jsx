@@ -169,8 +169,8 @@ export default function LibrarySongCardList({ title, searchTerm, id = '' }) {
     console.log('Filtered songs based on searchTerm:', filteredSongs);
 
     return (
-        <div className="w-full">
-            <h2 className="text-2xl font-bold mb-6 text-white">{title}</h2>
+        <div className="w-full h-full min-h-64">
+            <h2 className="text-2xl font-bold text-white mb-6">{title}</h2>
             <table className="w-full text-left text-semiWhite mb-6">
                 <thead className="bg-secondaryBlack">
                     <tr>
@@ -213,7 +213,7 @@ export default function LibrarySongCardList({ title, searchTerm, id = '' }) {
                                 {song.title}
                             </td>
                             <td className="px-4 py-2">{song.composers.join(', ')}</td>
-                            <td className="px-4 py-2">{song.duration}</td>
+                            <td className="px-4 py-2 pl-8">{song.duration}</td>
                             <td className="px-8 py-2 space-x-2">
                                 <div className="relative inline-block" ref={menuRef}>
                                     <button 
@@ -226,7 +226,7 @@ export default function LibrarySongCardList({ title, searchTerm, id = '' }) {
                                         <div className="absolute right-0 mt-2 z-20 bg-semiBlack text-white rounded-md shadow-lg w-48">
                                             <ul className='flex flex-col items-center'>
                                                 <li 
-                                                    className='w-full hover:bg-primaryColor cursor-pointer p-2 text-center' 
+                                                    className='w-full hover:bg-primaryColor cursor-pointer p-2 text-center hover:bg-slate-900' 
                                                     onClick={(event) => handleCreatePlaylist(song, event)}
                                                 >
                                                     Crear playlist
@@ -234,7 +234,7 @@ export default function LibrarySongCardList({ title, searchTerm, id = '' }) {
                                                 {playlists.map(playlist => (
                                                     <li 
                                                         key={playlist.playlist_id} 
-                                                        className='w-full hover:bg-primaryColor cursor-pointer p-2 text-center'
+                                                        className='w-full hover:bg-primaryColor cursor-pointer p-2 text-center hover:bg-slate-900'
                                                         onClick={() => handleAddSongToPlaylist(song, playlist.playlist_id)}
                                                     >
                                                         Añadir a {playlist.name}

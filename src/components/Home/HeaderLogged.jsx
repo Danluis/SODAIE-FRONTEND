@@ -3,14 +3,16 @@ import { Link, useNavigate } from "react-router-dom";
 import { IoNotifications } from "react-icons/io5";
 import { CiSearch } from "react-icons/ci";
 import { useAuth } from "../../context/AuthContext";
-import { apiGetCredential } from "../../api/auth";
+import { apiGetCredential, apiGetUser } from "../../api/auth";
 
 export default function HeaderLogged() {
   const { logout } = useAuth();
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
   const [role, setRole] = useState(null);
-  const [loading, setLoading] = useState(true); // Añadido para manejar el estado de carga
+  const [userImageUrl, setUserImageUrl] = useState(null); // Estado para la imagen del usuario
+  const [userName, setUserName] = useState(null); // Estado para el nombre del usuario proveniente de la API
+  const [loading, setLoading] = useState(true); // Estado para manejar la carga
   const menuRef = useRef(null); // Referencia para el menú
 
   // Parse user data from localStorage
@@ -32,11 +34,22 @@ export default function HeaderLogged() {
           console.error("Error al obtener el rol del usuario:", error);
         })
         .finally(() => {
-          setLoading(false); // Establece loading en false una vez que la solicitud ha terminado
+          setLoading(false); // Finalizar carga
+        });
+
+      // Obtener la imagen y nombre del usuario desde la API
+      apiGetUser(credentials_id)
+        .then((response) => {
+          const userData = response.data;
+          setUserImageUrl(userData.userImageUrl); // Establecer imagen
+          setUserName(userData.name); // Establecer nombre desde la API
+        })
+        .catch((error) => {
+          console.error("Error al obtener los datos del usuario:", error);
         });
     } else {
       console.error("No credentials_id available");
-      setLoading(false); // Asegúrate de actualizar el estado de carga si no hay credentials_id
+      setLoading(false); // Finalizar carga si no hay credentials_id
     }
   }, [credentials_id]);
 
@@ -56,11 +69,12 @@ export default function HeaderLogged() {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
   const handleNavigate = () => {
     if (role) {
       if (role === "composer") {
         navigate(`/ComposerPerfil/${credentials_id}`);
-      } else if (role === "user") {
+      } else if (role === "user" || role === "admin") {
         navigate(`/UserPerfil/${credentials_id}`);
       } else {
         console.error("Rol no reconocido");
@@ -101,10 +115,20 @@ export default function HeaderLogged() {
           <IoNotifications className="w-7 h-7 text-white" />
           <div className="relative" ref={menuRef}>
             <button 
-              className="flex items-center justify-center w-10 h-10 p-4 text-center bg-semiBlack rounded-full cursor-pointer"
+              className="flex items-center justify-center w-10 h-10 text-center bg-semiBlack rounded-full cursor-pointer"
               onClick={toggleMenu}
             >
-              <span className="text-white">D</span>
+              {userImageUrl ? (
+                <img
+                  className="w-full h-full rounded-full object-cover"
+                  src={userImageUrl}
+                  alt="User profile"
+                />
+              ) : (
+                <span className="text-white">
+                  {userName ? userName.charAt(0) : 'U'}
+                </span>
+              )}
             </button>
             {menuOpen && (
               <div className="absolute right-0 mt-2 w-48 bg-slate-800 rounded-md shadow-lg z-20">
@@ -115,7 +139,7 @@ export default function HeaderLogged() {
                   Perfil
                 </div>
                 <div
-                  onClick={handleEditProfile} // Añadido botón para editar perfil
+                  onClick={handleEditProfile}
                   className="w-full block px-4 py-2 text-white text-left hover:bg-gray-900"
                 >
                   Editar Perfil

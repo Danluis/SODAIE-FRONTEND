@@ -127,7 +127,7 @@ export default function LibrarySongsLiked({ title, searchTerm }) {
                                 {song.title}
                             </td>
                             <td className="px-4 py-2">{song.composers.join(', ')}</td>
-                            <td className="px-4 py-2">{song.duration}</td>
+                            <td className="px-4 py-2 pl-8">{song.duration}</td>
                             <td className="px-8 py-2 space-x-2">
                                 <div className="relative inline-block" ref={menuRef}>
                                     <button 

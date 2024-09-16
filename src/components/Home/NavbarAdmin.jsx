@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { LuMenu } from "react-icons/lu";
 import { IoHome } from "react-icons/io5";
 import { MdOutlineExplore } from "react-icons/md";
@@ -7,8 +7,18 @@ import { IoClose } from "react-icons/io5"; // Importar el ícono de cerrar
 import { FaUserShield } from "react-icons/fa"; // Icono para Admin
 import { Link } from "react-router-dom";
 
-export default function Navbar() {
+export default function NavbarAdmin() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [userRole, setUserRole] = useState(null);
+
+  useEffect(() => {
+    // Obtener el rol del usuario desde el almacenamiento local o desde algún contexto
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      const user = JSON.parse(storedUser);
+      setUserRole(user.roles); // Suponiendo que 'roles' contiene el rol del usuario
+    }
+  }, []);
 
   return (
     <div className="relative">
@@ -37,13 +47,23 @@ export default function Navbar() {
         </div>
 
         <div className="flex flex-col gap-4 mt-4">
-          <Link
-            to={"/"}
-            className="hover:bg-slate-600 flex flex-col items-center p-2 rounded-lg cursor-pointer"
-          >
-            <IoHome className=" text-white w-6 h-6" />
-            <span className=" text-white">Inicio</span>
-          </Link>
+          {userRole === "admin" ? (
+            <Link
+              to={"/AdminPage"}
+              className="hover:bg-slate-600 flex flex-col items-center p-2 rounded-lg cursor-pointer"
+            >
+              <IoHome className="text-white w-6 h-6" />
+              <span className="text-white">Inicio</span>
+            </Link>
+          ) : (
+            <Link
+              to={"/"}
+              className="hover:bg-slate-600 flex flex-col items-center p-2 rounded-lg cursor-pointer"
+            >
+              <IoHome className="text-white w-6 h-6" />
+              <span className="text-white">Inicio</span>
+            </Link>
+          )}
           <Link
             to={"/search"}
             className="hover:bg-slate-600 flex flex-col items-center p-2 rounded-lg cursor-pointer"

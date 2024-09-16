@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
-import { apiGetLibrary } from "../../api/auth"; // Cambiado a la función de API que obtiene la librería
+import { useNavigate } from 'react-router-dom'; // Importa useNavigate para la navegación
+import { apiGetLibrary } from "../../api/auth";
 import CardPlayButton from "../../components/MediaPlayer/CardPlayButton";
 
 export default function LibraryPlaylistCardList({ title, searchTerm }) {
@@ -9,8 +10,10 @@ export default function LibraryPlaylistCardList({ title, searchTerm }) {
     const [hoveredPlaylistId, setHoveredPlaylistId] = useState(null);
     const [menuVisible, setMenuVisible] = useState(null);
     const menuRef = useRef(null);
+    const navigate = useNavigate(); // Crea el hook para navegación
     const user = JSON.parse(localStorage.getItem('user'));
-    const userId = user.credentials_id
+    const userId = user.credentials_id;
+
     useEffect(() => {
         const fetchPlaylists = async () => {
             try {
@@ -35,8 +38,12 @@ export default function LibraryPlaylistCardList({ title, searchTerm }) {
     }, [userId]);
 
     const toggleMenu = (playlistId, event) => {
-        event.stopPropagation();
+        event.stopPropagation(); // Evita que la redirección ocurra al hacer clic en el botón del menú
         setMenuVisible(playlistId === menuVisible ? null : playlistId);
+    };
+
+    const handleRowClick = (playlistId) => {
+        navigate(`/PlaylistSongsCard/${playlistId}`); // Redirige a la ruta especificada
     };
 
     if (loading) {
@@ -60,7 +67,7 @@ export default function LibraryPlaylistCardList({ title, searchTerm }) {
                         <th className="pl-8 pr-4 py-2">#</th>
                         <th className="px-4 py-2">Nombre</th>
                         <th className="px-4 py-2">Descripción</th>
-                        <th className="px-4 py-2">Duracion</th>
+                        <th className="px-4 py-2">Duración</th>
                         <th className="px-4 py-2">Acciones</th>
                     </tr>
                 </thead>
@@ -68,7 +75,8 @@ export default function LibraryPlaylistCardList({ title, searchTerm }) {
                     {filteredPlaylists.map((playlist, index) => (
                         <tr 
                             key={playlist.playlist_id} 
-                            className="border-t border-semiBlack hover:bg-secondaryBlack"
+                            className="border-t border-semiBlack hover:bg-secondaryBlack cursor-pointer"
+                            onClick={() => handleRowClick(playlist.playlist_id)} // Maneja el clic en la fila para redirigir
                             onMouseEnter={() => setHoveredPlaylistId(playlist.playlist_id)} 
                             onMouseLeave={() => setHoveredPlaylistId(null)}
                         >

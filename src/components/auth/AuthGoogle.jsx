@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import GoogleLogin from "react-google-login";
 import { gapi } from "gapi-script";
 import { useAuthStore } from '../../store/authStore';
-import { googleLoginRequest, registerRequest } from "../../api/auth";
+import { googleLoginRequest, registerRequest, updateUserRequest } from "../../api/auth";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
@@ -55,7 +55,7 @@ export default function AuthGoogle() {
             if (loginResponse.data.roles === 'admin') {
                 navigate('/AdminPage');
             } else if (loginResponse.data.roles === 'composer') {
-                navigate('/Composer');
+                navigate('/');
             } else {
                 navigate('/');
             }
@@ -76,6 +76,13 @@ export default function AuthGoogle() {
                     setUser(registerResponse.data);
                     setIsAuthenticated(true);
                     setIsRegister(true);
+
+                    // Actualizar la imagen de usuario después de registrarlo
+                    const updateResponse = await updateUserRequest(registerResponse.data.credentials_id, {
+                        userImageUrl: user.imageUrl  // Actualiza la imagen con la URL de la imagen de Google
+                    });
+
+                    console.log('User image updated:', updateResponse.data);
     
                     // Redirigir a la página de registro /ChooseRegister
                     navigate('/ChooseRegister');
@@ -94,6 +101,7 @@ export default function AuthGoogle() {
 
     useEffect(() => {
         if (googleUser.email && googleUser.googleId) {
+            console.log("Google User:", googleUser);  // Aquí el console.log que pediste
             sendUserDataToBackend(googleUser);
         }
     }, [googleUser]);

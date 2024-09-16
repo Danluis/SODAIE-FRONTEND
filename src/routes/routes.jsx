@@ -23,6 +23,7 @@ import FormOTPInput from "../pages/Form/FormOTPInput";
 import FormRepertoire from "../pages/Form/FormRepertoire";
 import FormGeneralInfoUser from "../pages/Form/FormGeneralInfoUser";
 import FormPersonalInfoUser from "../pages/Form/FormPersonalInfoUser";
+import PlaylistSongsCard from "../components/Home/PlaylistSongsCard";
 import { ProtectedRoute } from "../components/Utilities/ProtectedRoute";
 import { ProtectedRouteUser } from "../components/Utilities/ProtectedRouteUser";
 import { ProtectedRouteAdmin } from "../components/Utilities/ProtectedRouteAdmin";
@@ -79,6 +80,7 @@ const RoutesApp = () => {
         <Route path="/EditPerfil/:userId" element={<EditPerfil />} />
         <Route path="/ComposerPerfil/:userId" element={<ComposerPerfil />} />
         <Route path="/UserPerfil/:userId" element={<UserPerfil />} />
+        <Route path="/PlaylistSongsCard/:playlistId" element={<PlaylistSongsCard />} />
       </Route>
     </Routes>
   );

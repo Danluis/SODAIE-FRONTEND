@@ -47,7 +47,7 @@ export default function Artist() {
                                                 <p className="text-sm text-gray-400">Canción</p>
                                                 <h1 className="text-3xl md:text-5xl font-bold text-white mb-2">{songData.title}</h1>
                                                 <p className="text-sm text-gray-400 mb-4 md:mb-12">
-                                                    <Link to="/Perfil" className="hover:text-white">
+                                                    <Link to="/Perfil" className="hover:text-white mr-1">
                                                         {songData.composers.join(', ')}
                                                     </Link> 
                                                     • {new Date(songData.createdAt).getFullYear()}

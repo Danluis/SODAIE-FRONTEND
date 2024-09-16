@@ -47,7 +47,7 @@ export default function AuthFacebook() {
                 if (loginResponse.data.roles === 'admin') {
                     navigate('/AdminPage');
                 } else if (loginResponse.data.roles === 'composer') {
-                    navigate('/Composer');
+                    navigate('/');
                 } else {
                     navigate('/');
                 }
@@ -85,7 +85,9 @@ export default function AuthFacebook() {
 
     useEffect(() => {
         if (facebookUser.email && facebookUser.userID) {
+            console.log('facebook user: ', facebookUser);
             sendUserDataToBackend(facebookUser);
+            
         }
     }, [facebookUser]);
 
