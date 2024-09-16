@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import SongCard from "./SongCardV1";
-import ShowMore from "./ShowMore";
 import { apiGetSongs } from "../../api/auth";
 
 export default function SongCardList({ title, userId }) {
@@ -43,7 +42,7 @@ export default function SongCardList({ title, userId }) {
           {title}
         </span>
       </div>
-      <div className="flex gap-6 md:grid-cols-3 lg:grid-cols-4 rounded-xl py-2">
+      <div className="flex w-full gap-6 md:grid-cols-3 lg:grid-cols-4 overflow-x-auto py-2 scrollbar-hidden">
         {songs.map((song) => (
           <SongCard
             key={song.song_id}
@@ -53,9 +52,6 @@ export default function SongCardList({ title, userId }) {
             id={song.song_id}
           />
         ))}
-        <div className="relative top-10 right-8">
-          <ShowMore />
-        </div>
       </div>
     </div>
   );

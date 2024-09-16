@@ -21,10 +21,10 @@ export default function SongCard({ img, title, artists, id }) {
     return (
         <div 
             onClick={handleNavigate} 
-            className="w-[14rem] relative flex flex-col mb-16 h-min-height py-2 bg-transparent cursor-pointer p-3 rounded-lg hover:bg-gray-800 hover:shadow-lg"
+            className="min-w-max max-w-[14rem] w-[100px] relative flex flex-col mb-16 h-min-height py-2 bg-transparent cursor-pointer overflow-x-auto p-3 rounded-lg hover:bg-gray-800 hover:shadow-lg"
         >
             <img 
-                className="w-full h-[10rem] object-cover rounded-lg" 
+                className="w-full max-w-[10rem] h-[10rem] object-cover rounded-lg" 
                 src={img} 
                 alt={title} 
             />

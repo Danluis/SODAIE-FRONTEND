@@ -155,37 +155,37 @@ export default function LibrarySongCardList({ title, searchTerm, id = '' }) {
     };
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <div className="text-white">Loading...</div>;
     }
 
     if (error) {
-        return <div>Error: {error.message}</div>;
+        return <div className="text-white">Error: {error.message}</div>;
     }
 
     const filteredSongs = songs.filter((song) =>
-        song.title.toLowerCase().includes(searchTerm || '')
+        song.title.toLowerCase().includes(searchTerm.toLowerCase() || '')
     );
 
     console.log('Filtered songs based on searchTerm:', filteredSongs);
 
     return (
-        <div className="w-full h-full min-h-64">
+        <div className="w-full h-full min-h-64 px-4 py-6">
             <h2 className="text-2xl font-bold text-white mb-6">{title}</h2>
-            <table className="w-full text-left text-semiWhite mb-6">
+            <table className="w-full text-left text-semiWhite mb-6 border-collapse">
                 <thead className="bg-secondaryBlack">
                     <tr>
                         <th className="pl-8 pr-4 py-2">#</th>
                         <th className="px-4 py-2">Titulo</th>
                         <th className="px-4 py-2">Creador</th>
-                        <th className="px-4 py-2">Duracion</th>
-                        <th className="px-4 py-2">Acciones</th>
+                        <th className="px-4 py-2">Duración</th>
+                        <th className="px-8 py-2">Acciones</th>
                     </tr>
                 </thead>
                 <tbody className="bg-blackMain">
                     {filteredSongs.map((song, index) => (
                         <tr 
                             key={song.song_id} 
-                            className="border-t border-semiBlack hover:bg-secondaryBlack"
+                            className="border-t border-semiBlack hover:bg-secondaryBlack transition-colors duration-200"
                             onMouseEnter={() => setHoveredSongId(song.song_id)} 
                             onMouseLeave={() => setHoveredSongId(null)}
                         >
@@ -203,10 +203,10 @@ export default function LibrarySongCardList({ title, searchTerm, id = '' }) {
                                 </div>
                             </td>
                             <td className="px-4 py-2 flex items-center gap-2 text-white font-semibold">
-                                <div className="relative w-[3rem] h-[3rem]">
+                                <div className="relative w-[3rem] h-[3rem] flex-shrink-0">
                                     <img 
                                         src={song.cover} 
-                                        alt={song.title} 
+                                        alt={`Cover of ${song.title}`} 
                                         className="w-full h-full rounded-md object-cover" 
                                     />
                                 </div>
@@ -218,6 +218,7 @@ export default function LibrarySongCardList({ title, searchTerm, id = '' }) {
                                 <div className="relative inline-block" ref={menuRef}>
                                     <button 
                                         className="text-semiWhite hover:text-white text-2xl"
+                                        aria-label={`More options for ${song.title}`}
                                         onClick={(event) => toggleMenu(song.song_id, event)}
                                     >
                                         +
@@ -246,6 +247,7 @@ export default function LibrarySongCardList({ title, searchTerm, id = '' }) {
                                 </div>
                                 <button 
                                     className={`text-2xl ${likedSongs.includes(song.song_id) ? 'text-red-500' : 'text-gray-500'}`} 
+                                    aria-label={`${likedSongs.includes(song.song_id) ? 'Unlike' : 'Like'} ${song.title}`}
                                     onClick={() => handleToggleLikedSong(song)}
                                 >
                                     ♥
