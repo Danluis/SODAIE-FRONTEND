@@ -27,28 +27,24 @@ export default function HomePageV1() {
 
             {/* Artist List */}
             <section aria-label="Lista de compositores">
-              <h2 className="text-xl font-semibold mb-4">Compositores</h2>
+
               <ArtistList title="Compositores" />
             </section>
 
             {/* SongCardLists */}
             <section aria-label="Canciones escuchadas recientemente">
-              <h2 className="text-xl font-semibold mb-4">Escuchado recientemente</h2>
               <SongCardList title="Escuchado recientemente" />
             </section>
 
             <section aria-label="Canciones subidas recientemente">
-              <h2 className="text-xl font-semibold mb-4">Subidas recientemente</h2>
               <SongCardList title="Subidas recientemente" />
             </section>
 
             <section aria-label="Las canciones más votadas">
-              <h2 className="text-xl font-semibold mb-4">Las más votadas</h2>
               <SongCardList title="Las más votadas" />
             </section>
 
             <section aria-label="Música de temporada">
-              <h2 className="text-xl font-semibold mb-4">Música de Temporada</h2>
               <SongCardList title="Música de Temporada" />
             </section>
 
