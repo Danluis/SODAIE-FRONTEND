@@ -4,6 +4,7 @@ import Footer from "../../components/Footer";
 import Navbar from "../../components/Home/Navbar";
 import FormInput from "../../components/Form/FormInput";
 import ScrollMenu from "../../components/ScrollMenu";
+import FormInputSelect from "../../components/Form/FormInputSelect";
 import { updateUserRequest } from "../../api/auth";
 import { useEffect, useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
@@ -133,6 +134,14 @@ export default function EditPerfil() {
                     text="Teléfono"
                     placeholder="Número de teléfono"
                     className="w-full"
+                  />
+                  <FormInputSelect
+                    labelText="Selecciona una Red Social"
+                    placeholderText="Red Social"
+                    textPlaceholder="https://..." // Placeholder del campo de texto
+                    inputLabelText="Ingresa la Red Social" // Aquí puedes cambiar el texto del label
+                    name="opcion"
+                    options={["Facebook", "Instagram", "Youtube", "X"]}
                   />
                   <div className="mt-4">
                     <label htmlFor="bio" className="block text-sm font-medium">
