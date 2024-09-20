@@ -1,11 +1,19 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { FaTwitter, FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa";
 import Header from "../../components/Home/Header";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Home/Navbar";
 import FollowButton from "../../components/Utilities/FollowButton";
 import SongCardList from "../../components/Home/SongCardListV1"; // Importar el componente SongCardList
 import { apiGetUser } from "../../api/auth";
+
+const socialIcons = {
+  twitter: FaTwitter,
+  facebook: FaFacebook,
+  instagram: FaInstagram,
+  youtube: FaYoutube,
+};
 
 export default function ComposerPerfil() {
   const { userId } = useParams(); // Obtener el userId de los parámetros de la URL
@@ -34,6 +42,24 @@ export default function ComposerPerfil() {
   if (!user) {
     return <div className="text-white">Usuario no encontrado</div>;
   }
+
+  const SocialNetworkIcons = () => {
+    const SocialIcon = socialIcons[user.social_network_selected];
+
+    return (
+      <div className="text-white mt-2">
+        {SocialIcon && (
+          <a
+            href={user.social_network_link}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <SocialIcon className="text-white w-10 h-10 p-2 rounded-full bg-blackLogo hover:bg-slate-700" />
+          </a>
+        )}
+      </div>
+    );
+  };
 
   return (
     <div className="w-full h-full max-w-full-xl mt-2 bg-blackMain">
@@ -120,6 +146,7 @@ export default function ComposerPerfil() {
               <div className="text-2xl font-bold mb-4 text-white mt-6">
                 Teléfono: {user.phone}
               </div>
+              <SocialNetworkIcons /> {/* Aquí se renderizan los íconos */}
             </div>
           </div>
 
