@@ -4,12 +4,11 @@ import Footer from "../../components/Footer";
 import Navbar from "../../components/Home/Navbar";
 import FormInput from "../../components/Form/FormInput";
 import ScrollMenu from "../../components/ScrollMenu";
-import FormInputSelect from "../../components/Form/FormInputSelect";
 import { updateUserRequest } from "../../api/auth";
 import { useEffect, useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { useNavigate, Link } from "react-router-dom";
-import { supabase } from "../../supabase/supabaseClient"; // Import supabase
+import { supabase } from "../../supabase/supabaseClient";
 
 export default function EditPerfil() {
   const { userId } = useParams();
@@ -52,12 +51,10 @@ export default function EditPerfil() {
       let bannerURL = user.bannerImage;
       let profileURL = user.profileImage;
 
-      // Subir banner si hay uno nuevo
       if (bannerImage) {
         bannerURL = await uploadFile(bannerImage, "images");
       }
 
-      // Subir foto de perfil si hay una nueva
       if (profileImage) {
         profileURL = await uploadFile(profileImage, "images");
       }
@@ -135,14 +132,24 @@ export default function EditPerfil() {
                     placeholder="Número de teléfono"
                     className="w-full"
                   />
-                  <FormInputSelect
-                    labelText="Selecciona una Red Social"
-                    placeholderText="Red Social"
-                    textPlaceholder="https://..." // Placeholder del campo de texto
-                    inputLabelText="Ingresa la Red Social" // Aquí puedes cambiar el texto del label
-                    name="opcion"
-                    options={["Facebook", "Instagram", "Youtube", "X"]}
-                  />
+
+                  {/* Sección para inputs de redes sociales */}
+                  <div className="mt-4">
+                    <ScrollMenu
+                      text="Red social"
+                      placeholder="Seleccione una red social"
+                      options={["facebook", "youtube", "twitter", "instagram"]} // Agregar más redes sociales aquí
+                      name="social_network_selected"
+                      className="w-1/2"
+                    />
+                    <FormInput
+                      name="social_network_link"
+                      text="Link"
+                      placeholder="link"
+                      className="w-1/2"
+                    />
+                  </div>
+
                   <div className="mt-4">
                     <label htmlFor="bio" className="block text-sm font-medium">
                       Biografía
