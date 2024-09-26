@@ -4,24 +4,47 @@ import Footer from "../../components/Footer";
 import Navbar from "../../components/Home/Navbar";
 import FormInput from "../../components/Form/FormInput";
 import ScrollMenu from "../../components/ScrollMenu";
-import { updateUserRequest } from "../../api/auth";
+import { updateUserRequest, apiGetUser } from "../../api/auth"; // Importamos la función apiGetUser
 import { useEffect, useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { useNavigate, Link } from "react-router-dom";
 import { supabase } from "../../supabase/supabaseClient";
 
 export default function EditPerfil() {
-  const { userId } = useParams();
+  const { userId } = useParams(); // Obtener el userId desde los parámetros de la URL
   const methods = useForm();
-  const { handleSubmit, register } = methods;
+  const { handleSubmit, register, setValue } = methods;
   const navigate = useNavigate();
   const [redirect, setRedirect] = useState(false);
   const [bannerImage, setBannerImage] = useState(null);
   const [profileImage, setProfileImage] = useState(null);
+  const [socialNetwork, setSocialNetwork] = useState([""]);
+  const [socialNetworkLink, setSocialNetworkLink] = useState([""]);
 
   useEffect(() => {
     if (redirect) navigate(`/ComposerPerfil/${userId}`);
   }, [redirect, navigate, userId]);
+
+  useEffect(() => {
+    // Obtener los datos del usuario desde la API
+    const fetchUserData = async () => {
+      try {
+        const { data: user } = await apiGetUser(userId); // Llamada a la API para obtener el usuario
+        if (user) {
+          // Rellenar los campos con los valores obtenidos de la API
+          setValue("nickname", user.nickname || ""); // Apodo
+          setValue("phone", user.phone || ""); // Teléfono
+          setValue("instruments", user.instruments || ""); // Instrumento
+          setSocialNetwork(user.social_network_selected || [""]); // Redes sociales
+          setSocialNetworkLink(user.social_network_link || [""]); // Links de redes sociales
+        }
+      } catch (error) {
+        console.error("Error obteniendo los datos del usuario: ", error);
+      }
+    };
+
+    fetchUserData();
+  }, [setValue, userId]);
 
   const uploadFile = async (file, bucket) => {
     const { data, error } = await supabase.storage
@@ -46,8 +69,8 @@ export default function EditPerfil() {
   };
 
   const onSubmit = handleSubmit(async (values) => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    if (user) {
+    try {
+      const { data: user } = await apiGetUser(userId); // Volvemos a obtener el usuario para asegurarnos
       let bannerURL = user.bannerImage;
       let profileURL = user.profileImage;
 
@@ -64,20 +87,17 @@ export default function EditPerfil() {
         ...values,
         bannerImage: bannerURL,
         profileImage: profileURL,
+        social_network_selected: socialNetwork,
+        social_network_link: socialNetworkLink,
       };
 
-      try {
-        await updateUserRequest(user.credentials_id, updatedUser);
-        localStorage.setItem("user", JSON.stringify(updatedUser));
-        setRedirect(true);
-      } catch (error) {
-        console.error(
-          "Error actualizando los datos del usuario: ",
-          error.response ? error.response.data : error.message
-        );
-      }
-    } else {
-      console.error("No se encontró ningún usuario");
+      await updateUserRequest(userId, updatedUser); // Asegúrate de pasar userId correcto
+      setRedirect(true);
+    } catch (error) {
+      console.error(
+        "Error actualizando los datos del usuario: ",
+        error.response ? error.response.data : error.message
+      );
     }
   });
 
@@ -86,6 +106,21 @@ export default function EditPerfil() {
     if (file) {
       setImage(file);
     }
+  };
+
+  const handleListChange = (index, value, list, setList) => {
+    const newList = [...list];
+    newList[index] = value;
+    setList(newList);
+  };
+
+  const addToList = (list, setList) => {
+    setList([...list, ""]);
+  };
+
+  const removeFromList = (index, list, setList) => {
+    const newList = list.filter((_, i) => i !== index);
+    setList(newList);
   };
 
   const instruments = [
@@ -134,20 +169,83 @@ export default function EditPerfil() {
                   />
 
                   {/* Sección para inputs de redes sociales */}
-                  <div className="mt-4">
-                    <ScrollMenu
-                      text="Red social"
-                      placeholder="Seleccione una red social"
-                      options={["facebook", "youtube", "twitter", "instagram"]} // Agregar más redes sociales aquí
-                      name="social_network_selected"
-                      className="w-1/2"
-                    />
-                    <FormInput
-                      name="social_network_link"
-                      text="Link"
-                      placeholder="link"
-                      className="w-1/2"
-                    />
+                  <div className="">
+                    <label className="block bg-transparent px-1 mb-1 text-sm font-semibold text-gray-400">
+                      Redes Sociales
+                    </label>
+                    {socialNetwork.map((socialNet, index) => (
+                      <div key={index} className="flex gap-4 items-center mb-2">
+                        <select
+                          className="w-1/2 px-4 py-3 rounded-lg bg-semiBlack text-white"
+                          value={socialNet}
+                          onChange={(e) =>
+                            handleListChange(
+                              index,
+                              e.target.value,
+                              socialNetwork,
+                              setSocialNetwork
+                            )
+                          }
+                        >
+                          <option value="">Selecciona una red social</option>
+                          <option value="Facebook">Facebook</option>
+                          <option value="Twitter">Twitter</option>
+                          <option value="Instagram">Instagram</option>
+                          <option value="Youtube">Youtube</option>
+                          <option value="TikTok">TikTok</option>
+                        </select>
+
+                        <input
+                          type="text"
+                          className="w-1/2 px-4 pl-7 py-3 rounded-lg bg-semiBlack text-white"
+                          value={socialNetworkLink[index]}
+                          onChange={(e) =>
+                            handleListChange(
+                              index,
+                              e.target.value,
+                              socialNetworkLink,
+                              setSocialNetworkLink
+                            )
+                          }
+                          placeholder="Link de la red social"
+                        />
+                        {index > 0 && (
+                          <button
+                            type="button"
+                            className="ml-2 px-2 py-1 rounded bg-red-600 text-white"
+                            onClick={() => {
+                              removeFromList(
+                                index,
+                                socialNetwork,
+                                setSocialNetwork
+                              );
+                              removeFromList(
+                                index,
+                                socialNetworkLink,
+                                setSocialNetworkLink
+                              );
+                            }}
+                          >
+                            -
+                          </button>
+                        )}
+                      </div>
+                    ))}
+
+                    <button
+                      type="button"
+                      className="mt-2 px-4 py-2 rounded bg-cyan-700 text-white"
+                      onClick={() =>
+                        addToList(
+                          socialNetwork,
+                          setSocialNetwork,
+                          socialNetworkLink,
+                          setSocialNetworkLink
+                        )
+                      }
+                    >
+                      +
+                    </button>
                   </div>
 
                   <div className="mt-4">
