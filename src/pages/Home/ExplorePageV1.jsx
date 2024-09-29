@@ -13,6 +13,7 @@ export default function ExplorePageV1() {
   const [title, setTitle] = useState("");
   const [filterOption, setFilterOption] = useState("");
   const [filterValue, setFilterValue] = useState("");
+  const [hasSearched, setHasSearched] = useState(false); // Nuevo estado
 
   useEffect(() => {
     // Obtener todas las canciones al cargar el componente
@@ -55,6 +56,7 @@ export default function ExplorePageV1() {
     }
 
     setFilteredSongs(filtered);
+    setHasSearched(true); // Indicar que la búsqueda se ha realizado
   };
 
   return (
@@ -111,45 +113,51 @@ export default function ExplorePageV1() {
               <div className="mt-8 w-full">
                 {filteredSongs.length > 0 ? (
                   <div className="overflow-x-auto mt-4">
-                    <table className="min-w-full text-white">
-                      <thead>
+                    <table className="min-w-full text-white bg-gray-900 shadow-lg rounded-lg overflow-hidden">
+                      <thead className="bg-gray-700">
                         <tr>
-                          <th className="px-4 py-2">Título</th>
-                          <th className="px-4 py-2">Compositores</th>
-                          <th className="px-4 py-2">Intérpretes</th>
-                          <th className="px-4 py-2">Género</th>
-                          <th className="px-4 py-2">Letra</th>
-                          <th className="px-4 py-2">Registro ONDA</th>
+                          <th className="px-6 py-3 text-left text-sm font-semibold uppercase tracking-wider">
+                            Título
+                          </th>
+                          <th className="px-6 py-3 text-left text-sm font-semibold uppercase tracking-wider">
+                            Compositores
+                          </th>
+                          <th className="px-6 py-3 text-left text-sm font-semibold uppercase tracking-wider">
+                            Intérpretes
+                          </th>
+                          <th className="px-6 py-3 text-left text-sm font-semibold uppercase tracking-wider">
+                            Género
+                          </th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody className="bg-gray-800 divide-y divide-gray-700">
                         {filteredSongs.map((song, index) => (
                           <tr
                             key={index}
-                            className="bg-gray-800 hover:bg-gray-700"
+                            className="hover:bg-gray-700 transition duration-200 ease-in-out"
                           >
-                            <td className="border px-4 py-2">{song.title}</td>
-                            <td className="border px-4 py-2">
+                            <td className="px-6 py-4 whitespace-nowrap border-gray-700">
+                              {song.title}
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap border-gray-700">
                               {song.composers.join(", ")}
                             </td>
-                            <td className="border px-4 py-2">
+                            <td className="px-6 py-4 whitespace-nowrap border-gray-700">
                               {song.interpreters.join(", ")}
                             </td>
-                            <td className="border px-4 py-2">{song.gender}</td>
-                            <td className="border px-4 py-2">{song.letter}</td>
-                            <td className="border px-4 py-2">
-                              {song.registro_ONDA}
+                            <td className="px-6 py-4 whitespace-nowrap border-gray-700">
+                              {song.gender}
                             </td>
                           </tr>
                         ))}
                       </tbody>
                     </table>
                   </div>
-                ) : (
-                  <div className="mt-4 text-white">
-                    No se encontraron canciones con los criterios de búsqueda.
-                  </div>
-                )}
+                ) : hasSearched ? (
+                  <p className="text-center text-gray-400">
+                    No hay canciones disponibles
+                  </p>
+                ) : null}
               </div>
             </div>
 
