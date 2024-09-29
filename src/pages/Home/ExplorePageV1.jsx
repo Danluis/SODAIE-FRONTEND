@@ -117,6 +117,9 @@ export default function ExplorePageV1() {
                       <thead className="bg-gray-700">
                         <tr>
                           <th className="px-6 py-3 text-left text-sm font-semibold uppercase tracking-wider">
+                            Identificador
+                          </th>
+                          <th className="px-6 py-3 text-left text-sm font-semibold uppercase tracking-wider">
                             Título
                           </th>
                           <th className="px-6 py-3 text-left text-sm font-semibold uppercase tracking-wider">
@@ -136,6 +139,9 @@ export default function ExplorePageV1() {
                             key={index}
                             className="hover:bg-gray-700 transition duration-200 ease-in-out"
                           >
+                            <td className="px-6 py-4 whitespace-nowrap border-gray-700">
+                              {song.reperdom_id}
+                            </td>
                             <td className="px-6 py-4 whitespace-nowrap border-gray-700">
                               {song.title}
                             </td>
