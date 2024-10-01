@@ -134,20 +134,6 @@ export default function UserPerfil() {
 
             <div className="border-b border-gray-500 my-4"></div>
 
-            <div className="mb-4">
-              <span className="text-2xl font-bold mb-4 text-white">
-                Artistas que sigo:
-              </span>
-              <div className="flex space-x-2">
-                <div className="bg-gray-500 h-12 w-12"></div>
-                <div className="bg-gray-500 h-12 w-12"></div>
-                <div className="bg-gray-500 h-12 w-12"></div>
-                <div className="bg-gray-500 h-12 w-12"></div>
-              </div>
-            </div>
-
-            <div className="border-b border-gray-500 my-4"></div>
-
             <div>
               <span className="text-2xl font-bold mb-4 text-white">
                 Contacto y Redes Sociales:

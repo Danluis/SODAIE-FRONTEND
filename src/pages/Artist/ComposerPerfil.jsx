@@ -120,7 +120,6 @@ export default function ComposerPerfil() {
                 <span className="text-2xl font-bold text-white mr-4">
                   {user.nickname}
                 </span>
-                <FollowButton />
               </div>
             </div>
 
