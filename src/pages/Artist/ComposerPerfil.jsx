@@ -106,9 +106,9 @@ export default function ComposerPerfil() {
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center">
                 <div className="bg-gray-500 rounded-full h-24 w-24 mr-4">
-                  {user.profileImage ? (
+                  {user.userImageUrl ? (
                     <img
-                      src={user.profileImage}
+                      src={user.userImageUrl}
                       alt="Profile"
                       className="h-full w-full object-cover rounded-full"
                     />
