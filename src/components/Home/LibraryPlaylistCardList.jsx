@@ -23,6 +23,8 @@ export default function LibraryPlaylistCardList({ title, searchTerm }) {
                 if (response.data && response.data.Playlist_Libraries) {
                     const playlistData = response.data.Playlist_Libraries.map(pl => pl.Playlist);
                     setPlaylists(playlistData);
+                    console.log(playlistData);
+                    
                 } else {
                     console.error('Unexpected response format:', response.data);
                 }
@@ -33,7 +35,6 @@ export default function LibraryPlaylistCardList({ title, searchTerm }) {
                 setLoading(false);
             }
         };
-
         fetchPlaylists();
     }, [userId]);
 
@@ -84,7 +85,13 @@ export default function LibraryPlaylistCardList({ title, searchTerm }) {
                                 <div className="relative w-full h-full flex justify-start items-center">
                                 {hoveredPlaylistId === playlist.playlist_id ? (
                                 <div className="absolute left-14 bottom-5">
-                                    <CardPlayButton id={playlist.playlist_id} />
+                                    {
+                                       console.log(playlists)
+
+                                    }
+                                    <CardPlayButton 
+                                        playlistId={playlists.playlist_id} // Pasa el playlist_id al CardPlayButton
+                                    />
                                 </div>
                                 ) : (
                                     <div className="absolute left-4">

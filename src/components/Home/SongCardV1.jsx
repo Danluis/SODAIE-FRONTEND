@@ -21,10 +21,10 @@ export default function SongCard({ img, title, artists, id }) {
     return (
         <div 
             onClick={handleNavigate} 
-            className="w-[14rem] relative flex flex-col mb-16 h-min-height py-2 bg-transparent cursor-pointer p-3 rounded-lg hover:bg-gray-800 hover:shadow-lg"
+            className="min-w-max max-w-[14rem] w-[100px] relative flex flex-col mb-16 h-min-height py-2 bg-transparent cursor-pointer overflow-x-auto p-3 rounded-lg hover:bg-gray-800 hover:shadow-lg"
         >
             <img 
-                className="w-full h-[10rem] object-cover rounded-lg" 
+                className="w-full max-w-[10rem] h-[10rem] object-cover rounded-lg" 
                 src={img} 
                 alt={title} 
             />
@@ -37,10 +37,10 @@ export default function SongCard({ img, title, artists, id }) {
                 </div>
             </div>
             <div 
-                className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300 mt-4"
+                className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300"
             >
                 <div onClick={handlePlayClick}>
-                    <CardPlayButton id={id} />
+                    <CardPlayButton songId={id} />
                 </div>
             </div>
         </div>

@@ -4,14 +4,14 @@ import Footer from "../../components/Footer";
 import Navbar from "../../components/Home/Navbar";
 import FormInput from "../../components/Form/FormInput";
 import ScrollMenu from "../../components/ScrollMenu";
-import { updateUserRequest, apiGetUser } from "../../api/auth"; // Importamos la función apiGetUser
+import { updateUserRequest, apiGetUser } from "../../api/auth";
 import { useEffect, useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { useNavigate, Link } from "react-router-dom";
-import { supabase } from "../../supabase/supabaseClient";
+import { supabase } from "../../supabase/supabaseClient"; // Import supabase
 
 export default function EditPerfil() {
-  const { userId } = useParams(); // Obtener el userId desde los parámetros de la URL
+  const { userId } = useParams();
   const methods = useForm();
   const { handleSubmit, register, setValue } = methods;
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ export default function EditPerfil() {
   const [socialNetworkLink, setSocialNetworkLink] = useState([""]);
 
   useEffect(() => {
-    if (redirect) navigate(`/ComposerPerfil/${userId}`);
+    if (redirect) navigate(`/UserPerfil/${userId}`);
   }, [redirect, navigate, userId]);
 
   useEffect(() => {
@@ -123,18 +123,6 @@ export default function EditPerfil() {
     setList(newList);
   };
 
-  const instruments = [
-    "Guitarra",
-    "Violín",
-    "Viola",
-    "Violonchelo",
-    "Contrabajo",
-    "Arpa",
-    "Laúd",
-    "Mandolina",
-    // ... (lista completa de instrumentos)
-  ];
-
   return (
     <div className="w-full h-full max-w-full-xl mt-2 bg-blackMain text-white">
       <Header />
@@ -154,13 +142,6 @@ export default function EditPerfil() {
                     placeholder="Apodo"
                     className="w-full"
                   />
-                  <ScrollMenu
-                    text="Instrumento"
-                    placeholder="Seleccione un Instrumento"
-                    options={instruments}
-                    name="instruments"
-                    className="w-full"
-                  />
                   <FormInput
                     name="phone"
                     text="Teléfono"
@@ -168,7 +149,6 @@ export default function EditPerfil() {
                     className="w-full"
                   />
 
-                  {/* Sección para inputs de redes sociales */}
                   <div className="">
                     <label className="block bg-transparent px-1 mb-1 text-sm font-semibold text-gray-400">
                       Redes Sociales
@@ -298,7 +278,7 @@ export default function EditPerfil() {
                       Siguiente
                     </button>
                     <Link
-                      to={`/ComposerPerfil/${userId}`}
+                      to={`/UserPerfil/${userId}`}
                       className="text-center w-full md:w-1/4 bg-semiBlack text-semiWhite px-4 py-3 rounded-xl font-semibold hover:bg-slate-900 transition-transform transform hover:scale-105"
                     >
                       Cancelar
