@@ -87,7 +87,17 @@ export default function HeaderLogged() {
   };
 
   const handleEditProfile = () => {
-    navigate(`/EditPerfil/${credentials_id}`);
+    if (role) {
+      if (role === "composer") {
+        navigate(`/EditPerfil/${credentials_id}`);
+      } else if (role === "user") {
+        navigate(`/EditPerfilUser/${credentials_id}`); // Cambiado para redirigir correctamente
+      } else {
+        console.error("Rol no reconocido");
+      }
+    } else {
+      console.error("No role available");
+    }
   };
 
   return (
