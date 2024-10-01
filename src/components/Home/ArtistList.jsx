@@ -12,7 +12,7 @@ export default function ArtistList({ title }) {
           </span>
         </Link>
       </div>
-      <div className="flex justify-between gap-8 rounded-xl overflow-x-auto py-2 scrollbar-hidden">
+      <div className="flex w-full justify-between gap-8 rounded-xl overflow-x-auto py-2 scrollbar-hidden">
         <ArtistCard img={'https://cdn.pixabay.com/photo/2021/08/20/17/48/man-6560971_960_720.jpg'} artist={'NOMBRE'} />
         <ArtistCard img={'https://cdn.pixabay.com/photo/2018/07/19/08/22/singer-3548070_1280.jpg'} artist={'NOMBRE'} />
         <ArtistCard img={'https://cdn.pixabay.com/photo/2020/05/24/08/40/city-5213062_1280.jpg'} artist={'NOMBRE'} />

@@ -158,18 +158,18 @@ export default function HeaderLogged() {
               </button>
               {menuOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-slate-800 rounded-md shadow-lg z-20">
-                  <div
+                  <button
                     onClick={handleNavigate}
                     className="w-full block px-4 py-2 text-white text-left hover:bg-gray-900"
                   >
                     Perfil
-                  </div>
-                  <div
+                  </button>
+                  <button
                     onClick={handleEditProfile}
                     className="w-full block px-4 py-2 text-white text-left hover:bg-gray-900"
                   >
                     Editar Perfil
-                  </div>
+                  </button>
                   <button
                     onClick={logout}
                     className="w-full block px-4 py-2 text-white text-left hover:bg-gray-900"

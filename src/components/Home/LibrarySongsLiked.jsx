@@ -107,7 +107,7 @@ export default function LibrarySongsLiked({ title, searchTerm }) {
                                 <div className="relative w-full h-full flex justify-start items-center">
                                     {hoveredSongId === song.song_id ? (
                                         <div className="absolute left-14 bottom-5">
-                                            <CardPlayButton id={song.song_id} />
+                                            <CardPlayButton songId={song.song_id} />
                                         </div>
                                     ) : (
                                         <div className="absolute left-4">

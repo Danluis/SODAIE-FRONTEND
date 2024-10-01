@@ -30,8 +30,14 @@ export function AudioPlayer() {
       audio.src = currentMusic.song.audio;
       audio.load(); // Asegúrate de que el audio se cargue
       audio.addEventListener('canplaythrough', handleCanPlayThrough);
+  
+      // Cleanup event listener
+      return () => {
+        audio.removeEventListener('canplaythrough', handleCanPlayThrough);
+      };
     }
   }, [currentMusic.song, audio]);
+  
 
   useEffect(() => {
     if (isMuted) {

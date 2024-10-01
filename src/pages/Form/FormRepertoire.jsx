@@ -192,10 +192,10 @@ export default function FormRepertoire() {
         etiquetas,
         cover: coverURL,
         letter: values.letter,
-        likes: 100,
+        likes: 1,
         audio: audioURL,
         duration: audioDuration,
-        favorites: 100,
+        favorites: 1,
         registro_ONDA: values.registro_ONDA,
         user_id: user.credentials_id,
       };

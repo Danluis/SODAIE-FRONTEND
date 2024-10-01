@@ -43,7 +43,7 @@ export default function Artist() {
                                             className="rounded-lg w-full md:w-[10rem] h-auto object-cover" 
                                         />
                                         <div className="flex flex-col justify-between">
-                                            <div>
+                                            <div className="flex flex-col justify-between">
                                                 <p className="text-sm text-gray-400">Canción</p>
                                                 <h1 className="text-3xl md:text-5xl font-bold text-white mb-2">{songData.title}</h1>
                                                 <p className="text-sm text-gray-400 mb-4 md:mb-12">
@@ -54,7 +54,6 @@ export default function Artist() {
                                                 </p>
                                             </div>
                                             <div>
-                                                <p className="text-xs text-gray-400 mb-2">{new Date(songData.releaseDate).getFullYear()}</p>
                                                 <p className="text-xs text-gray-400">{songData.copyright}</p>
                                             </div>
                                         </div>
