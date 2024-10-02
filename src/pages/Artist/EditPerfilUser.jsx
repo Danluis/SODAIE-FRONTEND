@@ -17,7 +17,7 @@ export default function EditPerfil() {
   const navigate = useNavigate();
   const [redirect, setRedirect] = useState(false);
   const [bannerImage, setBannerImage] = useState(null);
-  const [profileImage, setProfileImage] = useState(null);
+  const [userImageUrl, setUserImageUrl] = useState(null);
   const [socialNetwork, setSocialNetwork] = useState([""]);
   const [socialNetworkLink, setSocialNetworkLink] = useState([""]);
 
@@ -72,21 +72,21 @@ export default function EditPerfil() {
     try {
       const { data: user } = await apiGetUser(userId); // Volvemos a obtener el usuario para asegurarnos
       let bannerURL = user.bannerImage;
-      let profileURL = user.profileImage;
+      let profileURL = user.userImageUrl;
 
       if (bannerImage) {
         bannerURL = await uploadFile(bannerImage, "images");
       }
 
-      if (profileImage) {
-        profileURL = await uploadFile(profileImage, "images");
+      if (userImageUrl) {
+        profileURL = await uploadFile(userImageUrl, "images");
       }
 
       const updatedUser = {
         ...user,
         ...values,
         bannerImage: bannerURL,
-        profileImage: profileURL,
+        userImageUrl: profileURL,
         social_network_selected: socialNetwork,
         social_network_link: socialNetworkLink,
       };
@@ -257,16 +257,16 @@ export default function EditPerfil() {
                   </div>
                   <div className="mt-4">
                     <label
-                      htmlFor="profileImage"
+                      htmlFor="userImageUrl"
                       className="block text-sm font-medium"
                     >
                       Foto de Perfil
                     </label>
                     <input
                       type="file"
-                      id="profileImage"
+                      id="userImageUrl"
                       accept="image/*"
-                      onChange={(e) => handleImageChange(e, setProfileImage)}
+                      onChange={(e) => handleImageChange(e, setUserImageUrl)}
                       className="border-2 border-blue-500 p-4 w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-cyan-600 file:text-white hover:file:bg-cyan-700"
                     />
                   </div>
