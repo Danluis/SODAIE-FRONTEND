@@ -10,12 +10,15 @@ export default function HeaderLogged() {
   const { logout } = useAuth();
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [notificationsOpen, setNotificationsOpen] = useState(false); // Estado para controlar el menú de notificaciones
+  const [notifications, setNotifications] = useState([]); // Estado para las notificaciones
   const [role, setRole] = useState(null);
   const [userImageUrl, setUserImageUrl] = useState(null);
   const [userName, setUserName] = useState(null);
   const [loading, setLoading] = useState(true);
   const [searchActive, setSearchActive] = useState(false); // Estado para controlar si el buscador está activo
   const menuRef = useRef(null);
+  const notificationsRef = useRef(null); // Referencia para las notificaciones
 
   // Parse user data from localStorage
   const user = JSON.parse(localStorage.getItem("user"));
@@ -49,6 +52,13 @@ export default function HeaderLogged() {
         .catch((error) => {
           console.error("Error al obtener los datos del usuario:", error);
         });
+
+      // Obtener notificaciones (simuladas o desde una API)
+      setNotifications([
+        { id: 1, message: "Tienes una nueva canción en tu lista." },
+        { id: 2, message: "Un nuevo usuario te ha seguido." },
+        { id: 3, message: "Tu perfil ha sido actualizado." },
+      ]);
     } else {
       console.error("No credentials_id available");
       setLoading(false);
@@ -59,10 +69,20 @@ export default function HeaderLogged() {
     setMenuOpen(!menuOpen);
   };
 
+  const toggleNotifications = () => {
+    setNotificationsOpen(!notificationsOpen);
+  };
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
         setMenuOpen(false);
+      }
+      if (
+        notificationsRef.current &&
+        !notificationsRef.current.contains(event.target)
+      ) {
+        setNotificationsOpen(false);
       }
     };
 
@@ -148,7 +168,37 @@ export default function HeaderLogged() {
 
           {/* Iconos de notificaciones y menú del usuario */}
           <div className="sm:flex hidden items-center gap-4 relative">
-            <IoNotifications className="w-7 h-7 text-white" />
+            {/* Ícono de notificaciones */}
+            <div className="relative" ref={notificationsRef}>
+              <IoNotifications
+                className="w-7 h-7 text-white cursor-pointer"
+                onClick={toggleNotifications}
+              />
+              {notificationsOpen && (
+                <div className="absolute right-0 mt-2 w-64 bg-slate-800 rounded-md shadow-lg z-20">
+                  <div className="px-4 py-2 text-white text-left font-semibold">
+                    Notificaciones
+                  </div>
+                  {notifications.length > 0 ? (
+                    <ul className="max-h-60 overflow-y-auto">
+                      {notifications.map((notification) => (
+                        <li
+                          key={notification.id}
+                          className="px-4 py-2 text-white hover:bg-gray-900"
+                        >
+                          {notification.message}
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <div className="px-4 py-2 text-white">
+                      No hay notificaciones
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+
             <div className="relative" ref={menuRef}>
               <button
                 className="flex items-center justify-center w-10 h-10 text-center bg-semiBlack rounded-full cursor-pointer"
@@ -193,7 +243,7 @@ export default function HeaderLogged() {
         </div>
       </header>
 
-      {/* Menú de navegación inferior */}
+      {/* Barra de navegación inferior para móvil */}
       <BottomNav />
     </>
   );
