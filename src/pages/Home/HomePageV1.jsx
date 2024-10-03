@@ -35,15 +35,21 @@ export default function HomePageV1() {
 
             {/* SongCardLists */}
             <section aria-label="Canciones escuchadas recientemente">
-              <SongCardList title="Escuchado recientemente" />
+              <SongCardList
+                title="Escuchado recientemente "
+                type="recentlyPlayed"
+              />
             </section>
 
             <section aria-label="Canciones subidas recientemente">
-              <SongCardList title="Subidas recientemente" />
+              <SongCardList
+                title="Subidas recientemente"
+                type="recentlyUploaded"
+              />
             </section>
 
             <section aria-label="Música de temporada">
-              <SongCardList title="Música de Temporada" />
+              <SongCardList title="Música de Temporada" type="seasonalMusic" />
             </section>
 
             {/* Footer */}
