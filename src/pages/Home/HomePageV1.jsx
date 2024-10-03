@@ -14,7 +14,10 @@ export default function HomePageV1() {
       {/* Contenedor principal que se extiende para ocupar toda la pantalla */}
       <div className="flex flex-1 flex-col lg:flex-row w-full h-full">
         {/* Navbar - Se ajusta al alto y se mantiene fijo en pantallas grandes */}
-        <Navbar aria-label="Navegación principal del sitio" className="lg:w-1/4 h-full" />
+        <Navbar
+          aria-label="Navegación principal del sitio"
+          className="lg:w-1/4 h-full"
+        />
 
         {/* Contenido principal */}
         <main className="flex-1 w-full h-full">
@@ -27,7 +30,6 @@ export default function HomePageV1() {
 
             {/* Artist List */}
             <section aria-label="Lista de compositores">
-
               <ArtistList title="Compositores" />
             </section>
 
@@ -38,10 +40,6 @@ export default function HomePageV1() {
 
             <section aria-label="Canciones subidas recientemente">
               <SongCardList title="Subidas recientemente" />
-            </section>
-
-            <section aria-label="Las canciones más votadas">
-              <SongCardList title="Las más votadas" />
             </section>
 
             <section aria-label="Música de temporada">

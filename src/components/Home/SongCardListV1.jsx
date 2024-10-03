@@ -2,20 +2,19 @@ import { useEffect, useState } from "react";
 import SongCard from "./SongCardV1";
 import { apiGetSongs } from "../../api/auth";
 
-export default function SongCardList({ title, userId }) {
+export default function SongCardList({ title, userId, type }) {
   const [songs, setSongs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
 
-  // Detectar el tamaño de la pantalla para ajustar el número de canciones que se muestran
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768); // Móvil si la pantalla es menor o igual a 768px
+      setIsMobile(window.innerWidth <= 768);
     };
 
     window.addEventListener("resize", handleResize);
-    handleResize(); // Comprobar el tamaño de la pantalla al cargar el componente
+    handleResize();
 
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -23,11 +22,31 @@ export default function SongCardList({ title, userId }) {
   useEffect(() => {
     const fetchSongs = async () => {
       try {
-        const response = await apiGetSongs();
-        const filteredSongs = userId
-          ? response.data.filter((song) => song.user_id === Number(userId))
-          : response.data;
-        setSongs(filteredSongs);
+        let response;
+
+        if (type === "recentlyPlayed") {
+          response = await apiGetSongs();
+          const shuffledSongs = response.data.sort(() => 0.5 - Math.random());
+          setSongs(shuffledSongs.slice(0, 1));
+        } else if (type === "recentlyUploaded") {
+          response = await apiGetSongs();
+          const currentDate = new Date();
+          const recentSongs = response.data.filter((song) => {
+            const createdAt = new Date(song.createdAt);
+            const daysDifference =
+              (currentDate - createdAt) / (1000 * 3600 * 24);
+            return daysDifference <= 3;
+          });
+          setSongs(recentSongs);
+        } else if (type === "seasonalMusic") {
+          response = await apiGetSongs();
+          // Ordenar por número de likes de mayor a menor
+          const seasonalSongs = response.data.sort((a, b) => b.likes - a.likes);
+          setSongs(seasonalSongs.slice(0, 10)); // Mostrar las 10 canciones con más likes
+        } else {
+          response = await apiGetSongs();
+          setSongs(response.data);
+        }
       } catch (error) {
         setError(error);
         console.error("Error fetching songs:", error);
@@ -37,17 +56,11 @@ export default function SongCardList({ title, userId }) {
     };
 
     fetchSongs();
-  }, [userId]);
+  }, [userId, type]);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
 
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
-
-  // Determinar cuántas canciones mostrar según el tamaño de la pantalla
   const displayedSongs = isMobile ? songs.slice(0, 10) : songs.slice(0, 5);
 
   return (
@@ -57,7 +70,7 @@ export default function SongCardList({ title, userId }) {
           {title}
         </span>
       </div>
-      <div className="flex w-full gap-6 md:grid-cols-3 lg:grid-cols-4 overflow-x-auto py-2 scrollbar-hidden">
+      <div className="flex w-full gap-6 overflow-x-auto py-2 scrollbar-hidden">
         {displayedSongs.map((song) => (
           <SongCard
             key={song.song_id}
