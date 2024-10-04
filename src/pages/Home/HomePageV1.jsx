@@ -34,10 +34,10 @@ export default function HomePageV1() {
             </section>
 
             {/* SongCardLists */}
-            <section aria-label="Canciones escuchadas recientemente">
+            <section aria-label="Canciones Recomendadas">
               <SongCardList
-                title="Escuchado recientemente "
-                type="recentlyPlayed"
+                title="Canciones Recomendadas"
+                type="recomendedMusic"
               />
             </section>
 

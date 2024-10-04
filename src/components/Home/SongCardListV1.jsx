@@ -19,19 +19,49 @@ export default function SongCardList({ title, userId, type }) {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  const updateRecentlyPlayed = (filteredSongs) => {
+    const lastUpdateTime = localStorage.getItem("lastUpdateTime");
+    const currentTime = Date.now();
+    const oneDay = 24 * 60 * 60 * 1000; // 24 horas en milisegundos
+
+    if (!lastUpdateTime || currentTime - lastUpdateTime > oneDay) {
+      // Generar nuevas canciones aleatorias si han pasado 24 horas
+      const shuffledSongs = filteredSongs.sort(() => 0.5 - Math.random());
+      const randomSongs = shuffledSongs.slice(0, 7);
+
+      // Guardar las canciones y el tiempo de actualización
+      localStorage.setItem("recentlyPlayedSongs", JSON.stringify(randomSongs));
+      localStorage.setItem("lastUpdateTime", currentTime);
+
+      setSongs(randomSongs);
+    } else {
+      // Reutilizar las canciones guardadas si no han pasado 24 horas
+      const savedSongs = JSON.parse(
+        localStorage.getItem("recentlyPlayedSongs")
+      );
+      setSongs(savedSongs);
+    }
+  };
+
   useEffect(() => {
     const fetchSongs = async () => {
       try {
-        let response;
+        const response = await apiGetSongs();
+        let filteredSongs = response.data;
 
-        if (type === "recentlyPlayed") {
-          response = await apiGetSongs();
-          const shuffledSongs = response.data.sort(() => 0.5 - Math.random());
-          setSongs(shuffledSongs.slice(0, 1));
+        // Filtrar por userId si está disponible
+        if (userId) {
+          filteredSongs = filteredSongs.filter(
+            (song) => song.user_id === Number(userId)
+          );
+        }
+
+        // Aplicar lógica según el tipo de canciones
+        if (type === "recomendedMusic") {
+          updateRecentlyPlayed(filteredSongs); // Solo aplica esta lógica cada 24 horas
         } else if (type === "recentlyUploaded") {
-          response = await apiGetSongs();
           const currentDate = new Date();
-          const recentSongs = response.data.filter((song) => {
+          const recentSongs = filteredSongs.filter((song) => {
             const createdAt = new Date(song.createdAt);
             const daysDifference =
               (currentDate - createdAt) / (1000 * 3600 * 24);
@@ -39,13 +69,10 @@ export default function SongCardList({ title, userId, type }) {
           });
           setSongs(recentSongs);
         } else if (type === "seasonalMusic") {
-          response = await apiGetSongs();
-          // Ordenar por número de likes de mayor a menor
-          const seasonalSongs = response.data.sort((a, b) => b.likes - a.likes);
+          const seasonalSongs = filteredSongs.sort((a, b) => b.likes - a.likes);
           setSongs(seasonalSongs.slice(0, 10)); // Mostrar las 10 canciones con más likes
         } else {
-          response = await apiGetSongs();
-          setSongs(response.data);
+          setSongs(filteredSongs); // Si no hay tipo específico, se muestran las canciones filtradas
         }
       } catch (error) {
         setError(error);
