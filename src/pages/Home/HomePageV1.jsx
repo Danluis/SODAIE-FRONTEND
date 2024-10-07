@@ -1,6 +1,7 @@
 import Header from "../../components/Home/Header";
 import Slider from "../../components/Home/Slider";
 import SongCardList from "../../components/Home/SongCardListV1";
+import SeasonalMusicCard from "../../components/Home/SeasonalMusicCard";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Home/Navbar";
 import ArtistList from "../../components/Home/ArtistList";
@@ -49,7 +50,7 @@ export default function HomePageV1() {
             </section>
 
             <section aria-label="Música de temporada">
-              <SongCardList title="Música de Temporada" type="seasonalMusic" />
+              <SeasonalMusicCard title="Música de Temporada" />
             </section>
 
             {/* Footer */}

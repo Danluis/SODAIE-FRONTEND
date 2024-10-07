@@ -44,7 +44,7 @@ export default function SongCardList({ title, userId, type }) {
         if (type === "recomendedMusic") {
           const lastUpdateTime = localStorage.getItem("lastUpdateTime");
           const currentTime = Date.now();
-          const oneDay = 60 * 1000;
+          const oneDay = 24 * 60 * 60 * 1000;
 
           if (!lastUpdateTime || currentTime - lastUpdateTime > oneDay) {
             randomMusic(filteredSongs);
