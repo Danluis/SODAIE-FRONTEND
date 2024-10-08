@@ -7,18 +7,19 @@ export default function BottomNav() {
 
   // Obtener el objeto 'user' del localStorage y extraer 'credentials_id'
   const user = JSON.parse(localStorage.getItem("user"));
-  console.log(user);
-  
   const credentials_id = user?.credentials_id; // Verifica si existe el objeto y luego extrae credentials_id
 
   // Redirigir si credentials_id está vacío o no existe
-
-
   const handleProfileClick = () => {
     if (!credentials_id) {
       navigate("/LoginPageV1"); // Redirigir si no hay credentials_id
     } else {
-      navigate(`/UserPerfil/${credentials_id}`); // Redirigir al perfil del usuario si credentials_id existe
+      // Verificar el rol del usuario y redirigir a la ruta correspondiente
+      if (user.roles === 'composer') {
+        navigate(`/ComposerPerfil/${credentials_id}`); // Redirigir al perfil del compositor
+      } else if (user.roles === 'user' || user.roles === 'admin') {
+        navigate(`/UserPerfil/${credentials_id}`); // Redirigir al perfil de usuario o admin
+      }
     }
   };
 
@@ -60,16 +61,12 @@ export default function BottomNav() {
       <Link to="/" className="flex flex-col items-center">
         <AiOutlineBell
           className={`text-2xl ${
-            location.pathname === "/notificaciones"
-              ? "text-white"
-              : "text-gray-400"
+            location.pathname === "/notificaciones" ? "text-white" : "text-gray-400"
           }`}
         />
         <span
           className={`text-xs ${
-            location.pathname === "/notificaciones"
-              ? "text-white"
-              : "text-gray-400"
+            location.pathname === "/notificaciones" ? "text-white" : "text-gray-400"
           }`}
         >
           Notificaciones
@@ -80,12 +77,14 @@ export default function BottomNav() {
       <button onClick={handleProfileClick} className="flex flex-col items-center">
         <AiOutlineUser
           className={`text-2xl ${
-            location.pathname === `/UserPerfil/${credentials_id}` ? "text-white" : "text-gray-400"
+            location.pathname === `/ComposerPerfil/${credentials_id}` || location.pathname === `/UserPerfil/${credentials_id}`
+              ? "text-white" : "text-gray-400"
           }`}
         />
         <span
           className={`text-xs ${
-            location.pathname === `/UserPerfil/${credentials_id}` ? "text-white" : "text-gray-400"
+            location.pathname === `/ComposerPerfil/${credentials_id}` || location.pathname === `/UserPerfil/${credentials_id}`
+              ? "text-white" : "text-gray-400"
           }`}
         >
           Perfil
