@@ -106,6 +106,7 @@ export default function CardPlayButton({ songId, playlistId }) {
 
         setIsPlaying(true);
         setIsHiddenPlayer(true);
+        audio.play()
       }
     } catch (error) {
       console.error('Error fetching playlist songs:', error);

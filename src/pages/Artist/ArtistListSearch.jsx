@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import ArtistCard from "./ArtistCard";
+import ArtistCard from '../../components/Home/ArtistCard';
 import { apiGetComposers } from '../../api/auth';
 
-export default function ArtistList({ title = "Artistas Destacados" }) {
+export default function ArtistListSearch({ title = "Artistas Destacados", search }) {
   const [composers, setComposers] = useState([]);
   const [loading, setLoading] = useState(true); // Estado de carga
   const [error, setError] = useState(null); // Estado de error
@@ -13,6 +13,7 @@ export default function ArtistList({ title = "Artistas Destacados" }) {
     const fetchComposers = async () => {
       try {
         const response = await apiGetComposers();
+        console.log(response.data); // Agregar esta línea para depuración
         if (Array.isArray(response.data)) {
           setComposers(response.data); // Setea el array de compositores
         } else {
@@ -29,6 +30,25 @@ export default function ArtistList({ title = "Artistas Destacados" }) {
     fetchComposers();
   }, []);
 
+  // Mostrar en consola el valor de 'search' y los compositores antes de filtrar
+  console.log("Valor de search:", search);
+  console.log("Compositores antes de filtrar:", composers);
+
+  // Filtrar compositores según el parámetro de búsqueda
+  const filteredComposers = search
+    ? composers.filter(composer => {
+        // Verifica si el search está en nickname, name o lastname
+        const lowerCaseSearch = search.toLowerCase();
+        return (
+          composer.nickname?.toLowerCase().includes(lowerCaseSearch) ||
+          composer.name?.toLowerCase().includes(lowerCaseSearch) ||
+          composer.lastname?.toLowerCase().includes(lowerCaseSearch)
+        );
+      })
+    : composers;
+
+  console.log("Compositores filtrados:", filteredComposers); // Comprobación después del filtrado
+
   return (
     <div className="flex flex-col mt-4">
       <div className="flex justify-between">
@@ -44,8 +64,8 @@ export default function ArtistList({ title = "Artistas Destacados" }) {
           <p className="text-white">Cargando compositores...</p> // Mensaje de carga
         ) : error ? (
           <p className="text-red-500">{error}</p> // Muestra error si ocurre
-        ) : composers.length > 0 ? (
-          composers.map((composer) => (
+        ) : filteredComposers.length > 0 ? (
+          filteredComposers.map((composer) => (
             <ArtistCard
               key={composer.user_id}
               img={composer.userImageUrl || 'https://via.placeholder.com/150'} // Placeholder si no hay imagen

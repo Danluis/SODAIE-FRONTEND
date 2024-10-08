@@ -101,15 +101,18 @@ export function AudioPlayer() {
   };
 
   return (
-    <div className="bottom-0 fixed h-[5.5rem] w-full  z-20">
-      <div className={`${isHiddenPlayer ? '' : 'hidden'} bg-black p-4 flex items-center flex-row justify-between w-full px-4 z-50 text-white relative`}>
+    <div className={`${isHiddenPlayer ? 'sm:bottom-0 bottom-20 fixed h-[5.5rem] w-full z-20' : 'block'  }`}>
+      <div className={`${isHiddenPlayer ? 'bg-black p-4 relative md:bottom-0 bottom-[1.9rem]' : 'hidden left-[40rem]'} `}>
+      <div className='flex items-center flex-row justify-between w-full px-4 z-50 text-white sm:p-0 pt-4'>
+        
         <IoMdClose className='w-5 h-5 absolute top-3 right-3 cursor-pointer hover:text-semiWhite' onClick={handleClose} />
         <div className='w-1/3 h-full'>
+        
           {currentMusic.song ? <CurrentSong {...currentMusic.song} /> : "No song playing"}
         </div>
 
         <div className="w-1/3 grid place-content-center items-center flex-1">
-          <div className="flex justify-center items-center gap-2">
+          <div className="flex justify-center items-center gap-2 sm:mt-0">
             <button className="rounded-full p-2" onClick={playPreviousSong}>
               <FaStepBackward className='w-6 h-5 text-gray-300 hover:text-gray-400' />
             </button>
@@ -120,7 +123,7 @@ export function AudioPlayer() {
               <FaStepForward className='w-6 h-5 text-gray-300 hover:text-gray-400' />
             </button>
           </div>
-          <SongControl audio={audio}/>
+          <SongControl audio={audio} smHidden={true} />
         </div>
 
         <div className='w-1/3 flex items-center justify-end'>
@@ -137,6 +140,12 @@ export function AudioPlayer() {
             />
           </div>
         </div>
+        </div>
+        <div className='sm:hidden block'>
+        <SongControl audio={audio} smHidden={false} />
+
+        </div>
+
       </div>
     </div>
   );

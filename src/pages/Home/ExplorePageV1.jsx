@@ -13,10 +13,9 @@ export default function ExplorePageV1() {
   const [title, setTitle] = useState("");
   const [filterOption, setFilterOption] = useState("");
   const [filterValue, setFilterValue] = useState("");
-  const [hasSearched, setHasSearched] = useState(false); // Nuevo estado
+  const [hasSearched, setHasSearched] = useState(false);
 
   useEffect(() => {
-    // Obtener todas las canciones al cargar el componente
     const fetchSongs = async () => {
       try {
         const response = await apiGetSongs();
@@ -56,22 +55,21 @@ export default function ExplorePageV1() {
     }
 
     setFilteredSongs(filtered);
-    setHasSearched(true); // Indicar que la búsqueda se ha realizado
+    setHasSearched(true);
   };
 
   return (
     <div className="w-full h-full max-w-full-xl mt-2 bg-blackMain">
       <Header />
-      <div className="flex flex-col-2">
+      <div className="flex flex-col md:flex-row">
         <Navbar />
-        <div className="w-full h-full mt-[6rem]">
-          <div className="bg-blackMain mr-2 p-8 w-full h-full text-white">
+        <div className="w-full h-full mt-[4rem] md:mt-[6rem]">
+          <div className="bg-blackMain mr-2 p-4 md:p-8 w-full h-full text-white">
             <div className="flex flex-col items-center w-full h-full mt-4 gap-4 mb-96">
-              {/* Título y botones de búsqueda */}
-              <span className="text-2xl font-semibold mb-4">
+              <span className="text-lg md:text-2xl font-semibold mb-4 text-center">
                 Encuentra a nuevos autores, compositores y arreglistas
               </span>
-              <div className="flex gap-4">
+              <div className="flex flex-col md:flex-row gap-4">
                 <SelectedButton
                   options={["Título"]}
                   selectedOption={title}
@@ -81,12 +79,12 @@ export default function ExplorePageV1() {
                   type="text"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  className="outline-none text-black px-4 w-[20rem] h-[3rem]"
+                  className="outline-none text-black px-4 w-[20rem] md:w-[20rem] h-[3rem]"
                   placeholder="Buscar por título"
                 />
               </div>
 
-              <div className="flex gap-4">
+              <div className="flex flex-col md:flex-row gap-4">
                 <SelectedButton2
                   options={["Compositor", "Intérprete"]}
                   selectedOption={filterOption}
@@ -96,39 +94,38 @@ export default function ExplorePageV1() {
                   type="text"
                   value={filterValue}
                   onChange={(e) => setFilterValue(e.target.value)}
-                  className="outline-none text-black px-4 w-[20rem] h-[3rem]"
+                  className="outline-none text-black px-4 w-[20rem] md:w-[20rem] h-[3rem]"
                   placeholder={`Buscar por ${filterOption.toLowerCase()}`}
                 />
               </div>
 
               <button
-                className="flex items-center justify-center gap-2 py-2 px-4 bg-secondaryBlack hover:bg-black w-[8rem] h-[3rem]"
+                className="flex items-center justify-center gap-2 py-2 px-4 bg-secondaryBlack hover:bg-black w-full md:w-[8rem] h-[3rem]"
                 onClick={handleSearch}
               >
                 <IoSearch className="w-[1rem] h-[1rem]" />
                 <span className="text-lg">Buscar</span>
               </button>
 
-              {/* Mostrar canciones filtradas */}
               <div className="mt-8 w-full">
                 {filteredSongs.length > 0 ? (
                   <div className="overflow-x-auto mt-4">
                     <table className="min-w-full text-white bg-gray-900 shadow-lg rounded-lg overflow-hidden">
                       <thead className="bg-gray-700">
                         <tr>
-                          <th className="px-6 py-3 text-left text-sm font-semibold uppercase tracking-wider">
+                          <th className="px-2 md:px-6 py-3 text-left text-xs md:text-sm font-semibold uppercase tracking-wider">
                             Identificador
                           </th>
-                          <th className="px-6 py-3 text-left text-sm font-semibold uppercase tracking-wider">
+                          <th className="px-2 md:px-6 py-3 text-left text-xs md:text-sm font-semibold uppercase tracking-wider">
                             Título
                           </th>
-                          <th className="px-6 py-3 text-left text-sm font-semibold uppercase tracking-wider">
+                          <th className="px-2 md:px-6 py-3 text-left text-xs md:text-sm font-semibold uppercase tracking-wider">
                             Compositores
                           </th>
-                          <th className="px-6 py-3 text-left text-sm font-semibold uppercase tracking-wider">
+                          <th className="px-2 md:px-6 py-3 text-left text-xs md:text-sm font-semibold uppercase tracking-wider">
                             Intérpretes
                           </th>
-                          <th className="px-6 py-3 text-left text-sm font-semibold uppercase tracking-wider">
+                          <th className="px-2 md:px-6 py-3 text-left text-xs md:text-sm font-semibold uppercase tracking-wider">
                             Género
                           </th>
                         </tr>
@@ -139,19 +136,19 @@ export default function ExplorePageV1() {
                             key={index}
                             className="hover:bg-gray-700 transition duration-200 ease-in-out"
                           >
-                            <td className="px-6 py-4 whitespace-nowrap border-gray-700">
+                            <td className="px-2 md:px-6 py-4 whitespace-nowrap border-gray-700">
                               {song.reperdom_id}
                             </td>
-                            <td className="px-6 py-4 whitespace-nowrap border-gray-700">
+                            <td className="px-2 md:px-6 py-4 whitespace-nowrap border-gray-700">
                               {song.title}
                             </td>
-                            <td className="px-6 py-4 whitespace-nowrap border-gray-700">
+                            <td className="px-2 md:px-6 py-4 whitespace-nowrap border-gray-700">
                               {song.composers.join(", ")}
                             </td>
-                            <td className="px-6 py-4 whitespace-nowrap border-gray-700">
+                            <td className="px-2 md:px-6 py-4 whitespace-nowrap border-gray-700">
                               {song.interpreters.join(", ")}
                             </td>
-                            <td className="px-6 py-4 whitespace-nowrap border-gray-700">
+                            <td className="px-2 md:px-6 py-4 whitespace-nowrap border-gray-700">
                               {song.gender}
                             </td>
                           </tr>
@@ -166,7 +163,6 @@ export default function ExplorePageV1() {
                 ) : null}
               </div>
             </div>
-
             <Footer />
           </div>
         </div>
