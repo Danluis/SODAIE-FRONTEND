@@ -24,6 +24,7 @@ import FormOTPInput from "../pages/Form/FormOTPInput";
 import FormRepertoire from "../pages/Form/FormRepertoire";
 import FormGeneralInfoUser from "../pages/Form/FormGeneralInfoUser";
 import FormPersonalInfoUser from "../pages/Form/FormPersonalInfoUser";
+import SearchView from "../pages/Home/SearchView";
 import PlaylistSongsCard from "../components/Home/PlaylistSongsCard";
 import { ProtectedRoute } from "../components/Utilities/ProtectedRoute";
 import { ProtectedRouteUser } from "../components/Utilities/ProtectedRouteUser";
@@ -50,7 +51,6 @@ const RoutesApp = () => {
             <Route path="/FormPersonalInfo" element={<FormPersonalInfo />} />
             <Route path="/FormFirstSong" element={<FormFirstSong />} />
             <Route path="/FormTermsCon" element={<FormTermsCon />} />
-            <Route path="/EditPerfil/:userId" element={<EditPerfil />} />
           </Route>
 
           <Route element={<ProtectedRouteUser />}>
@@ -77,6 +77,9 @@ const RoutesApp = () => {
           path="/FormPasswordForgotten"
           element={<FormPasswordForgotten />}
         />
+
+        <Route path="/EditPerfil/:userId" element={<EditPerfil />} />
+
         <Route path="/FormRestorePassword" element={<FormRestorePassword />} />
         <Route path="/RegisterPageV1" element={<RegisterPageV1 />} />
         <Route path="/FormOTPInput" element={<FormOTPInput />} />
@@ -85,7 +88,11 @@ const RoutesApp = () => {
         <Route path="/artists" element={<ArtistPage />} />
         <Route path="/ComposerPerfil/:userId" element={<ComposerPerfil />} />
         <Route path="/UserPerfil/:userId" element={<UserPerfil />} />
-        <Route path="/PlaylistSongsCard/:playlistId" element={<PlaylistSongsCard />} />
+        <Route
+          path="/PlaylistSongsCard/:playlistId"
+          element={<PlaylistSongsCard />}
+        />
+        <Route path="/SearchView/:searchQuery" element={<SearchView />} />
       </Route>
     </Routes>
   );

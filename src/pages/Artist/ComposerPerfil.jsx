@@ -90,7 +90,7 @@ export default function ComposerPerfil() {
 
         <div className="flex-1 p-8">
           {/* Banner Section */}
-          <div className="w-full h-64 bg-gray-900 flex items-center justify-center mb-8">
+          <div className="w-full h-64 mt-10 bg-gray-900 flex items-center justify-center mb-8">
             {user.bannerImage ? (
               <img
                 src={user.bannerImage}

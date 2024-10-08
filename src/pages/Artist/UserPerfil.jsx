@@ -87,7 +87,7 @@ export default function UserPerfil() {
       <div className="flex">
         <Navbar />
 
-        <div className="flex-1 p-8">
+        <div className="flex-1 p-8 mt-12">
           {/* Banner Section */}
           <div className="w-full h-64 bg-gray-900 flex items-center justify-center mb-8">
             {user.bannerImage ? (
