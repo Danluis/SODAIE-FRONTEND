@@ -137,51 +137,50 @@ export default function HeaderLogged() {
     }
   };
 
-// Función para manejar la búsqueda
-const handleSearch = async (query, noSearch=false) => {
-  try {
-    const songsResponse = await apiGetSongs();
-    const composersResponse = await apiGetComposers();
+  // Función para manejar la búsqueda
+  const handleSearch = async (query, noSearch = false) => {
+    try {
+      const songsResponse = await apiGetSongs();
+      const composersResponse = await apiGetComposers();
 
-    // Filtrar canciones y compositores según el texto ingresado
-    const filteredSongs = songsResponse.data.filter((song) =>
-      song.title.toLowerCase().includes(query.toLowerCase())
-    );
-
-    const filteredComposers = composersResponse.data.filter((composer) => {
-      const fullName = `${composer.name}`.toLowerCase();
-      const nickname = composer.nickname
-        ? composer.nickname.toLowerCase()
-        : "";
-
-      // Comprobar si el query coincide con el nombre completo o el nickname
-      return (
-        fullName.includes(query.toLowerCase()) ||
-        nickname.includes(query.toLowerCase())
+      // Filtrar canciones y compositores según el texto ingresado
+      const filteredSongs = songsResponse.data.filter((song) =>
+        song.title.toLowerCase().includes(query.toLowerCase())
       );
-    });
 
-    // Combinar resultados en un solo array
-    setSearchResults([...filteredSongs, ...filteredComposers]);
+      const filteredComposers = composersResponse.data.filter((composer) => {
+        const fullName = `${composer.name}`.toLowerCase();
+        const nickname = composer.nickname
+          ? composer.nickname.toLowerCase()
+          : "";
 
-    if(noSearch===true){
-      return;
+        // Comprobar si el query coincide con el nombre completo o el nickname
+        return (
+          fullName.includes(query.toLowerCase()) ||
+          nickname.includes(query.toLowerCase())
+        );
+      });
+
+      // Combinar resultados en un solo array
+      setSearchResults([...filteredSongs, ...filteredComposers]);
+
+      if (noSearch === true) {
+        return;
+      }
+
+      // Navegar a la vista de búsqueda si hay query
+      if (query) {
+        const searchResult = query.replace(/ /g, "+");
+        navigate(`/SearchView/${searchResult}`);
+
+        // Limpiar los resultados de búsqueda y el query después de navegar
+        setSearchQuery(""); // Limpiar el input de búsqueda
+        setSearchResults([]); // Limpiar los resultados de búsqueda
+      }
+    } catch (error) {
+      console.error("Error al realizar la búsqueda:", error);
     }
-
-    // Navegar a la vista de búsqueda si hay query
-    if (query) {
-      const searchResult = query.replace(/ /g, "+");
-      navigate(`/SearchView/${searchResult}`);
-      
-      // Limpiar los resultados de búsqueda y el query después de navegar
-      setSearchQuery(""); // Limpiar el input de búsqueda
-      setSearchResults([]); // Limpiar los resultados de búsqueda
-    }
-  } catch (error) {
-    console.error("Error al realizar la búsqueda:", error);
-  }
-};
-
+  };
 
   useEffect(() => {
     if (searchQuery) {
@@ -197,10 +196,10 @@ const handleSearch = async (query, noSearch=false) => {
     const searchResult = result.title
       ? result.title.replace(/ /g, "+")
       : `${result.name}`.replace(/ /g, "+");
-  
+
     // Limpiar el input de búsqueda
     setSearchQuery(""); // Limpiar el input
-  
+
     // Navegar a la vista de búsqueda
     navigate(`/SearchView/${searchResult}`);
   };
@@ -300,14 +299,13 @@ const handleSearch = async (query, noSearch=false) => {
                   ref={searchRef} // Agrega la referencia al input de búsqueda
                 />
               )}
-
             </div>
           </div>
 
           {/* Iconos de notificaciones y menú del usuario */}
           <div className="sm:flex hidden items-center gap-4 relative">
-                        {/* Ícono de notificaciones */}
-                        <div className="relative" ref={notificationsRef}>
+            {/* Ícono de notificaciones */}
+            <div className="relative" ref={notificationsRef}>
               <IoNotifications
                 className="w-7 h-7 text-white cursor-pointer"
                 onClick={toggleNotifications}
@@ -337,24 +335,34 @@ const handleSearch = async (query, noSearch=false) => {
               )}
             </div>
             <button
-              className="rounded-full cursor-pointer"
-              onClick={toggleMenu}
-              ref={menuRef}
-            >
-              {userImageUrl && (
-                <img
-                  src={userImageUrl}
-                  className="w-12 h-12 rounded-full object-cover object-center"
-                  alt="User Avatar"
-                />
-              )}
-            </button>
+  className="rounded-full cursor-pointer flex items-center justify-center bg-gray-300"
+  onClick={toggleMenu}
+  ref={menuRef}
+  style={{ width: '48px', height: '48px' }} // Mantén el tamaño del botón consistente
+>
+  {userImageUrl ? (
+    <img
+      src={userImageUrl}
+      className="w-12 h-12 rounded-full object-cover object-center"
+      alt="User Avatar"
+    />
+  ) : (
+    <div className="w-12 h-12 rounded-full bg-gray-400 text-white flex items-center justify-center">
+      U
+    </div>
+  )}
+</button>
+
+
             {menuOpen && (
               <div
                 className="absolute top-12 right-0 bg-slate-800 rounded-lg shadow-lg z-20"
                 onClick={(e) => e.stopPropagation()} // Detiene la propagación del clic dentro del menú
               >
-                <ul className="py-2 w-[10rem] text-sm text-gray-200" ref={menuRef}>
+                <ul
+                  className="py-2 w-[10rem] text-sm text-gray-200"
+                  ref={menuRef}
+                >
                   <li
                     className="px-4 py-2 hover:bg-slate-700 cursor-pointer"
                     onClick={() => {

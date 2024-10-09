@@ -176,7 +176,8 @@ export default function LibrarySongCardList({ title, searchTerm, id = '' }) {
                     <tr>
                         <th className="pl-8 pr-4 py-2">#</th>
                         <th className="px-4 py-2">Titulo</th>
-                        <th className="px-4 py-2">Creador</th>
+                        <th className="px-4 py-2">Compositores</th>
+                        <th className="px-4 py-2">Interpretes</th>
                         <th className="px-4 py-2">Duración</th>
                         <th className="px-8 py-2">Acciones</th>
                     </tr>
@@ -213,6 +214,7 @@ export default function LibrarySongCardList({ title, searchTerm, id = '' }) {
                                 {song.title}
                             </td>
                             <td className="px-4 py-2">{song.composers.join(', ')}</td>
+                            <td className="px-4 py-2">{song.interpreters.join(', ')}</td>
                             <td className="px-4 py-2 pl-8">{song.duration}</td>
                             <td className="px-8 py-2 space-x-2">
                                 <div className="relative inline-block" ref={menuRef}>
