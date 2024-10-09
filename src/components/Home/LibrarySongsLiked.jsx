@@ -2,7 +2,10 @@ import { useEffect, useState, useRef } from 'react';
 import { 
     apiGetLibrary,
     apiAddSongToLibrary,
-    apiRemoveSongFromLibrary
+    apiRemoveSongFromLibrary,
+    apiCreatePlaylists,
+    apiCreateSongPlaylists,
+    apiAddPlaylistToLibrary
 } from "../../api/auth";
 import CardPlayButton from "../../components/MediaPlayer/CardPlayButton";
 
@@ -13,6 +16,7 @@ export default function LibrarySongsLiked({ title, searchTerm }) {
     const [hoveredSongId, setHoveredSongId] = useState(null);
     const [menuVisible, setMenuVisible] = useState(null);
     const [likedSongs, setLikedSongs] = useState([]);
+    const [playlists, setPlaylists] = useState([]);
     const menuRef = useRef(null);
 
     useEffect(() => {
@@ -26,6 +30,7 @@ export default function LibrarySongsLiked({ title, searchTerm }) {
                     const librarySongs = response.data.Song_Libraries.map(songLib => songLib.Song);
                     setSongs(librarySongs);
                     setLikedSongs(librarySongs.map(song => song.song_id));
+                    setPlaylists(response.data.Playlist_Libraries.map(lib => lib.Playlist));
                 }
             } catch (error) {
                 setError(error);
@@ -63,6 +68,43 @@ export default function LibrarySongsLiked({ title, searchTerm }) {
         }
     };
 
+    const handleCreatePlaylist = async (song, event) => {
+        event.stopPropagation();
+    
+        const user = JSON.parse(localStorage.getItem('user'));
+        const newPlaylist = {
+            name: song.title,
+            cover: song.cover,
+            public: false,
+            user_id: user.credentials_id
+        };
+    
+        try {
+            const response = await apiCreatePlaylists(newPlaylist);
+            const playlistId = response.data.playlist_id;
+    
+            await apiCreateSongPlaylists({ song_id: song.song_id, playlist_id: playlistId });
+            await apiAddPlaylistToLibrary({ library_id: user.credentials_id, playlist_id: playlistId });
+    
+            alert('Playlist creada y añadida a tu librería con éxito');
+        } catch (error) {
+            console.error('Error creando playlist:', error);
+            alert('Error al crear la playlist');
+        } finally {
+            setMenuVisible(null);
+        }
+    };
+
+    const handleAddSongToPlaylist = async (song, playlistId) => {
+        try {
+            await apiCreateSongPlaylists({ song_id: song.song_id, playlist_id: playlistId });
+            alert('Canción añadida a la playlist con éxito');
+        } catch (error) {
+            console.error('Error añadiendo canción a la playlist:', error);
+            alert('Error al añadir la canción a la playlist');
+        }
+    };
+
     const toggleMenu = (songId, event) => {
         event.stopPropagation();
         setMenuVisible(songId === menuVisible ? null : songId);
@@ -80,8 +122,6 @@ export default function LibrarySongsLiked({ title, searchTerm }) {
         song.title.toLowerCase().includes(searchTerm || '')
     );
 
-    console.log('Filtered songs based on searchTerm:', filteredSongs);
-
     return (
         <div className="w-full">
             <h2 className="text-2xl font-bold mb-6 text-white">{title}</h2>
@@ -90,7 +130,8 @@ export default function LibrarySongsLiked({ title, searchTerm }) {
                     <tr>
                         <th className="pl-8 pr-4 py-2">#</th>
                         <th className="px-4 py-2">Titulo</th>
-                        <th className="px-4 py-2">Creador</th>
+                        <th className="px-4 py-2">Compositores</th>
+                        <th className="px-4 py-2">Interpretes</th>
                         <th className="px-4 py-2">Duracion</th>
                         <th className="px-4 py-2">Acciones</th>
                     </tr>
@@ -127,6 +168,7 @@ export default function LibrarySongsLiked({ title, searchTerm }) {
                                 {song.title}
                             </td>
                             <td className="px-4 py-2">{song.composers.join(', ')}</td>
+                            <td className="px-4 py-2">{song.interpreters.join(', ')}</td>
                             <td className="px-4 py-2 pl-8">{song.duration}</td>
                             <td className="px-8 py-2 space-x-2">
                                 <div className="relative inline-block" ref={menuRef}>
@@ -139,13 +181,21 @@ export default function LibrarySongsLiked({ title, searchTerm }) {
                                     {menuVisible === song.song_id && (
                                         <div className="absolute right-0 mt-2 z-20 bg-semiBlack text-white rounded-md shadow-lg w-48">
                                             <ul className='flex flex-col items-center'>
-                                                {/* Opciones del menú, por ejemplo: */}
                                                 <li 
                                                     className='w-full hover:bg-primaryColor cursor-pointer p-2 text-center'
-                                                    onClick={() => console.log('Añadir a playlist')}
+                                                    onClick={(event) => handleCreatePlaylist(song, event)}
                                                 >
-                                                    Añadir a playlist
+                                                    Crear playlist
                                                 </li>
+                                                {playlists.map(playlist => (
+                                                    <li 
+                                                        key={playlist.playlist_id} 
+                                                        className='w-full hover:bg-primaryColor cursor-pointer p-2 text-center'
+                                                        onClick={() => handleAddSongToPlaylist(song, playlist.playlist_id)}
+                                                    >
+                                                        Añadir a {playlist.name}
+                                                    </li>
+                                                ))}
                                             </ul>
                                         </div>
                                     )}

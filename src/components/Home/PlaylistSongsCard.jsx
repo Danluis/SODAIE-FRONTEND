@@ -61,7 +61,7 @@ export default function PlaylistSongsCard() {
         <Navbar />
         <div className="p-8 text-white mt-10">
           <div className="w-full max-w-full-xl bg-blackMain rounded-lg shadow-lg overflow-hidden mx-auto">
-            <div className="p-6">
+            <div className="p-6 min-h-[22rem] h-full mb-20">
               <h2 className="text-2xl font-bold mb-6 text-white">
                 {playlist ? playlist.name : "Loading Playlist..."}
               </h2>
@@ -75,6 +75,7 @@ export default function PlaylistSongsCard() {
                     <tr>
                       <th className="pl-8 pr-4 py-2">#</th>
                       <th className="px-4 py-2">Nombre</th>
+                      <th className="px-4 py-2">Compositores</th>
                       <th className="px-4 py-2">Interpretes</th>
                       <th className="px-4 py-2">Duracion</th>
                       <th className="px-4 py-2">Acciones</th>
@@ -111,36 +112,16 @@ export default function PlaylistSongsCard() {
                           {song.title}
                         </td>
                         <td className="px-4 py-2">
+                          {song.composers.join(", ")}
+                        </td>
+                        <td className="px-4 py-2">
                           {song.interpreters.join(", ")}
                         </td>
-                        <td className="px-4 py-2">{song.duration}</td>
-                        <td className="px-8 py-2 space-x-2">
-                          <div className="relative inline-block" ref={menuRef}>
-                            <button
-                              className="text-semiWhite hover:text-white text-2xl"
-                              onClick={(event) =>
-                                toggleMenu(song.song_id, event)
-                              }
-                            >
-                              +
-                            </button>
-                            {menuVisible === song.song_id && (
-                              <div className="absolute right-0 mt-2 z-20 bg-semiBlack text-white rounded-md shadow-lg w-48">
-                                <ul className="flex flex-col items-center">
-                                  <li className="px-4 py-2 hover:bg-gray-900 cursor-pointer w-full">
-                                    <span className="text-2xl mr-4">+</span>{" "}
-                                    Añadir a playlist
-                                  </li>
-                                  <hr className="w-full" />
-                                  <li className="px-4 py-2 hover:bg-gray-900 cursor-pointer">
-                                    Ver detalles
-                                  </li>
-                                </ul>
-                              </div>
-                            )}
-                          </div>
-                          <button className="text-semiWhite hover:text-white text-xl">
-                            ♡
+                        <td className="px-4 py-2 pl-8">{song.duration}</td>
+                        <td className="px-8 py-2">
+                          
+                          <button className="text-semiWhite hover:text-white text-2xl pl-4">
+                            ...
                           </button>
                         </td>
                       </tr>

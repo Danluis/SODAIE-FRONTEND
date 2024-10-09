@@ -33,7 +33,7 @@ export default function Navbar() {
 
       {/* Menú desplegable */}
       <div
-        className={`fixed top-0 left-0 h-full flex flex-col items-center pt-[9vh] w-[6rem] bg-blackMain border-r-2 border-opacity-5 z-50 transform transition-transform duration-300 ${
+        className={`fixed top-0 left-0 h-full flex flex-col items-center pt-[9vh] w-[8rem] bg-blackMain border-r-2 border-opacity-5 z-50 transform transition-transform duration-300 ${
           menuOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
@@ -86,7 +86,7 @@ export default function Navbar() {
               className="hover:bg-slate-600 flex flex-col items-center p-2 rounded-lg cursor-pointer"
             >
               <RiFolderMusicFill className="text-white w-6 h-6" />
-              <span className="text-white">Repertorio</span>
+              <span className="text-white">Subir Canción</span>
             </Link>
           )}
 
